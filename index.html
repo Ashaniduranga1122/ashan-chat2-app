@@ -32,7 +32,7 @@
 
     .no-select, button, .topbar, .avatar, .msg-time, .tick, .meta-badge,
     .wallpaper-layer, .brightness-overlay, .modal-backdrop, .sheet,
-    .status-strip, .lock-screen, #callOverlay, .section-label {
+    .status-strip, #callOverlay, .section-label {
       -webkit-user-select: none;
       user-select: none;
       -webkit-touch-callout: none;
@@ -628,6 +628,8 @@
       z-index: 320;
       display: none;
       border: 1px solid var(--border);
+      max-width: 90%;
+      text-align: center;
     }
   </style>
 </head>
@@ -643,10 +645,10 @@
         <input id="usernameInput" type="text" placeholder="උදා: Ashan" maxlength="30" />
       </div>
       <div class="field">
-        <label for="chatLockPinInput">Optional App/Chat PIN (4+ digits)</label>
+        <label for="chatLockPinInput">Optional Chat Lock PIN (4+ digits)</label>
         <input id="chatLockPinInput" type="password" placeholder="Leave blank if not needed" maxlength="12" />
       </div>
-      <button class="btn-primary" id="loginBtn">Continue</button>
+      <button class="btn-primary" id="loginBtn" type="button">Continue</button>
     </div>
   </div>
 
@@ -663,8 +665,8 @@
           </div>
         </div>
         <div class="topbar-right">
-          <button class="icon-btn" id="addStatusBtn" title="Post Status">⭕</button>
-          <button class="icon-btn" id="editProfileBtn" title="Settings">⚙</button>
+          <button class="icon-btn" id="addStatusBtn" type="button" title="Post Status">⭕</button>
+          <button class="icon-btn" id="editProfileBtn" type="button" title="Settings">⚙</button>
         </div>
       </div>
 
@@ -672,7 +674,7 @@
         <div class="search-box">
           <span>🔍</span>
           <input id="searchInput" type="text" placeholder="Search users to start chat..." autocomplete="off" />
-          <button class="icon-btn" id="clearSearchBtn" style="display:none;width:28px;height:28px;">✕</button>
+          <button class="icon-btn" id="clearSearchBtn" type="button" style="display:none;width:28px;height:28px;">✕</button>
         </div>
       </div>
 
@@ -691,11 +693,11 @@
 
       <div class="topbar" id="roomTopbar">
         <div class="topbar-left" id="multiSelectBar" style="display:none;">
-          <button class="icon-btn" id="cancelSelectBtn">✕</button>
+          <button class="icon-btn" id="cancelSelectBtn" type="button">✕</button>
           <div class="title-wrap"><div class="name" id="selectedCountText">0 selected</div></div>
         </div>
         <div class="topbar-left" id="normalRoomHeader">
-          <button class="icon-btn" id="backBtn">←</button>
+          <button class="icon-btn" id="backBtn" type="button">←</button>
           <div class="avatar">
             <span id="peerAvatarText">U</span>
             <span class="online-dot" id="peerOnlineDot"></span>
@@ -706,17 +708,17 @@
           </div>
         </div>
         <div class="topbar-right" id="roomActionsNormal">
-          <button class="icon-btn" id="voiceCallBtn" title="Voice Call">📞</button>
-          <button class="icon-btn" id="videoCallBtn" title="Video Call">📹</button>
-          <button class="icon-btn" id="wallpaperBtn" title="Wallpaper & Brightness">🖼</button>
-          <button class="icon-btn" id="chatMoreBtn" title="More Options">⋮</button>
-          <button class="icon-btn" id="bulkDeleteBtn" style="display:none;" title="Delete Selected">🗑</button>
+          <button class="icon-btn" id="voiceCallBtn" type="button" title="Voice Call">📞</button>
+          <button class="icon-btn" id="videoCallBtn" type="button" title="Video Call">📹</button>
+          <button class="icon-btn" id="wallpaperBtn" type="button" title="Wallpaper & Brightness">🖼</button>
+          <button class="icon-btn" id="chatMoreBtn" type="button" title="More Options">⋮</button>
+          <button class="icon-btn" id="bulkDeleteBtn" type="button" style="display:none;" title="Delete Selected">🗑</button>
         </div>
       </div>
 
       <div class="pinned-banner" id="pinnedBanner">
         <span id="pinnedText">📌 Pinned message</span>
-        <button class="icon-btn" id="unpinBtn" style="width:26px;height:26px;font-size:0.8rem;">✕</button>
+        <button class="icon-btn" id="unpinBtn" type="button" style="width:26px;height:26px;font-size:0.8rem;">✕</button>
       </div>
 
       <div class="messages" id="messagesList"></div>
@@ -726,15 +728,15 @@
           <div style="font-weight:700;color:var(--accent);font-size:0.74rem;" id="contextLabel">Reply</div>
           <div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted);" id="contextPreview"></div>
         </div>
-        <button class="icon-btn" id="closeContextBtn" style="width:28px;height:28px;">✕</button>
+        <button class="icon-btn" id="closeContextBtn" type="button" style="width:28px;height:28px;">✕</button>
       </div>
 
       <div class="composer">
         <input type="file" id="mediaPicker" accept="image/*,video/*" style="display:none;" />
-        <button class="icon-btn" id="attachBtn" title="Photo / Video">📎</button>
+        <button class="icon-btn" id="attachBtn" type="button" title="Photo / Video">📎</button>
         <input id="msgInput" type="text" placeholder="Message" autocomplete="off" />
-        <button class="icon-btn" id="voiceRecordBtn" title="Hold or Tap to Record Voice">🎤</button>
-        <button class="send-btn" id="sendBtn" title="Send">➤</button>
+        <button class="icon-btn" id="voiceRecordBtn" type="button" title="Record Voice">🎤</button>
+        <button class="send-btn" id="sendBtn" type="button" title="Send">➤</button>
       </div>
     </div>
   </div>
@@ -747,10 +749,10 @@
       <div style="font-size:0.92rem;color:var(--muted);margin-top:6px;" id="callStatusText">Calling...</div>
     </div>
     <div class="call-controls">
-      <button class="call-btn" id="callMuteBtn" title="Mute">🎤</button>
-      <button class="call-btn" id="callSpeakerBtn" title="Speaker">🔊</button>
-      <button class="call-btn" id="callHoldBtn" title="Hold">⏸</button>
-      <button class="call-btn end" id="callEndBtn" title="End Call">📞</button>
+      <button class="call-btn" id="callMuteBtn" type="button" title="Mute">🎤</button>
+      <button class="call-btn" id="callSpeakerBtn" type="button" title="Speaker">🔊</button>
+      <button class="call-btn" id="callHoldBtn" type="button" title="Hold">⏸</button>
+      <button class="call-btn end" id="callEndBtn" type="button" title="End Call">📞</button>
     </div>
   </div>
 
@@ -778,7 +780,7 @@
       <div class="sheet-title">Message Info</div>
       <div id="infoDetails" style="font-size:0.88rem;line-height:1.75;color:var(--text);"></div>
       <div style="margin-top:14px;text-align:right;">
-        <button class="btn-secondary" id="closeInfoBtn">Close</button>
+        <button class="btn-secondary" id="closeInfoBtn" type="button">Close</button>
       </div>
     </div>
   </div>
@@ -788,8 +790,8 @@
     <div class="sheet">
       <div class="sheet-title">Chat Options</div>
       <div class="action-grid">
-        <button class="action-item" id="toggleLockChatBtn">🔒 Lock / Unlock this Chat</button>
-        <button class="action-item danger" id="clearChatHistoryBtn">🧹 Clear Chat (for me)</button>
+        <button class="action-item" id="toggleLockChatBtn" type="button">🔒 Lock / Unlock this Chat</button>
+        <button class="action-item danger" id="clearChatHistoryBtn" type="button">🧹 Clear Chat (for me)</button>
       </div>
     </div>
   </div>
@@ -802,8 +804,8 @@
         <input id="unlockPinInput" type="password" placeholder="Enter PIN" />
       </div>
       <div style="display:flex;gap:8px;justify-content:flex-end;">
-        <button class="btn-secondary" id="cancelPinBtn">Cancel</button>
-        <button class="btn-primary" id="confirmPinBtn" style="width:auto;padding:9px 16px;">Unlock</button>
+        <button class="btn-secondary" id="cancelPinBtn" type="button">Cancel</button>
+        <button class="btn-primary" id="confirmPinBtn" type="button" style="width:auto;padding:9px 16px;">Unlock</button>
       </div>
     </div>
   </div>
@@ -817,10 +819,10 @@
         <div class="field">
           <input id="statusTextInput" type="text" placeholder="Write a status update..." maxlength="140" />
         </div>
-        <button class="btn-primary" id="publishStatusBtn">Post Status</button>
+        <button class="btn-primary" id="publishStatusBtn" type="button">Post Status</button>
       </div>
       <div style="margin-top:10px;text-align:right;">
-        <button class="btn-secondary" id="closeStatusBtn">Close</button>
+        <button class="btn-secondary" id="closeStatusBtn" type="button">Close</button>
       </div>
     </div>
   </div>
@@ -838,8 +840,8 @@
 
       <div style="display:flex;gap:8px;margin-bottom:10px;">
         <input type="file" id="customWallpaperFile" accept="image/*" style="display:none;" />
-        <button class="btn-primary" id="pickCustomWpBtn" style="padding:9px;font-size:0.84rem;">Custom Photo</button>
-        <button class="btn-secondary" id="resetWpBtn" style="flex:1;">Default</button>
+        <button class="btn-primary" id="pickCustomWpBtn" type="button" style="padding:9px;font-size:0.84rem;">Custom Photo</button>
+        <button class="btn-secondary" id="resetWpBtn" type="button" style="flex:1;">Default</button>
       </div>
 
       <div style="font-size:0.82rem;color:var(--muted);margin-bottom:4px;">15 Live Wallpapers</div>
@@ -861,8 +863,13 @@
       measurementId: "G-NY39110C2M"
     };
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    let db = null;
+    try {
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.database();
+    } catch (e) {
+      console.error("Firebase init error:", e);
+    }
 
     const LIVE_WALLPAPERS = [
       { id: "lw_1", name: "1. Aurora Wave", type: "canvas", mode: "aurora" },
@@ -901,12 +908,10 @@
     let multiSelectMode = false;
     let animFrameId = null;
 
-    // Voice recorder state
     let mediaRecorder = null;
     let audioChunks = [];
     let isRecording = false;
 
-    // Call state
     let callMuted = false;
     let callSpeaker = true;
     let callOnHold = false;
@@ -920,7 +925,7 @@
       el.textContent = msg;
       el.style.display = "block";
       clearTimeout(toast._t);
-      toast._t = setTimeout(() => (el.style.display = "none"), 2400);
+      toast._t = setTimeout(() => (el.style.display = "none"), 2600);
     }
 
     function esc(s) {
@@ -955,6 +960,21 @@
       return (name || "U").trim().charAt(0).toUpperCase();
     }
 
+    function loadLocalUsersFallback() {
+      try {
+        const localU = JSON.parse(localStorage.getItem("ashanchat_local_users") || "{}");
+        usersMap = { ...localU, ...usersMap };
+      } catch (_) {}
+    }
+
+    function saveLocalUserFallback(u) {
+      try {
+        const localU = JSON.parse(localStorage.getItem("ashanchat_local_users") || "{}");
+        localU[u.uid] = u;
+        localStorage.setItem("ashanchat_local_users", JSON.stringify(localU));
+      } catch (_) {}
+    }
+
     function initAuth() {
       appPin = localStorage.getItem("ashanchat_pro_pin") || "";
       try {
@@ -962,32 +982,51 @@
       } catch (_) {
         lockedChats = new Set();
       }
+      loadLocalUsersFallback();
+
       const saved = localStorage.getItem("ashanchat_pro_user");
       if (saved) {
-        me = JSON.parse(saved);
-        bootApp();
-      } else {
-        $("authScreen").style.display = "flex";
+        try {
+          me = JSON.parse(saved);
+          if (me && me.name) {
+            bootApp();
+            return;
+          }
+        } catch (_) {}
       }
+      $("authScreen").style.display = "flex";
     }
 
-    $("loginBtn").addEventListener("click", async () => {
-      const name = $("usernameInput").value.trim();
-      const pin = $("chatLockPinInput").value.trim();
-      if (!name) return toast("නම ඇතුළත් කරන්න.");
+    $("loginBtn").addEventListener("click", () => {
+      const name = ($("usernameInput").value || "").trim() || "Ashan";
+      const pin = ($("chatLockPinInput").value || "").trim();
+
       if (pin) {
         appPin = pin;
         localStorage.setItem("ashanchat_pro_pin", appPin);
       }
+
       let uid = localStorage.getItem("ashanchat_pro_uid");
       if (!uid) {
         uid = "u_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7);
         localStorage.setItem("ashanchat_pro_uid", uid);
       }
+
       me = { uid, name };
       localStorage.setItem("ashanchat_pro_user", JSON.stringify(me));
-      await db.ref("users/" + uid).set({ uid, name, online: true, lastSeen: Date.now() });
+      const userObj = { uid, name, online: true, lastSeen: Date.now() };
+      usersMap[uid] = userObj;
+      saveLocalUserFallback(userObj);
+
+      // Immediately transition UI without blocking on network/DB rules
       bootApp();
+
+      if (db) {
+        db.ref("users/" + uid).set(userObj).catch((err) => {
+          console.warn("Firebase users write error:", err);
+          toast("Note: Check Firebase Realtime Database Rules");
+        });
+      }
     });
 
     $("editProfileBtn").addEventListener("click", () => {
@@ -997,46 +1036,62 @@
     });
 
     function setupPresence() {
+      if (!db || !me) return;
       const userRef = db.ref("users/" + me.uid);
-      userRef.update({ name: me.name, online: true, lastSeen: Date.now() });
-      userRef.onDisconnect().update({ online: false, lastSeen: firebase.database.ServerValue.TIMESTAMP });
+      userRef.update({ name: me.name, online: true, lastSeen: Date.now() }).catch(() => {});
+      userRef.onDisconnect().update({ online: false, lastSeen: firebase.database.ServerValue.TIMESTAMP }).catch(() => {});
       document.addEventListener("visibilitychange", () => {
-        if (!me) return;
+        if (!me || !db) return;
         userRef.update({
           online: document.visibilityState === "visible",
           lastSeen: Date.now()
-        });
+        }).catch(() => {});
       });
     }
 
     function bootApp() {
       $("authScreen").style.display = "none";
       $("appShell").style.display = "flex";
+      $("chatListView").style.display = "flex";
+      $("chatRoomView").style.display = "none";
       $("myAvatar").textContent = initial(me.name);
       $("myNameText").textContent = me.name;
+
+      renderStatusStrip();
+      renderChatList();
       setupPresence();
 
+      if (!db) return;
+
       db.ref("users").on("value", (snap) => {
-        usersMap = snap.val() || {};
+        const remote = snap.val() || {};
+        loadLocalUsersFallback();
+        usersMap = { ...usersMap, ...remote };
         renderChatList();
         renderStatusStrip();
         if (peer && usersMap[peer.uid]) updatePeerPresenceUI(usersMap[peer.uid]);
+      }, (err) => {
+        console.warn("users listener err:", err);
       });
 
       db.ref("userChats/" + me.uid).on("value", (snap) => {
         myChats = snap.val() || {};
         renderChatList();
+      }, (err) => {
+        console.warn("userChats listener err:", err);
       });
 
       db.ref("statuses").on("value", (snap) => {
         statusesMap = snap.val() || {};
         renderStatusStrip();
         renderChatList();
+      }, (err) => {
+        console.warn("statuses listener err:", err);
       });
     }
 
-    // Status Strip
     function renderStatusStrip() {
+      if (!me) return;
       const strip = $("statusStrip");
       strip.innerHTML = "";
 
@@ -1079,24 +1134,27 @@
     }
 
     $("publishStatusBtn").addEventListener("click", async () => {
-      const text = $("statusTextInput").value.trim();
-      if (!text || !me) return;
-      await db.ref("statuses/" + me.uid).set({
-        uid: me.uid,
-        userName: me.name,
-        text,
-        updatedAt: Date.now()
-      });
-      $("statusModal").style.display = "none";
-      toast("Status updated");
+      const text = ($("statusTextInput").value || "").trim();
+      if (!text || !me || !db) return;
+      try {
+        await db.ref("statuses/" + me.uid).set({
+          uid: me.uid,
+          userName: me.name,
+          text,
+          updatedAt: Date.now()
+        });
+        $("statusModal").style.display = "none";
+        toast("Status updated");
+      } catch (_) {
+        toast("Could not post status");
+      }
     });
 
     $("closeStatusBtn").addEventListener("click", () => ($("statusModal").style.display = "none"));
 
-    // Chat List (Only existing chats on home; search finds others)
     function renderChatList() {
       if (!me) return;
-      const q = $("searchInput").value.trim().toLowerCase();
+      const q = ($("searchInput").value || "").trim().toLowerCase();
       $("clearSearchBtn").style.display = q ? "inline-flex" : "none";
       const list = $("chatListContainer");
       list.innerHTML = "";
@@ -1164,7 +1222,7 @@
     });
 
     $("confirmPinBtn").addEventListener("click", () => {
-      if ($("unlockPinInput").value.trim() === appPin) {
+      if (($("unlockPinInput").value || "").trim() === appPin) {
         $("pinUnlockModal").style.display = "none";
         const cb = pendingPinCallback;
         pendingPinCallback = null;
@@ -1201,6 +1259,7 @@
       applySavedWallpaper();
 
       if (msgsRef) msgsRef.off();
+      if (!db) return;
       msgsRef = db.ref("messages/" + roomId);
 
       msgsRef.on("value", (snap) => {
@@ -1247,17 +1306,17 @@
 
     $("clearChatHistoryBtn").addEventListener("click", async () => {
       $("chatMoreModal").style.display = "none";
-      if (!roomId || !me) return;
+      if (!roomId || !me || !db) return;
       const updates = {};
       Object.keys(messagesCache).forEach((id) => {
         updates[`messages/${roomId}/${id}/deletedFor/${me.uid}`] = true;
       });
-      if (Object.keys(updates).length) await db.ref().update(updates);
+      if (Object.keys(updates).length) await db.ref().update(updates).catch(() => {});
       toast("Chat cleared for you");
     });
 
     async function markIncomingDeliveredAndRead() {
-      if (!roomId || !me) return;
+      if (!roomId || !me || !db) return;
       const now = Date.now();
       const updates = {};
       Object.entries(messagesCache).forEach(([id, m]) => {
@@ -1266,7 +1325,7 @@
         if (!m.readAt) updates[`messages/${roomId}/${id}/readAt`] = now;
       });
       if (Object.keys(updates).length) {
-        await db.ref().update(updates);
+        await db.ref().update(updates).catch(() => {});
       }
     }
 
@@ -1304,7 +1363,7 @@
             html += `
               <div class="voice-box">
                 <audio src="${m.mediaData}" controls preload="metadata"></audio>
-                <button class="speed-btn" data-speed="1">1x</button>
+                <button class="speed-btn" type="button" data-speed="1">1x</button>
               </div>
             `;
           }
@@ -1336,7 +1395,6 @@
 
         div.innerHTML = html;
 
-        // Voice playback speed toggle (1x -> 1.5x -> 2x)
         const spBtn = div.querySelector(".speed-btn");
         const audEl = div.querySelector("audio");
         if (spBtn && audEl) {
@@ -1389,8 +1447,8 @@
 
     $("unpinBtn").addEventListener("click", async () => {
       const pEntry = Object.entries(messagesCache).find(([, v]) => v && v.pinned);
-      if (pEntry && roomId) {
-        await db.ref(`messages/${roomId}/${pEntry[0]}/pinned`).set(false);
+      if (pEntry && roomId && db) {
+        await db.ref(`messages/${roomId}/${pEntry[0]}/pinned`).set(false).catch(() => {});
       }
     });
 
@@ -1401,6 +1459,7 @@
 
       const addBtn = (label, fn, danger = false) => {
         const b = document.createElement("button");
+        b.type = "button";
         b.className = "action-item" + (danger ? " danger" : "");
         b.textContent = label;
         b.addEventListener("click", async () => {
@@ -1429,7 +1488,7 @@
         addBtn("↪ Forward", () => openForwardModal(msgObj));
 
         addBtn(msgObj.pinned ? "📌 Unpin" : "📌 Pin", async () => {
-          await db.ref(`messages/${roomId}/${msgObj.id}/pinned`).set(!msgObj.pinned);
+          if (db) await db.ref(`messages/${roomId}/${msgObj.id}/pinned`).set(!msgObj.pinned).catch(() => {});
         });
 
         if (msgObj.senderId === me.uid && msgObj.type === "text") {
@@ -1468,16 +1527,17 @@
       });
 
       addBtn("🗑 Delete for me", async () => {
-        await db.ref(`messages/${roomId}/${msgObj.id}/deletedFor/${me.uid}`).set(true);
+        if (db) await db.ref(`messages/${roomId}/${msgObj.id}/deletedFor/${me.uid}`).set(true).catch(() => {});
       }, true);
 
       if (msgObj.senderId === me.uid && !msgObj.deletedForEveryone) {
         addBtn("🗑 Delete for everyone", async () => {
+          if (!db) return;
           await db.ref(`messages/${roomId}/${msgObj.id}`).update({
             deletedForEveryone: true,
             text: "",
             mediaData: ""
-          });
+          }).catch(() => {});
           await syncChatMeta(peer, "🚫 This message was deleted", Date.now());
         }, true);
       }
@@ -1489,9 +1549,9 @@
 
     $("emojiStrip").addEventListener("click", async (e) => {
       const emoji = e.target.textContent.trim();
-      if (!emoji || !longPressMsg || !roomId) return;
+      if (!emoji || !longPressMsg || !roomId || !db) return;
       $("msgActionModal").style.display = "none";
-      await db.ref(`messages/${roomId}/${longPressMsg.id}/reactions/${me.uid}`).set(emoji);
+      await db.ref(`messages/${roomId}/${longPressMsg.id}/reactions/${me.uid}`).set(emoji).catch(() => {});
     });
 
     function openForwardModal(msgObj) {
@@ -1503,10 +1563,12 @@
       } else {
         targets.forEach((t) => {
           const b = document.createElement("button");
+          b.type = "button";
           b.className = "action-item";
           b.textContent = t.name;
           b.addEventListener("click", async () => {
             $("forwardModal").style.display = "none";
+            if (!db) return;
             const targetRoom = getRoomId(me.uid, t.uid);
             const ts = Date.now();
             await db.ref("messages/" + targetRoom).push({
@@ -1517,7 +1579,7 @@
               mediaData: msgObj.mediaData || "",
               forwarded: true,
               timestamp: ts
-            });
+            }).catch(() => {});
             await syncChatMeta(t, "↪ " + (msgObj.text || "Forwarded media"), ts);
             toast("Forwarded to " + t.name);
           });
@@ -1546,12 +1608,12 @@
     });
 
     $("bulkDeleteBtn").addEventListener("click", async () => {
-      if (!selectedIds.size || !roomId) return;
+      if (!selectedIds.size || !roomId || !db) return;
       const updates = {};
       selectedIds.forEach((id) => {
         updates[`messages/${roomId}/${id}/deletedFor/${me.uid}`] = true;
       });
-      await db.ref().update(updates);
+      await db.ref().update(updates).catch(() => {});
       exitMultiSelect();
       toast("Selected messages deleted");
     });
@@ -1564,6 +1626,7 @@
     $("closeContextBtn").addEventListener("click", clearContextBar);
 
     async function syncChatMeta(targetPeer, preview, ts) {
+      if (!db || !me || !targetPeer) return;
       const updates = {};
       updates[`userChats/${me.uid}/${targetPeer.uid}`] = {
         peerUid: targetPeer.uid,
@@ -1577,18 +1640,18 @@
         lastMessage: preview,
         updatedAt: ts
       };
-      await db.ref().update(updates);
+      await db.ref().update(updates).catch(() => {});
     }
 
     async function sendMessage() {
-      const text = $("msgInput").value.trim();
-      if (!text || !peer || !roomId) return;
+      const text = ($("msgInput").value || "").trim();
+      if (!text || !peer || !roomId || !db) return;
       $("msgInput").value = "";
 
       if (editingMsg) {
         const targetId = editingMsg.id;
         clearContextBar();
-        await db.ref(`messages/${roomId}/${targetId}`).update({ text, edited: true });
+        await db.ref(`messages/${roomId}/${targetId}`).update({ text, edited: true }).catch(() => toast("Edit failed"));
         return;
       }
 
@@ -1608,7 +1671,7 @@
       }
       clearContextBar();
 
-      await db.ref("messages/" + roomId).push(payload);
+      await db.ref("messages/" + roomId).push(payload).catch(() => toast("Send failed"));
       await syncChatMeta(peer, text, ts);
     }
 
@@ -1617,9 +1680,8 @@
       if (e.key === "Enter") { e.preventDefault(); sendMessage(); }
     });
 
-    // Voice Recording (Tap or Hold)
     $("voiceRecordBtn").addEventListener("click", async () => {
-      if (!peer || !roomId) return;
+      if (!peer || !roomId || !db) return;
       if (!isRecording) {
         try {
           const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -1641,7 +1703,7 @@
               mediaData: dataUrl,
               text: "",
               timestamp: ts
-            });
+            }).catch(() => {});
             await syncChatMeta(peer, "🎤 Voice message", ts);
             toast("Voice sent!");
           };
@@ -1659,7 +1721,6 @@
       }
     });
 
-    // Photo & Video Upload
     $("attachBtn").addEventListener("click", () => {
       if (!peer) return;
       $("mediaPicker").value = "";
@@ -1668,7 +1729,7 @@
 
     $("mediaPicker").addEventListener("change", async (e) => {
       const file = e.target.files && e.target.files[0];
-      if (!file || !peer || !roomId) return;
+      if (!file || !peer || !roomId || !db) return;
       const isVid = file.type.startsWith("video/");
       const isImg = file.type.startsWith("image/");
       if (!isVid && !isImg) return toast("Photo හෝ Video තෝරන්න.");
@@ -1728,7 +1789,6 @@
       });
     }
 
-    // Call Controls
     function startCallUI(type) {
       if (!peer) return;
       callMuted = false; callSpeaker = true; callOnHold = false; callSeconds = 0;
@@ -1780,7 +1840,6 @@
       toast("Call ended");
     });
 
-    // Wallpapers + 15 Live Wallpapers + Brightness
     function getWpKey() { return `ashanchat_wp_${me.uid}_${peer.uid}`; }
 
     function loadWpPref() {
