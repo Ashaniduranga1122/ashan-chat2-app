@@ -25,6 +25,7 @@ jobs:
 
       - name: Create Android WebView Project
         run: |
+          set -e
           mkdir -p android-app/app/src/main/java/com/ashan/chatapp
           mkdir -p android-app/app/src/main/res/layout
           mkdir -p android-app/app/src/main/res/values
@@ -318,11 +319,13 @@ jobs:
           android.useAndroidX=true
           EOF
 
-      - name: Setup Gradle Wrapper & Build Debug APK
+      - name: Build Debug APK
         run: |
+          set -e
           cd android-app
-          gradle wrapper --gradle-version 8.5 --distribution-type all
-          ./gradlew assembleDebug --no-daemon
+          curl -sSL https://services.gradle.org/distributions/gradle-8.5-bin.zip -o gradle.zip
+          unzip -q gradle.zip
+          ./gradle-8.5/bin/gradle assembleDebug --no-daemon
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
