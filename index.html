@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>WhatsApp</title>
   <style>
     :root {
@@ -545,6 +548,7 @@
     <symbol id="ic-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></symbol>
     <symbol id="ic-trash" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
     <symbol id="ic-speaker" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></symbol>
+    <symbol id="ic-refresh" viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></symbol>
   </svg>
 
   <!-- AUTH -->
@@ -565,7 +569,10 @@
     <div class="wa-top-header">
       <div class="top-bar-row">
         <span class="wa-wordmark">WhatsApp</span>
-        <button id="logoutBtn" class="btn-pill-sm">Log out</button>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <button id="refreshAppBtn" type="button" class="icon-tap" title="Refresh"><svg class="ico"><use href="#ic-refresh"/></svg></button>
+          <button id="logoutBtn" class="btn-pill-sm">Log out</button>
+        </div>
       </div>
       <div class="search-strip">
         <input type="text" id="chatSearch" class="search-box" placeholder="Search or start new chat" />
@@ -1031,6 +1038,34 @@
     return navigator.onLine !== false;
   }
 
+  // App Refresh / Cache Busting without manual Clear Cache
+  async function performAppRefresh(showFeedback = true) {
+    if (showFeedback) showToast("Refreshing...", true);
+    try {
+      if ("caches" in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map((k) => caches.delete(k).catch(() => {})));
+      }
+    } catch (_) {}
+
+    if (me) {
+      setPresence(!document.hidden);
+      bindHomeFeeds();
+      bindCallAlerts();
+      bindCallHistory();
+      if (roomId && peerUser) {
+        const prevUnread = chatMeta[roomId]?.[`unread_${me.uid}`] || 0;
+        bindMessages(prevUnread);
+      }
+      await flushOfflineQueue();
+    }
+    paintChats();
+    paintStatusFeed();
+    if (showFeedback) showToast("Refreshed");
+  }
+
+  document.getElementById("refreshAppBtn").addEventListener("click", () => performAppRefresh(true));
+
   // Android Hardware Back Button support via History API
   window.history.pushState({ waRoot: true }, "");
   window.addEventListener("popstate", () => {
@@ -1347,7 +1382,13 @@
 
   window.addEventListener("beforeunload", () => setPresence(false));
   document.addEventListener("visibilitychange", () => {
-    if (me && isOnlineNow()) setPresence(!document.hidden);
+    if (!me) return;
+    if (!document.hidden && isOnlineNow()) {
+      setPresence(true);
+      flushOfflineQueue();
+    } else if (document.hidden) {
+      setPresence(false);
+    }
   });
 
   window.addEventListener("online", () => {
@@ -1918,24 +1959,53 @@
     });
   }
 
-  async function prepareMediaForSend(file, storagePath, kind) {
-    try {
-      if (isOnlineNow()) {
+  function putStorageWithTimeout(file, storagePath, timeoutMs = 6000) {
+    return new Promise((resolve, reject) => {
+      let settled = false;
+      const timer = setTimeout(() => {
+        if (!settled) {
+          settled = true;
+          reject(new Error("Storage upload timeout"));
+        }
+      }, timeoutMs);
+
+      try {
         const ref = storage.ref().child(storagePath);
-        const snap = await ref.put(file);
-        return await snap.ref.getDownloadURL();
+        ref.put(file).then(
+          (snap) => snap.ref.getDownloadURL().then(
+            (url) => {
+              if (!settled) { settled = true; clearTimeout(timer); resolve(url); }
+            },
+            (err) => {
+              if (!settled) { settled = true; clearTimeout(timer); reject(err); }
+            }
+          ),
+          (err) => {
+            if (!settled) { settled = true; clearTimeout(timer); reject(err); }
+          }
+        );
+      } catch (err) {
+        if (!settled) { settled = true; clearTimeout(timer); reject(err); }
       }
-    } catch (_) {}
+    });
+  }
+
+  async function prepareMediaForSend(file, storagePath, kind) {
+    if (isOnlineNow() && storage && typeof storage.ref === "function") {
+      try {
+        return await putStorageWithTimeout(file, storagePath, 6000);
+      } catch (_) {}
+    }
 
     let raw = await readOriginalDataUrl(file);
     if (kind === "image") {
-      if (raw.length > 780000) raw = await compressImageDataUrl(raw, 1440, 0.88);
-      if (raw.length > 780000) raw = await compressImageDataUrl(raw, 1120, 0.82);
-      if (raw.length > 780000) raw = await compressImageDataUrl(raw, 880, 0.75);
+      if (raw.length > 700000) raw = await compressImageDataUrl(raw, 1280, 0.85);
+      if (raw.length > 700000) raw = await compressImageDataUrl(raw, 1024, 0.78);
+      if (raw.length > 700000) raw = await compressImageDataUrl(raw, 800, 0.72);
       return raw;
     }
-    if (raw.length > 860000) {
-      throw new Error("Large media requires active internet/Firebase Storage access.");
+    if (raw.length > 820000) {
+      throw new Error("Large media requires active Firebase Storage connection.");
     }
     return raw;
   }
@@ -2715,23 +2785,10 @@
   }
 
   async function commitMessageToServer(cid, targetUid, payload, localCreatedMs) {
-    let finalMediaUrl = payload.mediaUrl || "";
-    if (finalMediaUrl && finalMediaUrl.startsWith("data:") && isOnlineNow()) {
-      try {
-        const res = await fetch(finalMediaUrl);
-        const blob = await res.blob();
-        const ext = (blob.type.split("/")[1] || "bin").split(";")[0];
-        const path = `chats/${cid}/${localCreatedMs}_${Math.random().toString(36).slice(2, 7)}.${ext}`;
-        const ref = storage.ref().child(path);
-        const snap = await ref.put(blob);
-        finalMediaUrl = await snap.ref.getDownloadURL();
-      } catch (_) {}
-    }
-
     const docData = {
       text: payload.text || "",
       type: payload.type || "text",
-      mediaUrl: finalMediaUrl,
+      mediaUrl: payload.mediaUrl || "",
       fileName: payload.fileName || "",
       forwarded: !!payload.forwarded,
       replyTo: payload.replyTo || null,
@@ -2823,7 +2880,7 @@
         alert(`Failed ${f.name}: ${err.message}`);
       }
     }
-    showToast("");
+    showToast("Photo sent");
     e.target.value = "";
   });
 
@@ -2907,7 +2964,7 @@
         clearInterval(recTicker);
         document.getElementById("recDock").classList.add("hidden");
         document.getElementById("msgForm").classList.remove("hidden");
-        if (recAborted || !chunks.length || recSec < 1 && chunks.reduce((s, b) => s + b.size, 0) < 250) {
+        if (recAborted || !chunks.length || (recSec < 1 && chunks.reduce((s, b) => s + b.size, 0) < 250)) {
           chunks = [];
           return;
         }
