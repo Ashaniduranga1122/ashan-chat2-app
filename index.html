@@ -385,8 +385,13 @@
 
     .mention-hl { color: #7dd3fc; font-weight: 600; }
     .msg-meta { display: inline-flex; align-items: center; gap: 3px; float: right; margin: 4px 2px -1px 8px; font-size: 10.5px; color: rgba(240, 249, 255, 0.72); line-height: 1; }
-    .tick-mark { font-size: 11px; font-weight: 700; }
-    .tick-mark.seen { color: #7dd3fc; }
+    .tick-mark { font-size: 11.5px; font-weight: 800; letter-spacing: -1px; display: inline-block; }
+    .tick-mark.pending { color: var(--text-muted); font-size: 10px; letter-spacing: 0; }
+    .tick-mark.seen {
+      color: #ffd60a;
+      -webkit-text-stroke: 0.9px #000000;
+      text-shadow: 0 1px 0 #000, -1px 0 0 #000, 1px 0 0 #000, 0 -1px 0 #000;
+    }
     .star-ico { color: #ffd60a; font-size: 11px; }
     .edited-lbl { font-style: italic; font-size: 10.5px; }
 
@@ -528,17 +533,18 @@
   <div id="globalToast" class="status-toast hidden">Saved</div>
 
   <svg style="display:none;" aria-hidden="true">
-    <symbol id="ic-back" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></symbol>
+    <symbol id="ic-back" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></symbol>
     <symbol id="ic-call" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/></symbol>
-    <symbol id="ic-video" viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></symbol>
-    <symbol id="ic-cam" viewBox="0 0 24 24"><path d="M12 15.2A3.2 3.2 0 1015.2 12 3.2 3.2 0 0012 15.2zM9 2L7.17 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2h-3.17L15 2H9zm3 15a5 5 0 115-5 5 5 0 01-5 5z"/></symbol>
-    <symbol id="ic-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></symbol>
-    <symbol id="ic-mic" viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></symbol>
+    <symbol id="ic-video" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></symbol>
+    <symbol id="ic-cam" viewBox="0 0 24 24"><path d="M12 15.2A3.2 3.2 0 1015.2 12 3.2 3.2 0 0012 15.2zM9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15a5 5 0 115-5 5 5 0 01-5 5z"/></symbol>
+    <symbol id="ic-file" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></symbol>
+    <symbol id="ic-mic" viewBox="0 0 24 24"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></symbol>
     <symbol id="ic-send" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></symbol>
     <symbol id="ic-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
     <symbol id="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
     <symbol id="ic-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></symbol>
-    <symbol id="ic-trash" viewBox="0 0 24 24"><path d="M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
+    <symbol id="ic-trash" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
+    <symbol id="ic-speaker" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></symbol>
   </svg>
 
   <!-- AUTH -->
@@ -940,7 +946,7 @@
     <div class="call-row-btns">
       <button id="acceptCallBtn" class="call-circle answer hidden" title="Accept"><svg class="ico"><use href="#ic-call"/></svg></button>
       <button id="muteCallBtn" class="call-circle mute" title="Mute mic"><svg class="ico"><use href="#ic-mic"/></svg></button>
-      <button id="speakerCallBtn" class="call-circle mute" title="Speaker">🔊</button>
+      <button id="speakerCallBtn" class="call-circle mute" title="Speaker"><svg class="ico"><use href="#ic-speaker"/></svg></button>
       <button id="endCallBtn" class="call-circle end" title="End call"><svg class="ico"><use href="#ic-close"/></svg></button>
     </div>
   </div>
@@ -989,17 +995,41 @@
   let quoteDraft = null, activeMsg = null, pendingDpUser = null;
   let selecting = false, pickedIds = new Set(), renderedMsgs = [], fwdQueue = [];
   let uUsers = null, uChats = null, uMsgs = null, uPeer = null, uStatus = null, uCall = null, uCallHist = null;
-  let typingTimer = null, loadedOnce = false;
+  let typingTimer = null, loadedOnce = false, syncingQueue = false;
 
   let recorder = null, chunks = [], recTicker = null, recSec = 0, recAborted = false, holdingMic = false, micStartX = 0;
   let activeAudioEl = null, activeAudioBtn = null;
   let rtc = null, micCamStream = null, callDocId = null, ringingCall = null, mutedMic = false, speakerBoost = false, ringInterval = null;
-  const rtcServers = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] };
+  const rtcServers = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }, { urls: "stun:stun1.l.google.com:19302" }] };
 
   const msgStream = document.getElementById("msgStream");
   const msgField = document.getElementById("msgField");
   const sendBtn = document.getElementById("sendBtn");
   const voiceBtn = document.getElementById("voiceBtn");
+
+  // Offline / Data-off Queue Helpers
+  const OFFLINE_QUEUE_KEY = "wa_offline_msg_queue_v1";
+  function getOfflineQueue() {
+    try {
+      const q = JSON.parse(localStorage.getItem(OFFLINE_QUEUE_KEY) || "[]");
+      return Array.isArray(q) ? q : [];
+    } catch (_) { return []; }
+  }
+  function saveOfflineQueue(q) {
+    try { localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(q)); } catch (_) {}
+  }
+  function enqueueOfflineMessage(item) {
+    const q = getOfflineQueue();
+    q.push(item);
+    saveOfflineQueue(q);
+  }
+  function removeQueuedMessage(queueId) {
+    const q = getOfflineQueue().filter((x) => x.queueId !== queueId);
+    saveOfflineQueue(q);
+  }
+  function isOnlineNow() {
+    return navigator.onLine !== false;
+  }
 
   // Android Hardware Back Button support via History API
   window.history.pushState({ waRoot: true }, "");
@@ -1070,7 +1100,7 @@
     el.textContent = text;
     el.classList.remove("hidden");
     if (!persistent) {
-      toastTimer = setTimeout(() => el.classList.add("hidden"), 1500);
+      toastTimer = setTimeout(() => el.classList.add("hidden"), 1600);
     }
   }
 
@@ -1281,8 +1311,10 @@
   }
 
   function fmtClock(ts) {
-    if (!ts || !ts.toDate) return "";
-    return ts.toDate().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    if (!ts) return "";
+    if (typeof ts === "number") return new Date(ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    if (ts.toDate) return ts.toDate().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    return "";
   }
 
   function fmtSec(sec) {
@@ -1292,8 +1324,11 @@
   }
 
   function fmtDay(ts) {
-    if (!ts || !ts.toDate) return "Today";
-    const d = ts.toDate();
+    let d = null;
+    if (!ts) d = new Date();
+    else if (typeof ts === "number") d = new Date(ts);
+    else if (ts.toDate) d = ts.toDate();
+    else d = new Date();
     const now = new Date();
     const diff = new Date(now.getFullYear(), now.getMonth(), now.getDate()) - new Date(d.getFullYear(), d.getMonth(), d.getDate());
     if (diff === 0) return "Today";
@@ -1302,7 +1337,7 @@
   }
 
   function setPresence(online) {
-    if (!me) return;
+    if (!me || !isOnlineNow()) return;
     db.collection("users").doc(me.uid).set({
       online,
       typingTo: online ? undefined : "",
@@ -1312,8 +1347,41 @@
 
   window.addEventListener("beforeunload", () => setPresence(false));
   document.addEventListener("visibilitychange", () => {
-    if (me) setPresence(!document.hidden);
+    if (me && isOnlineNow()) setPresence(!document.hidden);
   });
+
+  window.addEventListener("online", () => {
+    showToast("Back online • Syncing...");
+    if (me) {
+      setPresence(!document.hidden);
+      flushOfflineQueue();
+    }
+  });
+  window.addEventListener("offline", () => {
+    showToast("Offline • Messages will send when connected");
+  });
+
+  async function flushOfflineQueue() {
+    if (!me || syncingQueue || !isOnlineNow()) return;
+    const queue = getOfflineQueue().filter((x) => x.ownerUid === me.uid);
+    if (!queue.length) return;
+    syncingQueue = true;
+    try {
+      for (const item of queue) {
+        if (!isOnlineNow()) break;
+        try {
+          await commitMessageToServer(item.cid, item.targetUid, item.payload, item.localCreatedMs);
+          removeQueuedMessage(item.queueId);
+        } catch (_) {
+          break;
+        }
+      }
+      if (roomId) bindMessages();
+      paintChats();
+    } finally {
+      syncingQueue = false;
+    }
+  }
 
   // Auth
   document.getElementById("authSignupBtn").addEventListener("click", async () => {
@@ -1350,18 +1418,22 @@
     if (user) {
       me = user;
       const ref = db.collection("users").doc(user.uid);
-      const snap = await ref.get();
-      if (!snap.exists) {
-        await ref.set({
-          uid: user.uid, name: user.email.split("@")[0], about: "Hey there! I am using WhatsApp.",
-          email: user.email, photoData: "", blocked: [], online: true, typingTo: "",
-          privacy: { lastSeen: "everyone", photo: "everyone", status: "everyone", readReceipts: true },
-          lastSeen: firebase.firestore.FieldValue.serverTimestamp()
-        });
-      } else {
-        await ref.set({ online: true, lastSeen: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+      try {
+        const snap = await ref.get();
+        if (!snap.exists) {
+          await ref.set({
+            uid: user.uid, name: user.email.split("@")[0], about: "Hey there! I am using WhatsApp.",
+            email: user.email, photoData: "", blocked: [], online: true, typingTo: "",
+            privacy: { lastSeen: "everyone", photo: "everyone", status: "everyone", readReceipts: true },
+            lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        } else {
+          await ref.set({ online: true, lastSeen: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+        }
+        myProfile = (await ref.get()).data();
+      } catch (_) {
+        myProfile = myProfile || { uid: user.uid, name: user.email.split("@")[0], email: user.email, blocked: [] };
       }
-      myProfile = (await ref.get()).data();
       if (!Array.isArray(myProfile.blocked)) myProfile.blocked = [];
       fillSettings();
       authView.classList.add("hidden");
@@ -1369,6 +1441,7 @@
       bindHomeFeeds();
       bindCallAlerts();
       bindCallHistory();
+      flushOfflineQueue();
     } else {
       me = null;
       stopRingLoop();
@@ -1453,9 +1526,15 @@
     const f = e.target.files[0];
     if (!f) return;
     showToast("Saving...", true);
-    const photoData = await prepareMediaForSend(f, `avatars/${me.uid}_${Date.now()}_${f.name}`, "image");
-    await db.collection("users").doc(me.uid).set({ photoData }, { merge: true });
-    myProfile.photoData = photoData; fillSettings(); e.target.value = ""; showToast("Saved");
+    try {
+      const photoData = await prepareMediaForSend(f, `avatars/${me.uid}_${Date.now()}_${f.name}`, "image");
+      await db.collection("users").doc(me.uid).set({ photoData }, { merge: true });
+      myProfile.photoData = photoData; fillSettings(); showToast("Saved");
+    } catch (err) {
+      showToast("DP upload failed");
+      alert("DP upload failed: " + err.message);
+    }
+    e.target.value = "";
   });
 
   async function savePriv() {
@@ -1533,14 +1612,14 @@
       contacts = [];
       snap.forEach((d) => { if (d.id !== me.uid) contacts.push(d.data()); });
       paintChats(); paintBlockedList(); paintLockedSummary();
-    });
+    }, () => {});
 
     if (uChats) uChats();
     uChats = db.collection("chats").where("participants", "array-contains", me.uid).onSnapshot((snap) => {
       chatMeta = {};
       snap.forEach((d) => { chatMeta[d.id] = d.data(); });
       paintChats();
-    });
+    }, () => {});
 
     if (uStatus) uStatus();
     uStatus = db.collection("statuses").orderBy("createdAtMs", "desc").onSnapshot((snap) => {
@@ -1552,7 +1631,7 @@
       });
       paintStatusFeed();
       paintChats();
-    });
+    }, () => {});
   }
 
   function getVisibleStatuses() {
@@ -1627,7 +1706,7 @@
       });
       if (!n) feed.innerHTML = `<div style="padding:28px; text-align:center; color:var(--text-muted); font-size:13px;">No recent calls</div>`;
       applyCardCustom();
-    });
+    }, () => {});
   }
 
   const chatSearchEl = document.getElementById("chatSearch");
@@ -1642,14 +1721,34 @@
     paintChats();
   });
 
+  function renderTickHtml(m, isMine) {
+    if (!isMine) return "";
+    if (m.offlinePending) {
+      return `<span class="tick-mark pending" title="Waiting for connection">🕒</span>`;
+    }
+    if (m.read) {
+      return `<span class="tick-mark seen" title="Seen">✓✓</span>`;
+    }
+    return `<span class="tick-mark" title="Sent">✓✓</span>`;
+  }
+
   function paintChats() {
     const q = chatSearchEl.value.trim().toLowerCase();
     const lockedIds = getLockedList();
+    const myQueue = me ? getOfflineQueue().filter((x) => x.ownerUid === me.uid) : [];
     pageChats.innerHTML = "";
 
     const list = [...contacts]
       .filter((u) => `${u.name || ""} ${u.email || ""}`.toLowerCase().includes(q))
-      .sort((a, b) => (chatMeta[pairId(me.uid, b.uid)]?.updatedAtMs || 0) - (chatMeta[pairId(me.uid, a.uid)]?.updatedAtMs || 0));
+      .sort((a, b) => {
+        const cidA = pairId(me.uid, a.uid);
+        const cidB = pairId(me.uid, b.uid);
+        const qA = myQueue.filter((x) => x.cid === cidA).pop();
+        const qB = myQueue.filter((x) => x.cid === cidB).pop();
+        const tA = Math.max(chatMeta[cidA]?.updatedAtMs || 0, qA?.localCreatedMs || 0);
+        const tB = Math.max(chatMeta[cidB]?.updatedAtMs || 0, qB?.localCreatedMs || 0);
+        return tB - tA;
+      });
 
     if (!list.length) {
       pageChats.innerHTML = `<div style="padding:30px; text-align:center; color:var(--text-muted); font-size:13px;">No chats yet</div>`;
@@ -1659,21 +1758,31 @@
     list.forEach((u) => {
       const cid = pairId(me.uid, u.uid);
       const m = chatMeta[cid] || {};
+      const qLast = myQueue.filter((x) => x.cid === cid).pop();
+      const useQueued = qLast && (qLast.localCreatedMs >= (m.updatedAtMs || 0));
+
       const blocked = isBlocked(u.uid);
       const locked = lockedIds.includes(u.uid);
       const isActiveRoom = roomId === cid;
       const unread = (blocked || isActiveRoom) ? 0 : (m[`unread_${me.uid}`] || 0);
       const online = !blocked && u.online && u.privacy?.lastSeen !== "nobody";
       const ringCls = !blocked ? getStatusRingClass(u.uid) : "";
-      const tm = m.updatedAtMs ? new Date(m.updatedAtMs).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
+      const latestMs = useQueued ? qLast.localCreatedMs : (m.updatedAtMs || 0);
+      const tm = latestMs ? new Date(latestMs).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
 
       let sub = u.about || "Tap to chat";
       if (locked) sub = `<span style="color:#7dd3fc;">Chat locked</span>`;
       else if (blocked) sub = `<span style="color:var(--danger);">Blocked</span>`;
       else if (u.typingTo === me.uid) {
         sub = `<span class="typing-yellow-anim">Typing<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span></span>`;
+      } else if (useQueued) {
+        const p = qLast.payload;
+        const txt = p.text || p.fileName || (p.type === "image" ? "Photo" : (p.type === "video" ? "Video" : (p.type === "file" ? "File" : "Voice message")));
+        sub = `<span class="tick-mark pending">🕒</span> ${esc(txt)}`;
       } else if (m.lastText) {
-        const ck = m.lastSender === me.uid ? `<span class="tick-mark ${m.lastRead ? "seen" : ""}">${m.lastRead ? "✓✓" : "✓"}</span> ` : "";
+        const ck = m.lastSender === me.uid
+          ? `<span class="tick-mark ${m.lastRead ? "seen" : ""}">${m.lastRead ? "✓✓" : "✓✓"}</span> `
+          : "";
         sub = `${ck}${esc(m.lastText)}`;
       }
 
@@ -1748,8 +1857,11 @@
           text: "", imageUrl: "", videoUrl: url, bgColor: "#000",
           privacyStatus: myProfile?.privacy?.status || "everyone", createdAtMs: Date.now()
         });
-      } catch (err) { alert("Status video failed: " + err.message); }
-      showToast("");
+        showToast("Status posted");
+      } catch (err) {
+        showToast("Status video failed");
+        alert("Status video failed: " + err.message);
+      }
     } else {
       showToast("Sending status photo...", true);
       try {
@@ -1759,8 +1871,11 @@
           text: "", imageUrl: url, videoUrl: "", bgColor: "#000",
           privacyStatus: myProfile?.privacy?.status || "everyone", createdAtMs: Date.now()
         });
-      } catch (err) { alert("Status photo failed: " + err.message); }
-      showToast("");
+        showToast("Status posted");
+      } catch (err) {
+        showToast("Status photo failed");
+        alert("Status photo failed: " + err.message);
+      }
     }
     e.target.value = "";
   });
@@ -1805,22 +1920,24 @@
 
   async function prepareMediaForSend(file, storagePath, kind) {
     try {
-      const ref = storage.ref().child(storagePath);
-      const snap = await ref.put(file);
-      return await snap.ref.getDownloadURL();
-    } catch (_) {
-      let raw = await readOriginalDataUrl(file);
-      if (kind === "image") {
-        if (raw.length > 820000) raw = await compressImageDataUrl(raw, 1600, 0.9);
-        if (raw.length > 820000) raw = await compressImageDataUrl(raw, 1280, 0.85);
-        if (raw.length > 820000) raw = await compressImageDataUrl(raw, 1024, 0.8);
-        return raw;
+      if (isOnlineNow()) {
+        const ref = storage.ref().child(storagePath);
+        const snap = await ref.put(file);
+        return await snap.ref.getDownloadURL();
       }
-      if (raw.length > 880000) {
-        throw new Error("Video exceeds 880 KB direct database fallback. Configure Firebase Storage rules for larger videos.");
-      }
+    } catch (_) {}
+
+    let raw = await readOriginalDataUrl(file);
+    if (kind === "image") {
+      if (raw.length > 780000) raw = await compressImageDataUrl(raw, 1440, 0.88);
+      if (raw.length > 780000) raw = await compressImageDataUrl(raw, 1120, 0.82);
+      if (raw.length > 780000) raw = await compressImageDataUrl(raw, 880, 0.75);
       return raw;
     }
+    if (raw.length > 860000) {
+      throw new Error("Large media requires active internet/Firebase Storage access.");
+    }
+    return raw;
   }
 
   function styleCssForStatus(st) {
@@ -1986,12 +2103,13 @@
     if (uPeer) uPeer();
     uPeer = db.collection("users").doc(peer.uid).onSnapshot((d) => {
       if (d.exists) { peerUser = d.data(); paintPeerPresence(peerUser); refreshComposerLock(); }
-    });
+    }, () => {});
     bindMessages(prevUnread);
   }
 
   function paintPeerPresence(p) {
     const el = document.getElementById("peerSubText");
+    if (!isOnlineNow()) { el.innerHTML = "waiting for network..."; return; }
     if (isBlocked(p.uid)) { el.innerHTML = "blocked"; return; }
     if (p.typingTo === me.uid) {
       el.innerHTML = `<span class="typing-yellow-anim">Typing<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span></span>`;
@@ -2059,7 +2177,9 @@
   document.getElementById("menuClear").addEventListener("click", async () => {
     chatMenuSheet.classList.add("hidden");
     if (!confirm("Clear messages in this chat?")) return;
-    for (const m of renderedMsgs) await m.ref.update({ deletedFor: firebase.firestore.FieldValue.arrayUnion(me.uid) });
+    for (const m of renderedMsgs) {
+      if (m.ref) await m.ref.update({ deletedFor: firebase.firestore.FieldValue.arrayUnion(me.uid) }).catch(() => {});
+    }
   });
   document.getElementById("menuBlock").addEventListener("click", async () => {
     chatMenuSheet.classList.add("hidden");
@@ -2090,6 +2210,7 @@
   }
 
   async function toggleReaction(ref, data, emoji) {
+    if (!ref) return;
     const reactions = { ...(data.reactions || {}) };
     const savedBg = localStorage.getItem("wa_react_bg") || "#0d2e5c";
     const cur = reactions[me.uid];
@@ -2148,16 +2269,41 @@
       let didRead = false;
       const showReceipts = myProfile?.privacy?.readReceipts !== false;
 
+      const items = [];
       snap.forEach((doc) => {
         const m = doc.data();
         if (m.deletedForEveryone) return;
         if (Array.isArray(m.deletedFor) && m.deletedFor.includes(me.uid)) return;
         if (m.senderUid !== me.uid && isBlocked(m.senderUid)) return;
+        items.push({ id: doc.id, ref: doc.ref, data: m, isMine: m.senderUid === me.uid, sortMs: m.createdAt?.toDate ? m.createdAt.toDate().getTime() : (m.localCreatedMs || Date.now()) });
+      });
 
-        const isMine = m.senderUid === me.uid;
-        if (!isMine && !m.read && showReceipts) { doc.ref.update({ read: true }).catch(() => {}); didRead = true; }
+      const pendingForRoom = getOfflineQueue().filter((q) => q.ownerUid === me.uid && q.cid === roomId);
+      pendingForRoom.forEach((q) => {
+        items.push({
+          id: q.queueId,
+          ref: null,
+          data: {
+            ...q.payload,
+            createdAt: q.localCreatedMs,
+            offlinePending: true,
+            read: false
+          },
+          isMine: true,
+          sortMs: q.localCreatedMs
+        });
+      });
 
-        renderedMsgs.push({ id: doc.id, ref: doc.ref, data: m, isMine });
+      items.sort((a, b) => a.sortMs - b.sortMs);
+
+      items.forEach((entry) => {
+        const { id, ref, data: m, isMine } = entry;
+        if (!isMine && !m.read && showReceipts && ref) {
+          ref.update({ read: true }).catch(() => {});
+          didRead = true;
+        }
+
+        renderedMsgs.push({ id, ref, data: m, isMine });
 
         const day = fmtDay(m.createdAt);
         if (day !== prevDay) {
@@ -2177,7 +2323,7 @@
 
         const line = document.createElement("div");
         line.className = `msg-line ${isMine ? "me" : "them"}`;
-        line.dataset.msgid = doc.id;
+        line.dataset.msgid = id;
 
         const hint = document.createElement("div");
         hint.className = "swipe-hint";
@@ -2186,16 +2332,16 @@
 
         if (selecting) {
           const chk = document.createElement("input");
-          chk.type = "checkbox"; chk.checked = pickedIds.has(doc.id);
+          chk.type = "checkbox"; chk.checked = pickedIds.has(id);
           chk.style.accentColor = "#38bdf8";
-          chk.addEventListener("change", () => flipPick(doc.id, chk.checked));
+          chk.addEventListener("change", () => flipPick(id, chk.checked));
           line.appendChild(chk);
         }
 
         const mediaSrc = m.mediaUrl || m.mediaData || "";
         const isPhotoOnly = m.type === "image" && !m.text && !m.replyTo && !m.forwarded;
         const box = document.createElement("div");
-        box.className = `msg-box ${isMine ? "me" : "them"} ${isPhotoOnly ? "photo-box" : ""} ${pickedIds.has(doc.id) ? "picked" : ""}`;
+        box.className = `msg-box ${isMine ? "me" : "them"} ${isPhotoOnly ? "photo-box" : ""} ${pickedIds.has(id) ? "picked" : ""}`;
 
         let inner = "";
         if (m.forwarded) inner += `<div class="fwd-label">Forwarded</div>`;
@@ -2214,7 +2360,7 @@
 
         const star = Array.isArray(m.starredBy) && m.starredBy.includes(me.uid) ? `<span class="star-ico">★</span>` : "";
         const ed = m.edited ? `<span class="edited-lbl">edited</span>` : "";
-        const ck = isMine ? `<span class="tick-mark ${m.read ? "seen" : ""}">${m.read ? "✓✓" : "✓"}</span>` : "";
+        const ck = renderTickHtml(m, isMine);
         inner += `<span class="msg-meta">${star}${ed}<span>${fmtClock(m.createdAt)}</span>${ck}</span>`;
         inner += renderReactionChips(m.reactions);
 
@@ -2268,27 +2414,27 @@
           box.style.transform = "";
           hint.style.opacity = "0";
           if ((isMine && dx < -45) || (!isMine && dx > 45)) {
-            triggerReplyForMsg(m, isMine, doc.id);
+            triggerReplyForMsg(m, isMine, id);
           }
         });
 
         let lastTap = 0;
         box.addEventListener("click", () => {
-          if (selecting) { flipPick(doc.id, !pickedIds.has(doc.id)); bindMessages(0); return; }
+          if (selecting) { flipPick(id, !pickedIds.has(id)); bindMessages(0); return; }
           const now = Date.now();
           if (now - lastTap < 300) {
             lastTap = 0;
-            toggleReaction(doc.ref, m, localStorage.getItem("wa_react") || "❤️");
+            toggleReaction(ref, m, localStorage.getItem("wa_react") || "❤️");
             return;
           }
           lastTap = now;
           setTimeout(() => {
             if (lastTap !== 0 && Date.now() - lastTap >= 290) {
               lastTap = 0;
-              activeMsg = { id: doc.id, ref: doc.ref, data: m, isMine };
+              activeMsg = { id, ref, data: m, isMine };
               const within10Min = !m.createdAt?.toDate || (Date.now() - m.createdAt.toDate().getTime()) <= 10 * 60 * 1000;
-              document.getElementById("optEdit").classList.toggle("hidden", !isMine || m.type !== "text" || !within10Min);
-              document.getElementById("optDelAll").classList.toggle("hidden", !isMine);
+              document.getElementById("optEdit").classList.toggle("hidden", !isMine || m.type !== "text" || !within10Min || !ref);
+              document.getElementById("optDelAll").classList.toggle("hidden", !isMine || !ref);
               msgMenuSheet.classList.remove("hidden");
             }
           }, 300);
@@ -2302,7 +2448,7 @@
         db.collection("chats").doc(roomId).set({ lastRead: true, [`unread_${me.uid}`]: 0 }, { merge: true }).catch(() => {});
       }
       msgStream.scrollTop = msgStream.scrollHeight;
-    });
+    }, () => {});
   }
 
   function wireAudio(bar) {
@@ -2318,13 +2464,19 @@
       if (isFinite(snd.duration) && snd.duration > 0) durEl.textContent = fmtSec(snd.duration);
     });
     bar.addEventListener("click", (e) => e.stopPropagation());
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", async () => {
       if (snd.paused) {
         if (activeAudioEl && activeAudioEl !== snd) stopActiveAudio();
         activeAudioEl = snd;
         activeAudioBtn = btn;
-        snd.play();
         btn.innerHTML = `<svg class="ico-sm"><use href="#ic-pause"/></svg>`;
+        try {
+          await snd.play();
+        } catch (_) {
+          btn.innerHTML = `<svg class="ico-sm"><use href="#ic-play"/></svg>`;
+          activeAudioEl = null;
+          activeAudioBtn = null;
+        }
       } else {
         snd.pause();
         btn.innerHTML = `<svg class="ico-sm"><use href="#ic-play"/></svg>`;
@@ -2359,8 +2511,13 @@
   document.getElementById("multiDelBtn").addEventListener("click", async () => {
     for (const m of renderedMsgs) {
       if (!pickedIds.has(m.id)) continue;
-      if (m.isMine) await m.ref.update({ deletedForEveryone: true });
-      else await m.ref.update({ deletedFor: firebase.firestore.FieldValue.arrayUnion(me.uid) });
+      if (m.data?.offlinePending) {
+        removeQueuedMessage(m.id);
+        continue;
+      }
+      if (!m.ref) continue;
+      if (m.isMine) await m.ref.update({ deletedForEveryone: true }).catch(() => {});
+      else await m.ref.update({ deletedFor: firebase.firestore.FieldValue.arrayUnion(me.uid) }).catch(() => {});
     }
     const remaining = renderedMsgs.filter((x) => !pickedIds.has(x.id));
     await syncChatLastPreviewFromVisibleMsgs(remaining);
@@ -2389,7 +2546,7 @@
 
   document.getElementById("optEdit").addEventListener("click", async () => {
     msgMenuSheet.classList.add("hidden");
-    if (!activeMsg?.isMine) return;
+    if (!activeMsg?.isMine || !activeMsg.ref) return;
     const createdMs = activeMsg.data.createdAt?.toDate ? activeMsg.data.createdAt.toDate().getTime() : Date.now();
     if (Date.now() - createdMs > 10 * 60 * 1000) return alert("Messages can only be edited within 10 minutes.");
     const v = await openCustomPrompt("Edit message:", activeMsg.data.text || "");
@@ -2404,7 +2561,7 @@
 
   document.getElementById("optStar").addEventListener("click", async () => {
     msgMenuSheet.classList.add("hidden");
-    if (!activeMsg) return;
+    if (!activeMsg?.ref) return;
     const arr = activeMsg.data.starredBy || [];
     await activeMsg.ref.update({ starredBy: arr.includes(me.uid) ? firebase.firestore.FieldValue.arrayRemove(me.uid) : firebase.firestore.FieldValue.arrayUnion(me.uid) });
   });
@@ -2422,13 +2579,19 @@
   document.getElementById("optDelMe").addEventListener("click", async () => {
     msgMenuSheet.classList.add("hidden");
     if (!activeMsg) return;
-    await activeMsg.ref.update({ deletedFor: firebase.firestore.FieldValue.arrayUnion(me.uid) });
+    if (activeMsg.data?.offlinePending) {
+      removeQueuedMessage(activeMsg.id);
+      if (roomId) bindMessages();
+      paintChats();
+      return;
+    }
+    if (activeMsg.ref) await activeMsg.ref.update({ deletedFor: firebase.firestore.FieldValue.arrayUnion(me.uid) }).catch(() => {});
   });
 
   document.getElementById("optDelAll").addEventListener("click", async () => {
     msgMenuSheet.classList.add("hidden");
-    if (!activeMsg?.isMine) return;
-    await activeMsg.ref.update({ deletedForEveryone: true });
+    if (!activeMsg?.isMine || !activeMsg.ref) return;
+    await activeMsg.ref.update({ deletedForEveryone: true }).catch(() => {});
     const remaining = renderedMsgs.filter((x) => x.id !== activeMsg.id);
     await syncChatLastPreviewFromVisibleMsgs(remaining);
   });
@@ -2486,7 +2649,7 @@
       mentionStrip.onclick = () => { msgField.value = v + tag + " "; mentionStrip.classList.add("hidden"); msgField.focus(); };
     } else { mentionStrip.classList.add("hidden"); }
 
-    if (me && peerUser && !isBlocked(peerUser.uid)) {
+    if (me && peerUser && !isBlocked(peerUser.uid) && isOnlineNow()) {
       db.collection("users").doc(me.uid).set({ typingTo: peerUser.uid }, { merge: true }).catch(() => {});
       clearTimeout(typingTimer);
       typingTimer = setTimeout(() => db.collection("users").doc(me.uid).set({ typingTo: "" }, { merge: true }).catch(() => {}), 1500);
@@ -2513,7 +2676,9 @@
       holdingMic = false;
       voiceBtn.classList.remove("recording");
       showToast("Voice cancelled");
-      if (recorder && recorder.state !== "inactive") recorder.stop();
+      if (recorder && recorder.state !== "inactive") {
+        try { recorder.stop(); } catch (_) {}
+      }
     }
   });
 
@@ -2522,14 +2687,18 @@
     if (e.cancelable) e.preventDefault();
     holdingMic = false;
     voiceBtn.classList.remove("recording");
-    if (recorder && recorder.state !== "inactive") recorder.stop();
+    if (recorder && recorder.state !== "inactive") {
+      try { recorder.stop(); } catch (_) {}
+    }
   });
 
   window.addEventListener("pointercancel", () => {
     if (!holdingMic) return;
     holdingMic = false;
     voiceBtn.classList.remove("recording");
-    if (recorder && recorder.state !== "inactive") recorder.stop();
+    if (recorder && recorder.state !== "inactive") {
+      try { recorder.stop(); } catch (_) {}
+    }
   });
 
   async function sendTypedMsg() {
@@ -2540,26 +2709,101 @@
     const q = quoteDraft; quoteDraft = null;
     document.getElementById("replyBar").classList.add("hidden");
     await pushMsg(roomId, peerUser.uid, { text, type: "text", replyTo: q });
-    db.collection("users").doc(me.uid).set({ typingTo: "" }, { merge: true }).catch(() => {});
+    if (isOnlineNow()) {
+      db.collection("users").doc(me.uid).set({ typingTo: "" }, { merge: true }).catch(() => {});
+    }
   }
 
-  async function pushMsg(cid, targetUid, extra) {
-    if (isBlocked(targetUid)) return alert("Blocked contact");
-    chime(620);
+  async function commitMessageToServer(cid, targetUid, payload, localCreatedMs) {
+    let finalMediaUrl = payload.mediaUrl || "";
+    if (finalMediaUrl && finalMediaUrl.startsWith("data:") && isOnlineNow()) {
+      try {
+        const res = await fetch(finalMediaUrl);
+        const blob = await res.blob();
+        const ext = (blob.type.split("/")[1] || "bin").split(";")[0];
+        const path = `chats/${cid}/${localCreatedMs}_${Math.random().toString(36).slice(2, 7)}.${ext}`;
+        const ref = storage.ref().child(path);
+        const snap = await ref.put(blob);
+        finalMediaUrl = await snap.ref.getDownloadURL();
+      } catch (_) {}
+    }
+
     const docData = {
-      text: extra.text || "", type: extra.type || "text", mediaUrl: extra.mediaUrl || "",
-      fileName: extra.fileName || "", forwarded: !!extra.forwarded, replyTo: extra.replyTo || null,
-      edited: false, starredBy: [], reactions: {},
-      senderUid: me.uid, senderName: myProfile?.name || me.email,
-      read: false, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      text: payload.text || "",
+      type: payload.type || "text",
+      mediaUrl: finalMediaUrl,
+      fileName: payload.fileName || "",
+      forwarded: !!payload.forwarded,
+      replyTo: payload.replyTo || null,
+      edited: false,
+      starredBy: [],
+      reactions: {},
+      senderUid: me.uid,
+      senderName: myProfile?.name || me.email,
+      localCreatedMs: localCreatedMs || Date.now(),
+      read: false,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
     };
+
     await db.collection("chats").doc(cid).collection("messages").add(docData);
     const prev = docData.text || docData.fileName || (docData.type === "image" ? "Photo" : (docData.type === "video" ? "Video" : (docData.type === "file" ? "File" : "Voice message")));
     const targetUnreadInc = roomId === cid ? 0 : 1;
     await db.collection("chats").doc(cid).set({
-      participants: [me.uid, targetUid], lastText: prev, lastSender: me.uid,
-      lastRead: false, updatedAtMs: Date.now(), [`unread_${targetUid}`]: firebase.firestore.FieldValue.increment(targetUnreadInc)
+      participants: [me.uid, targetUid],
+      lastText: prev,
+      lastSender: me.uid,
+      lastRead: false,
+      updatedAtMs: localCreatedMs || Date.now(),
+      [`unread_${targetUid}`]: firebase.firestore.FieldValue.increment(targetUnreadInc)
     }, { merge: true });
+  }
+
+  async function pushMsg(cid, targetUid, extra) {
+    if (!me) return;
+    if (isBlocked(targetUid)) return alert("Blocked contact");
+    const localCreatedMs = Date.now();
+    const payload = {
+      text: extra.text || "",
+      type: extra.type || "text",
+      mediaUrl: extra.mediaUrl || "",
+      fileName: extra.fileName || "",
+      forwarded: !!extra.forwarded,
+      replyTo: extra.replyTo || null
+    };
+
+    if (!isOnlineNow()) {
+      const queueId = `q_${localCreatedMs}_${Math.random().toString(36).slice(2, 7)}`;
+      enqueueOfflineMessage({
+        queueId,
+        ownerUid: me.uid,
+        cid,
+        targetUid,
+        payload,
+        localCreatedMs
+      });
+      showToast("Queued • Will send when data is on");
+      if (roomId === cid) bindMessages();
+      paintChats();
+      return;
+    }
+
+    chime(620);
+    try {
+      await commitMessageToServer(cid, targetUid, payload, localCreatedMs);
+    } catch (_) {
+      const queueId = `q_${localCreatedMs}_${Math.random().toString(36).slice(2, 7)}`;
+      enqueueOfflineMessage({
+        queueId,
+        ownerUid: me.uid,
+        cid,
+        targetUid,
+        payload,
+        localCreatedMs
+      });
+      showToast("Saved offline • Will retry automatically");
+      if (roomId === cid) bindMessages();
+      paintChats();
+    }
   }
 
   // Up to 10 Photos
@@ -2574,7 +2818,10 @@
       try {
         const url = await prepareMediaForSend(f, `chats/${roomId}/${Date.now()}_${i}_${f.name}`, "image");
         await pushMsg(roomId, peerUser.uid, { type: "image", mediaUrl: url, fileName: f.name });
-      } catch (err) { alert(`Failed ${f.name}: ${err.message}`); }
+      } catch (err) {
+        showToast("Photo failed");
+        alert(`Failed ${f.name}: ${err.message}`);
+      }
     }
     showToast("");
     e.target.value = "";
@@ -2591,8 +2838,11 @@
     try {
       const url = await prepareMediaForSend(f, `chats/${roomId}/${Date.now()}_${f.name}`, "video");
       await pushMsg(roomId, peerUser.uid, { type: "video", mediaUrl: url, fileName: f.name });
-    } catch (err) { alert("Video send failed: " + err.message); }
-    showToast("");
+      showToast("Video sent");
+    } catch (err) {
+      showToast("Video failed");
+      alert("Video send failed: " + err.message);
+    }
     e.target.value = "";
   });
 
@@ -2605,35 +2855,74 @@
     try {
       const url = await prepareMediaForSend(f, `chats/${roomId}/${Date.now()}_${f.name}`, "file");
       await pushMsg(roomId, peerUser.uid, { type: "file", mediaUrl: url, fileName: f.name });
-    } catch (err) { alert("File send failed: " + err.message); }
-    showToast("");
+      showToast("File sent");
+    } catch (err) {
+      showToast("File failed");
+      alert("File send failed: " + err.message);
+    }
     e.target.value = "";
   });
 
+  function pickSupportedAudioMime() {
+    if (typeof MediaRecorder === "undefined" || typeof MediaRecorder.isTypeSupported !== "function") return "";
+    const candidates = [
+      "audio/webm;codecs=opus",
+      "audio/webm",
+      "audio/mp4",
+      "audio/ogg;codecs=opus",
+      "audio/3gpp"
+    ];
+    for (const t of candidates) {
+      if (MediaRecorder.isTypeSupported(t)) return t;
+    }
+    return "";
+  }
+
   // Voice Note
   async function beginVoice() {
-    if (!peerUser || isBlocked(peerUser.uid)) return;
+    if (!peerUser || isBlocked(peerUser.uid) || !roomId) {
+      holdingMic = false;
+      voiceBtn.classList.remove("recording");
+      return;
+    }
     stopActiveAudio();
     try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error("Microphone API unavailable in this browser/WebView");
+      }
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      recorder = new MediaRecorder(stream);
+      const mimeType = pickSupportedAudioMime();
+      recorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
       chunks = []; recAborted = false; recSec = 0;
       document.getElementById("recClock").textContent = "0:00";
-      recorder.ondataavailable = (ev) => chunks.push(ev.data);
+
+      recorder.ondataavailable = (ev) => {
+        if (ev.data && ev.data.size > 0) chunks.push(ev.data);
+      };
+
       recorder.onstop = async () => {
-        stream.getTracks().forEach((t) => t.stop());
+        stream.getTracks().forEach((t) => {
+          try { t.stop(); } catch (_) {}
+        });
         clearInterval(recTicker);
         document.getElementById("recDock").classList.add("hidden");
         document.getElementById("msgForm").classList.remove("hidden");
-        if (recAborted || !chunks.length) return;
-        const blob = new Blob(chunks, { type: "audio/webm" });
+        if (recAborted || !chunks.length || recSec < 1 && chunks.reduce((s, b) => s + b.size, 0) < 250) {
+          chunks = [];
+          return;
+        }
+        const blobType = recorder.mimeType || mimeType || "audio/webm";
+        const blob = new Blob(chunks, { type: blobType });
+        chunks = [];
         const fr = new FileReader();
         fr.onloadend = async () => {
-          await pushMsg(roomId, peerUser.uid, { type: "audio", mediaUrl: fr.result });
+          if (!fr.result || !roomId || !peerUser) return;
+          await pushMsg(roomId, peerUser.uid, { type: "audio", mediaUrl: fr.result, fileName: "voice_note.webm" });
         };
         fr.readAsDataURL(blob);
       };
-      recorder.start();
+
+      recorder.start(200);
       document.getElementById("msgForm").classList.add("hidden");
       document.getElementById("recDock").classList.remove("hidden");
       recTicker = setInterval(() => {
@@ -2643,12 +2932,16 @@
     } catch (e) {
       holdingMic = false;
       voiceBtn.classList.remove("recording");
+      document.getElementById("recDock").classList.add("hidden");
+      document.getElementById("msgForm").classList.remove("hidden");
       alert("Mic access required: " + e.message);
     }
   }
   document.getElementById("recDiscardBtn").addEventListener("click", () => {
     recAborted = true; holdingMic = false; voiceBtn.classList.remove("recording");
-    if (recorder?.state !== "inactive") recorder.stop();
+    if (recorder && recorder.state !== "inactive") {
+      try { recorder.stop(); } catch (_) {}
+    }
   });
 
   // WebRTC Calls
@@ -2657,11 +2950,14 @@
 
   async function dial(withVideo) {
     if (!peerUser || isBlocked(peerUser.uid)) return alert("Cannot call blocked contact");
+    if (!isOnlineNow()) return alert("No internet connection for calls");
     try {
       micCamStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: withVideo });
-      document.getElementById("localVid").srcObject = micCamStream;
-      document.getElementById("localVid").classList.toggle("hidden", !withVideo);
-      document.getElementById("remoteVid").classList.toggle("hidden", !withVideo);
+      const localVid = document.getElementById("localVid");
+      const remoteVid = document.getElementById("remoteVid");
+      localVid.srcObject = micCamStream;
+      localVid.classList.toggle("hidden", !withVideo);
+      remoteVid.classList.toggle("hidden", !withVideo);
       callLayer.classList.remove("hidden");
       document.getElementById("acceptCallBtn").classList.add("hidden");
       document.getElementById("callTitle").textContent = peerUser.name || peerUser.email;
@@ -2669,7 +2965,22 @@
 
       rtc = new RTCPeerConnection(rtcServers);
       micCamStream.getTracks().forEach((tr) => rtc.addTrack(tr, micCamStream));
-      rtc.ontrack = (ev) => { document.getElementById("remoteVid").srcObject = ev.streams[0]; };
+      rtc.ontrack = (ev) => {
+        if (withVideo) {
+          remoteVid.srcObject = ev.streams[0];
+        } else {
+          let aud = document.getElementById("remoteVoiceAudio");
+          if (!aud) {
+            aud = document.createElement("audio");
+            aud.id = "remoteVoiceAudio";
+            aud.autoplay = true;
+            aud.playsInline = true;
+            callLayer.appendChild(aud);
+          }
+          aud.srcObject = ev.streams[0];
+          aud.play().catch(() => {});
+        }
+      };
 
       const docRef = db.collection("calls").doc();
       callDocId = docRef.id;
@@ -2685,7 +2996,7 @@
 
       docRef.onSnapshot(async (s) => {
         const d = s.data();
-        if (!d) return;
+        if (!d || !rtc) return;
         if (d.status === "ended") resetCall();
         if (d.answer && !rtc.currentRemoteDescription) {
           await rtc.setRemoteDescription(new RTCSessionDescription(d.answer));
@@ -2693,7 +3004,11 @@
         }
       });
       docRef.collection("calleeCandidates").onSnapshot((s) => {
-        s.docChanges().forEach((c) => { if (c.type === "added") rtc.addIceCandidate(new RTCIceCandidate(c.doc.data())).catch(() => {}); });
+        s.docChanges().forEach((c) => {
+          if (c.type === "added" && rtc && rtc.remoteDescription) {
+            rtc.addIceCandidate(new RTCIceCandidate(c.doc.data())).catch(() => {});
+          }
+        });
       });
     } catch (e) { alert("Call failed: " + e.message); resetCall(); }
   }
@@ -2713,7 +3028,7 @@
           startRingLoop();
         }
       });
-    });
+    }, () => {});
   }
 
   document.getElementById("acceptCallBtn").addEventListener("click", async () => {
@@ -2723,13 +3038,30 @@
     try {
       const withVideo = !!ringingCall.withVideo;
       micCamStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: withVideo });
-      document.getElementById("localVid").srcObject = micCamStream;
-      document.getElementById("localVid").classList.toggle("hidden", !withVideo);
-      document.getElementById("remoteVid").classList.toggle("hidden", !withVideo);
+      const localVid = document.getElementById("localVid");
+      const remoteVid = document.getElementById("remoteVid");
+      localVid.srcObject = micCamStream;
+      localVid.classList.toggle("hidden", !withVideo);
+      remoteVid.classList.toggle("hidden", !withVideo);
 
       rtc = new RTCPeerConnection(rtcServers);
       micCamStream.getTracks().forEach((tr) => rtc.addTrack(tr, micCamStream));
-      rtc.ontrack = (ev) => { document.getElementById("remoteVid").srcObject = ev.streams[0]; };
+      rtc.ontrack = (ev) => {
+        if (withVideo) {
+          remoteVid.srcObject = ev.streams[0];
+        } else {
+          let aud = document.getElementById("remoteVoiceAudio");
+          if (!aud) {
+            aud = document.createElement("audio");
+            aud.id = "remoteVoiceAudio";
+            aud.autoplay = true;
+            aud.playsInline = true;
+            callLayer.appendChild(aud);
+          }
+          aud.srcObject = ev.streams[0];
+          aud.play().catch(() => {});
+        }
+      };
 
       const docRef = db.collection("calls").doc(ringingCall.id);
       callDocId = docRef.id;
@@ -2746,7 +3078,11 @@
         if (snap.data()?.status === "ended") resetCall();
       });
       docRef.collection("callerCandidates").onSnapshot((s) => {
-        s.docChanges().forEach((c) => { if (c.type === "added") rtc.addIceCandidate(new RTCIceCandidate(c.doc.data())).catch(() => {}); });
+        s.docChanges().forEach((c) => {
+          if (c.type === "added" && rtc && rtc.remoteDescription) {
+            rtc.addIceCandidate(new RTCIceCandidate(c.doc.data())).catch(() => {});
+          }
+        });
       });
     } catch (e) {
       alert("Could not accept call: " + e.message);
@@ -2764,8 +3100,10 @@
   document.getElementById("speakerCallBtn").addEventListener("click", () => {
     speakerBoost = !speakerBoost;
     const rv = document.getElementById("remoteVid");
+    const ra = document.getElementById("remoteVoiceAudio");
     rv.muted = false;
     rv.volume = speakerBoost ? 1.0 : 0.7;
+    if (ra) { ra.muted = false; ra.volume = speakerBoost ? 1.0 : 0.7; }
     showToast(speakerBoost ? "Speaker boosted" : "Normal volume");
   });
 
@@ -2777,8 +3115,10 @@
 
   function resetCall() {
     stopRingLoop();
-    if (rtc) { rtc.close(); rtc = null; }
-    if (micCamStream) { micCamStream.getTracks().forEach((t) => t.stop()); micCamStream = null; }
+    if (rtc) { try { rtc.close(); } catch (_) {} rtc = null; }
+    if (micCamStream) { micCamStream.getTracks().forEach((t) => { try { t.stop(); } catch (_) {} }); micCamStream = null; }
+    const ra = document.getElementById("remoteVoiceAudio");
+    if (ra) ra.remove();
     callDocId = null; ringingCall = null; mutedMic = false; speakerBoost = false;
     callLayer.classList.add("hidden");
   }
