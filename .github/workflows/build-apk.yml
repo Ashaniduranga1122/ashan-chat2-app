@@ -45,6 +45,13 @@ jobs:
           mkdir -p android-app/app/src/main/res/mipmap-xxhdpi
           mkdir -p android-app/app/src/main/res/mipmap-xxxhdpi
 
+          cat << 'EOF' > android-app/app/src/main/res/values/strings.xml
+          <?xml version="1.0" encoding="utf-8"?>
+          <resources>
+              <string name="app_name">NA Whatsapp</string>
+          </resources>
+          EOF
+
           if [ -f "1000394929.jpg" ]; then
             pip install -q pillow || true
             python3 - << 'PYEOF'
@@ -55,7 +62,6 @@ jobs:
               img = Image.open("1000394929.jpg").convert("RGBA")
               w, h = img.size
 
-              # Center square crop around the middle icon
               side = int(min(w, h) * 0.24)
               left = (w - side) // 2
               top = (h - side) // 2
@@ -75,8 +81,8 @@ jobs:
           except Exception as e:
               print("Fallback copy due to:", e)
               for d in ["mipmap-mdpi", "mipmap-hdpi", "mipmap-xhdpi", "mipmap-xxhdpi", "mipmap-xxxhdpi"]:
-                  shutil.copyfile("1000394929.jpg", f"android-app/app/src/main/res/{d}/ic_launcher.jpg")
-                  shutil.copyfile("1000394929.jpg", f"android-app/app/src/main/res/{d}/ic_launcher_round.jpg")
+                  shutil.copyfile("1000394929.jpg", f"android-app/app/src/main/res/{d}/ic_launcher.png")
+                  shutil.copyfile("1000394929.jpg", f"android-app/app/src/main/res/{d}/ic_launcher_round.png")
           PYEOF
           fi
 
@@ -167,7 +173,7 @@ jobs:
                   android:allowBackup="true"
                   android:icon="@mipmap/ic_launcher"
                   android:roundIcon="@mipmap/ic_launcher_round"
-                  android:label="NA Whatsapp"
+                  android:label="@string/app_name"
                   android:supportsRtl="true"
                   android:theme="@style/Theme.AppCompat.NoActionBar"
                   android:usesCleartextTraffic="true">
@@ -213,6 +219,7 @@ jobs:
           import android.webkit.PermissionRequest
           import android.webkit.ValueCallback
           import android.webkit.WebChromeClient
+          import android.webkit.WebResourceRequest
           import android.webkit.WebSettings
           import android.webkit.WebView
           import android.webkit.WebViewClient
@@ -248,9 +255,14 @@ jobs:
 
               private val runtimePermissionLauncher = registerForActivityResult(
                   ActivityResultContracts.RequestMultiplePermissions()
-              ) { _ ->
+              ) { grants ->
                   pendingPermissionRequest?.let { req ->
-                      req.grant(req.resources)
+                      val allGranted = grants.values.all { it }
+                      if (allGranted) {
+                          req.grant(req.resources)
+                      } else {
+                          req.deny()
+                      }
                       pendingPermissionRequest = null
                   }
               }
@@ -275,9 +287,12 @@ jobs:
                   }
 
                   webView.webViewClient = object : WebViewClient() {
-                      override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                          if (url == null) return false
-                          return !(url.startsWith("http://") || url.startsWith("https://"))
+                      override fun shouldOverrideUrlLoading(
+                          view: WebView?,
+                          request: WebResourceRequest?
+                      ): Boolean {
+                          val scheme = request?.url?.scheme?.lowercase() ?: return false
+                          return !(scheme == "http" || scheme == "https")
                       }
                   }
 
