@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- NA Whatsapp | Version 2.0.5 (v2.0.5 - Configured: chat-app-v1-641af) -->
+  <!-- NA Whatsapp | Version 2.0.6 (v2.0.6 - Configured: chat-app-v1-641af) -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>NA Whatsapp (v2.0.5)</title>
+  <title>NA Whatsapp (v2.0.6)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Fredoka:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+Sinhala:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -86,7 +86,7 @@
     .msg-font-script { font-family: "Dancing Script", "Noto Serif Sinhala", cursive; font-size: 1.16em; }
     .msg-font-display { font-family: "Plus Jakarta Sans", "Noto Serif Sinhala", sans-serif; font-weight: 800; letter-spacing: 0.03em; }
 
-    /* Yellow letters with thin black border for typing & typing indicator */
+    /* Yellow letters with thin black border for typing indicator */
     .typing-yellow-bordered {
       color: #ffd54f !important;
       font-weight: 800;
@@ -136,7 +136,6 @@
       flex-shrink: 0;
     }
 
-    /* Compact WhatsApp-style buttons sized cleanly to text */
     .hdr-actions { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
     .hdr-btn {
       background: rgba(255, 255, 255, 0.16);
@@ -206,7 +205,7 @@
       flex-shrink: 0;
       cursor: pointer;
     }
-    .av-ring.status-unseen { background: conic-gradient(#81d4fa, #29b6f6, #00e676, #81d4fa); }
+    .av-ring.status-unseen { background: conic-gradient(#29b6f6, #00e676, #81d4fa, #29b6f6); }
     .av-ring.status-seen { background: #607d8b; }
 
     .av {
@@ -304,7 +303,6 @@
     }
     input:focus, textarea:focus, select:focus { border-color: var(--accent-2); }
 
-    /* Pill / soft-rounded buttons sized to content */
     .wave-btn {
       background: linear-gradient(135deg, #0288d1, #1565c0);
       color: #ffffff; border: 1px solid rgba(179, 229, 252, 0.38); padding: 7px 14px; border-radius: 999px;
@@ -334,7 +332,6 @@
     }
     .search-wrap input { margin: 0; border-radius: 999px; padding: 7px 14px; font-size: 13px; }
 
-    /* Multi-select action bar on Home screen */
     .multi-select-bar {
       display: none;
       align-items: center;
@@ -359,7 +356,7 @@
     }
     .wa-tab.active { color: #ffffff; border-bottom-color: var(--accent-2); background: rgba(41, 182, 246, 0.18); }
 
-    .home-body { flex: 1; overflow-y: auto; position: relative; padding-bottom: 84px; will-change: scroll-position; }
+    .home-body { flex: 1; overflow-y: auto; position: relative; padding-bottom: 110px; will-change: scroll-position; }
     .home-view { display: none; padding: 10px 12px; }
     .home-view.active { display: block; }
 
@@ -457,6 +454,132 @@
     body.snake-pat-off .pro-card::before { display: none; }
     .pro-card:active { transform: scale(0.985); }
 
+    /* WhatsApp Screenshot Status UI Styling */
+    .wa-add-status-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 8px 4px 12px;
+      cursor: pointer;
+    }
+    .wa-add-av-wrap {
+      position: relative;
+      width: 54px;
+      height: 54px;
+      flex-shrink: 0;
+    }
+    .wa-add-av-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1976d2, #0d47a1);
+      border: 2px solid rgba(129, 212, 250, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .wa-add-av-circle img { width: 100%; height: 100%; object-fit: cover; }
+    .wa-add-plus-badge {
+      position: absolute;
+      right: -2px;
+      bottom: -2px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #0288d1;
+      color: #ffffff;
+      border: 2.5px solid #041226;
+      font-size: 14px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .wa-status-sec-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #b3e5fc;
+      margin: 6px 2px 10px;
+    }
+    .wa-status-feed-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 4px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+    .wa-status-feed-item:active { background: rgba(255, 255, 255, 0.08); }
+    .wa-status-right-thumb {
+      width: 38px;
+      height: 50px;
+      border-radius: 7px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid rgba(129, 212, 250, 0.4);
+      background: rgba(4, 15, 34, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #e1f5fe;
+    }
+    .wa-status-right-thumb img,
+    .wa-status-right-thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* WhatsApp Screenshot Floating Stack on Status Tab */
+    .wa-status-fab-stack {
+      position: fixed;
+      right: 16px;
+      bottom: 20px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      z-index: 26;
+    }
+    .wa-status-fab-stack.show { display: flex; }
+    .wa-mini-fab {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: rgba(13, 71, 161, 0.95);
+      color: #ffffff;
+      border: 1.5px solid rgba(129, 212, 250, 0.55);
+      font-size: 16px;
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.45);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wa-main-cam-fab {
+      width: 54px;
+      height: 54px;
+      border-radius: 17px;
+      background: linear-gradient(135deg, #29b6f6, #0288d1);
+      color: #ffffff;
+      border: 2px solid rgba(225, 245, 254, 0.65);
+      font-size: 22px;
+      box-shadow: 0 8px 22px rgba(41, 182, 246, 0.5);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .select-check-circle {
       width: 22px; height: 22px; border-radius: 50%;
       border: 2px solid #81d4fa; display: none; align-items: center; justify-content: center;
@@ -473,13 +596,6 @@
     .row-last-wrap { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 3px; }
     .row-last { font-size: 13px; color: #e1f5fe; opacity: 0.9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
 
-    .st-thumb-box {
-      width: 50px; height: 50px; border-radius: 14px; overflow: hidden;
-      flex-shrink: 0; border: 1.5px solid rgba(129, 212, 250, 0.45);
-      background: #041226; display: flex; align-items: center; justify-content: center;
-    }
-    .st-thumb-box video, .st-thumb-box img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
-
     .unread-badge {
       background: #00e676; color: #032212; font-size: 11px; font-weight: 800;
       min-width: 20px; height: 20px; border-radius: 999px; padding: 0 6px;
@@ -490,10 +606,27 @@
     .lock-tag { font-size: 11px; color: #81d4fa; margin-left: 4px; }
 
     .blocked-tag {
-      background: rgba(229, 57, 53, 0.25); color: #ff8a80;
-      border: 1px solid rgba(255, 138, 128, 0.4); font-size: 10px; font-weight: 800;
+      background: rgba(229, 57, 53, 0.28); color: #ff6b6b;
+      border: 1px solid rgba(255, 107, 107, 0.55); font-size: 10px; font-weight: 800;
       padding: 1px 7px; border-radius: 999px;
     }
+
+    /* Red banner shown to BOTH blocker and blocked user inside chat room */
+    .red-block-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 12px;
+      background: rgba(183, 28, 28, 0.94);
+      border-top: 1px solid rgba(255, 138, 128, 0.65);
+      border-bottom: 1px solid rgba(255, 138, 128, 0.65);
+      color: #ffffff;
+      font-size: 12.5px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .red-block-banner.show { display: flex; }
 
     .admin-chip {
       background: rgba(255, 213, 79, 0.2); color: #ffd54f;
@@ -702,12 +835,15 @@
       color: #fff;
     }
 
+    /* Clean, easy-to-read live typing preview (no yellow background/border) */
     .live-md-preview {
       display: none;
       padding: 6px 12px;
-      background: rgba(8, 28, 60, 0.92);
-      border-top: 1px dashed rgba(129, 212, 250, 0.45);
-      font-size: 13.5px;
+      background: rgba(8, 28, 60, 0.94);
+      border-top: 1px solid rgba(129, 212, 250, 0.35);
+      color: #f0f8ff;
+      font-size: 13px;
+      font-weight: 500;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -717,8 +853,8 @@
 
     .wa-composer { display: flex; align-items: center; gap: 6px; padding: 6px 8px 10px; background: rgba(3, 11, 26, 0.94); border-top: 1px solid rgba(129, 212, 250, 0.2); flex-shrink: 0; }
     .composer-pill { flex: 1; display: flex; align-items: center; gap: 4px; background: rgba(10, 32, 66, 0.96); border: 1.5px solid var(--border); border-radius: 26px; padding: 4px 9px; min-height: 44px; min-width: 0; }
-    .composer-pill input { flex: 1; border: none; background: transparent; padding: 6px 4px; margin: 0; font-size: 14px; min-width: 0; }
-    .composer-pill input::placeholder { color: #90caf9; -webkit-text-stroke: 0; text-shadow: none; font-weight: 400; }
+    .composer-pill input { flex: 1; border: none; background: transparent; padding: 6px 4px; margin: 0; font-size: 14px; min-width: 0; color: #ffffff; }
+    .composer-pill input::placeholder { color: #90caf9; font-weight: 400; }
 
     .icon-tap {
       background: rgba(255, 255, 255, 0.08);
@@ -790,7 +926,6 @@
     .full-viewer { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 100; flex-direction: column; align-items: center; justify-content: center; padding: 12px; }
     .full-viewer img, .full-viewer video { max-width: 98vw; max-height: 84dvh; width: auto; height: auto; border-radius: 12px; }
 
-    /* WhatsApp-style full-bleed Status Story Modal */
     .status-story-modal {
       display: none; position: fixed; inset: 0;
       background: #020813;
@@ -842,7 +977,7 @@
   <!-- Splash Loader -->
   <div id="splashLoader">
     <div class="na-center-icon">NA</div>
-    <div style="font-weight:800; font-size:17px; letter-spacing:0.4px;">NA Whatsapp <span class="ver-pill">v2.0.5</span></div>
+    <div style="font-weight:800; font-size:17px; letter-spacing:0.4px;">NA Whatsapp <span class="ver-pill">v2.0.6</span></div>
     <div style="font-size:12px; color:#b3e5fc;">Loading...</div>
   </div>
 
@@ -874,7 +1009,7 @@
   <div id="authScreen">
     <div class="auth-logo-center">
       <div class="na-center-icon">NA</div>
-      <div style="margin-top:10px; font-weight:800; font-size:20px; color:#fff;">NA Whatsapp <span class="ver-pill">v2.0.5</span></div>
+      <div style="margin-top:10px; font-weight:800; font-size:20px; color:#fff;">NA Whatsapp <span class="ver-pill">v2.0.6</span></div>
       <div style="font-size:12px; color:#e1f5fe; margin-top:3px;">Live Fonts • Rich Formatting • Smart Profiles</div>
     </div>
 
@@ -903,7 +1038,7 @@
         </div>
         <div class="wa-brand-wrap">
           <div class="wa-brand">NA Whatsapp</div>
-          <span class="ver-pill">v2.0.5</span>
+          <span class="ver-pill">v2.0.6</span>
         </div>
       </div>
       <div class="hdr-actions">
@@ -920,6 +1055,7 @@
       <span id="multiSelectCount" style="font-size:12.5px; font-weight:800; color:#fff;">0 selected</span>
       <div style="display:flex; gap:6px; align-items:center;">
         <button type="button" id="msMuteBtn" class="hdr-btn">🔕 Mute</button>
+        <button type="button" id="msClearBtn" class="hdr-btn">🧹 Clear</button>
         <button type="button" id="msRemoveListBtn" class="hdr-btn danger">🗑️ Remove</button>
         <button type="button" id="msCancelBtn" class="hdr-btn">✕</button>
       </div>
@@ -942,31 +1078,26 @@
         <div id="usersChatList"></div>
       </div>
 
-      <!-- WhatsApp-style Status Tab -->
+      <!-- WhatsApp Screenshot Status Layout (Add status + Recent updates + right thumbnails) -->
       <div id="statusTab" class="home-view">
-        <div class="pro-card" style="display:block; cursor:default;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-            <span style="font-weight:800; font-size:13.5px; color:#81d4fa;">My Status (24h)</span>
-            <span style="font-size:11px; color:#b3e5fc;">WhatsApp Style</span>
+        <div class="wa-add-status-row" id="waAddStatusRow">
+          <div class="wa-add-av-wrap">
+            <div class="wa-add-av-circle" id="waAddStatusAv">U</div>
+            <span class="wa-add-plus-badge">+</span>
           </div>
-          <input type="text" id="stTextInput" placeholder="Add a caption or type a text status..." />
-          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
-            <button type="button" id="stPostTextBtn" class="wave-btn btn-sm">✏️ Text</button>
-            <button type="button" id="stVoiceRecBtn" class="wave-btn btn-secondary btn-sm">🎤 Voice</button>
-            <button type="button" id="pickStPhotoBtn" class="wave-btn btn-secondary btn-sm">📷 Photo</button>
-            <button type="button" id="clearStPhotoBtn" class="btn-danger btn-sm" style="display:none;">✕ Photo</button>
-            <button type="button" id="pickStVideoBtn" class="wave-btn btn-secondary btn-sm">🎬 Video</button>
-            <button type="button" id="clearStVideoBtn" class="btn-danger btn-sm" style="display:none;">✕ Video</button>
+          <div style="min-width:0; flex:1;">
+            <div style="font-weight:700; font-size:15px; color:#fff;">Add status</div>
+            <div style="font-size:12.5px; color:#b3e5fc; margin-top:2px;">Share a photo, video, voice, or text</div>
           </div>
-          <input type="file" id="stPhotoInput" accept="image/*" style="display:none;" />
-          <input type="file" id="stVideoInput" accept="video/*" style="display:none;" />
-          <div id="stPhotoName" style="font-size:11px; color:#b3e5fc; margin-top:6px;">No photo selected</div>
-          <div id="stVideoName" style="font-size:11px; color:#b3e5fc; margin-top:2px;">No video selected</div>
-          <button type="button" id="postStMediaBtn" class="wave-btn btn-sm" style="margin-top:8px;" disabled>➤ Share Status</button>
-          <div id="stInfo" style="font-size:12px; color:#69f0ae; margin-top:6px;"></div>
         </div>
-        <div style="font-weight:700; font-size:13px; color:#e1f5fe; margin:10px 0 6px;">Recent Updates</div>
+
+        <div id="stInfo" style="font-size:12px; color:#69f0ae; margin:0 4px 8px;"></div>
+
+        <div class="wa-status-sec-title">Recent updates</div>
         <div id="statusFeedList"></div>
+
+        <input type="file" id="stPhotoInput" accept="image/*" style="display:none;" />
+        <input type="file" id="stVideoInput" accept="video/*" style="display:none;" />
       </div>
 
       <div id="groupsTab" class="home-view">
@@ -980,7 +1111,36 @@
       </div>
     </div>
 
+    <!-- WhatsApp Floating Buttons for Status Tab (Pencil/Text + Camera/Photo/Video) -->
+    <div id="waStatusFabStack" class="wa-status-fab-stack">
+      <button type="button" id="waFloatingTextBtn" class="wa-mini-fab" title="Text Status">✏️</button>
+      <button type="button" id="waFloatingVoiceBtn" class="wa-mini-fab" title="Voice Status">🎤</button>
+      <button type="button" id="waFloatingCamBtn" class="wa-main-cam-fab" title="Photo or Video Status">📷</button>
+    </div>
+
     <button id="fabNew" class="fab" title="New Group">+</button>
+  </div>
+
+  <!-- Status Composer Modal (WhatsApp Style Text / Photo / Video / Voice) -->
+  <div id="statusComposerModal" class="modal-bg">
+    <div class="modal-card">
+      <h3 id="stComposerTitle" style="margin-top:0;">Share Status</h3>
+      <input type="text" id="stTextInput" placeholder="Type status text or caption..." />
+      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
+        <button type="button" id="stPostTextBtn" class="wave-btn btn-sm">✏️ Post Text</button>
+        <button type="button" id="stVoiceRecBtn" class="wave-btn btn-secondary btn-sm">🎤 Voice</button>
+        <button type="button" id="pickStPhotoBtn" class="wave-btn btn-secondary btn-sm">📷 Photo</button>
+        <button type="button" id="clearStPhotoBtn" class="btn-danger btn-sm" style="display:none;">✕ Photo</button>
+        <button type="button" id="pickStVideoBtn" class="wave-btn btn-secondary btn-sm">🎬 Video</button>
+        <button type="button" id="clearStVideoBtn" class="btn-danger btn-sm" style="display:none;">✕ Video</button>
+      </div>
+      <div id="stPhotoName" style="font-size:11px; color:#b3e5fc; margin-top:8px;">No photo selected</div>
+      <div id="stVideoName" style="font-size:11px; color:#b3e5fc; margin-top:2px;">No video selected</div>
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button type="button" id="postStMediaBtn" class="wave-btn" style="flex:1;" disabled>➤ Share Media</button>
+        <button type="button" id="closeStComposerBtn" class="wave-btn btn-secondary" style="flex:1;">Close</button>
+      </div>
+    </div>
   </div>
 
   <!-- Chat Room Screen -->
@@ -1055,6 +1215,12 @@
 
       <div id="pinnedBanner" class="pinned-banner"></div>
 
+      <!-- Red Block Banner visible to BOTH Blocker & Blocked User -->
+      <div id="redBlockBanner" class="red-block-banner">
+        <span id="redBlockText">🚫 Blocked</span>
+        <button type="button" id="redBannerUnblockBtn" class="wave-btn btn-sm" style="display:none; background:#ffffff; color:#b71c1c; text-shadow:none;">Unblock</button>
+      </div>
+
       <div class="msg-area-wrap">
         <div id="msgArea" class="msg-area"></div>
         <button id="scrollBottomBtn" class="scroll-bottom-btn" title="Bottom">↓ <span id="scrollNewCount" style="font-size:11px;"></span></button>
@@ -1099,8 +1265,8 @@
         <button type="button" class="ff-chip" id="mdWrapStrike">~S~</button>
       </div>
 
-      <!-- Live Typing Preview Strip -->
-      <div id="liveMdPreview" class="live-md-preview typing-yellow-bordered"></div>
+      <!-- Clear, readable live typing preview (not yellow) -->
+      <div id="liveMdPreview" class="live-md-preview"></div>
 
       <div class="wa-composer">
         <div class="composer-pill">
@@ -1108,7 +1274,7 @@
             <svg viewBox="0 0 24 24" width="21" height="21"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-3.5-6.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm7 0c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm-3.5 3.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
           </button>
           <button type="button" class="icon-tap" id="toggleFontBarBtn" title="Message Font & *Bold* _Italic_">Aa</button>
-          <input type="text" id="composerInput" class="msg-font-default typing-yellow-bordered" placeholder="Message (*bold* _italic_ ~strike~)..." autocomplete="off" />
+          <input type="text" id="composerInput" class="msg-font-default" placeholder="Message (*bold* _italic_ ~strike~)..." autocomplete="off" />
           <button type="button" class="icon-tap" id="pickChatPhotoBtn" title="Photo">
             <svg viewBox="0 0 24 24" width="20" height="20"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
           </button>
@@ -1312,7 +1478,6 @@
     <div class="modal-card">
       <h3 style="margin-top:0;">Settings & Privacy</h3>
 
-      <!-- WhatsApp-style Privacy Controls -->
       <div class="item-card" style="border-color:rgba(79,195,247,0.45); margin-bottom:12px;">
         <div style="font-weight:800; font-size:13px; color:#81d4fa; margin-bottom:8px;">🛡️ Privacy (WhatsApp Style)</div>
 
@@ -1365,7 +1530,6 @@
         </div>
       </div>
 
-      <!-- Snake Border Customizer -->
       <div class="item-card" style="border-color:rgba(79,195,247,0.45); margin-bottom:12px;">
         <div style="font-weight:800; font-size:13px; color:#81d4fa; margin-bottom:6px;">🐍 Snake / Animated Card Border</div>
 
@@ -1562,7 +1726,7 @@
     import { getDatabase, ref, push, set, update, onValue, remove, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     const APP_NAME = "NA Whatsapp";
-    const APP_VERSION = "Version 2.0.5 (v2.0.5)";
+    const APP_VERSION = "Version 2.0.6 (v2.0.6)";
     window.NA_WHATSAPP_VERSION = APP_VERSION;
 
     const DEFAULT_FIREBASE_CONFIG = {
@@ -1589,7 +1753,6 @@
     const auth = getAuth(app);
     const db = getDatabase(app);
 
-    /* Safe vibration helper: ONLY vibrates on explicit buttons/actions, never on non-button touch */
     function vibrateAction(pattern = 18) {
       try {
         if (navigator.vibrate) navigator.vibrate(pattern);
@@ -1685,7 +1848,6 @@
       location.reload();
     });
 
-    /* Emoji Categories + Stickers Category */
     const emojiCategories = {
       "Stickers": ["🔥", "🤖", "🚀", "😎", "❤️", "⚡", "🎉", "👑", "💯", "🥳", "🤩", "🙏", "💪", "🌟", "🎯", "🦋"],
       "Smileys": ["😀","😃","😄","😁","😆","😅","🤣","😂","🙂","🙃","😉","😊","😇","🥰","😍","🤩","😘","😗","☺","😚","😙","🥲","😋","😛","😜","🤪","😝","🤑","🤗","🤭","🤫","🤔","🫡","🤐","🤨","😐","😑","😶","😏","😒","🙄","😬","😌","😔","😪","🤤","😴","😷","🤒","🤕","🤢","🤮","🤧","🥵","🥶","🥴","😵","🤯","🤠","🥳","😎","🤓","🧐","😕","😟","🙁","😮","😯","😲","😳","🥺","🥹","😦","😧","😨","😰","😥","😢","😭","😱","😖","😣","😞","😓","😩","😫","🥱","😤","😡","😠","🤬","😈","👿","💀","👻","👽","👾","🤖"],
@@ -1725,6 +1887,7 @@
 
     window.toggleReactionEmoji = async function(emo) {
       if (!pickedMsgId || !activeChat || !me) return;
+      if (isEitherBlockedInCurrentChat()) return await proAlert("Cannot react when blocked.", "Blocked");
       const cur = allChatsMsgs[activeChat.id]?.[pickedMsgId]?.reactions?.[me.uid];
       await set(ref(db, `chats/${activeChat.id}/${pickedMsgId}/reactions/${me.uid}`), cur === emo ? null : emo);
       closeSheet();
@@ -1800,7 +1963,7 @@
     ];
 
     let me = null, activeChat = null, replyObj = null, pickedMsgId = null, forwardSourceMsg = null;
-    let users = {}, groups = {}, blocks = {}, allChatsMsgs = {}, typingMap = {}, statuses = {}, callLogs = {};
+    let users = {}, groups = {}, blocks = {}, blockedByOthers = {}, allChatsMsgs = {}, typingMap = {}, statuses = {}, callLogs = {};
     let orderedStoryIds = [], currentStoryIdx = 0, storyTimer = null;
     let seenStatusIds = JSON.parse(localStorage.getItem("na_seen_statuses") || "{}");
     let mutedChats = JSON.parse(localStorage.getItem("na_muted_chats") || "{}");
@@ -1819,9 +1982,13 @@
     let callsListenerAttached = false;
     const watchedCallIds = new Set();
 
-    /* Multiple Select State for Home Chats */
     let selectModeActive = false;
     const selectedChatIds = new Set();
+
+    function isBlockedByMe(otherUid) { return !!(otherUid && blocks[otherUid]); }
+    function amIBlockedBy(otherUid) { return !!(otherUid && blockedByOthers[otherUid]); }
+    function isEitherBlockedUser(otherUid) { return !!(otherUid && (isBlockedByMe(otherUid) || amIBlockedBy(otherUid))); }
+    function isEitherBlockedInCurrentChat() { return !!(activeChat && activeChat.type === "private" && isEitherBlockedUser(activeChat.otherUid)); }
 
     let btnIconTint = localStorage.getItem("na_btn_icon_tint") || "#ffffff";
     function applyBtnIconTint() {
@@ -1968,7 +2135,6 @@
       });
     });
 
-    /* WhatsApp Privacy State: everyone | contacts | nobody */
     let prefs = {
       name: "", about: `Hey! Using ${APP_NAME}.`,
       privLastSeen: "everyone",
@@ -2008,7 +2174,6 @@
 
     applySelectedMsgFont();
 
-    /* Privacy evaluation helper for viewing another user's fields */
     function isContactWithMe(targetUid) {
       if (!me || !targetUid || targetUid === me.uid) return true;
       const cid = getPrivateChatId(me.uid, targetUid);
@@ -2024,7 +2189,7 @@
       return true;
     }
 
-    /* Multiple Select Helpers for Home Chat List */
+    /* Multi-select actions */
     function setSelectMode(enabled) {
       selectModeActive = enabled;
       document.body.classList.toggle("select-mode", enabled);
@@ -2060,6 +2225,18 @@
       setSelectMode(false);
     });
 
+    document.getElementById("msClearBtn").addEventListener("click", async () => {
+      if (!selectedChatIds.size || !me) return;
+      const ok = await proConfirm(`Clear messages in ${selectedChatIds.size} selected chat(s)?`, "Clear Chats");
+      if (!ok) return;
+      for (const cid of selectedChatIds) {
+        for (const mid of Object.keys(allChatsMsgs[cid] || {})) {
+          await set(ref(db, `chats/${cid}/${mid}/deletedFor/${me.uid}`), true);
+        }
+      }
+      setSelectMode(false);
+    });
+
     document.getElementById("msRemoveListBtn").addEventListener("click", async () => {
       if (!selectedChatIds.size) return;
       const ok = await proConfirm(`Remove ${selectedChatIds.size} selected chat(s) from your chat list?`, "Remove Chats");
@@ -2069,7 +2246,6 @@
       setSelectMode(false);
     });
 
-    /* DP Touch Handler */
     window.handleUserAvatarTap = function(targetUid, ev) {
       if (ev) ev.stopPropagation();
       if (!targetUid || !me) return;
@@ -2078,7 +2254,7 @@
       const now = Date.now();
       const userStatuses = canSeeStatus
         ? Object.entries(statuses)
-            .filter(([, s]) => s.uid === targetUid && !blocks[targetUid] && (now - (s.time || 0)) < 86400000)
+            .filter(([, s]) => s.uid === targetUid && !isEitherBlockedUser(targetUid) && (now - (s.time || 0)) < 86400000)
             .map(([id, v]) => ({ id, ...v }))
             .sort((a, b) => b.time - a.time)
         : [];
@@ -2127,16 +2303,17 @@
 
       let presTxt = isSelf ? "Your Profile" : "";
       if (!isSelf) {
-        if (blocks[targetUid]) presTxt = "Blocked";
+        if (isBlockedByMe(targetUid)) presTxt = "Blocked by you";
+        else if (amIBlockedBy(targetUid)) presTxt = "Blocked";
         else if (canViewByPrivacy(u, targetUid, "privLastSeen")) {
-          if (isUserOnlineNow(u)) presTxt = "Online";
+          if (isUserOnlineNow(u, targetUid)) presTxt = "Online";
           else if (u.lastSeen) presTxt = "Last seen " + new Date(u.lastSeen).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         }
       }
       document.getElementById("profModalPresence").textContent = presTxt;
 
       const handleCard = document.getElementById("profModalHandleCard");
-      const canSeeHandle = isSelf ? !!prefs.privateHandle : (!blocks[targetUid] && u.privateHandle && u.allowedHandleUsers && u.allowedHandleUsers[me.uid]);
+      const canSeeHandle = isSelf ? !!prefs.privateHandle : (!isEitherBlockedUser(targetUid) && u.privateHandle && u.allowedHandleUsers && u.allowedHandleUsers[me.uid]);
       if (canSeeHandle) {
         handleCard.style.display = "block";
         document.getElementById("profModalHandle").textContent = u.privateHandle;
@@ -2151,7 +2328,7 @@
         actionsBox.style.display = "flex";
         const cid = getPrivateChatId(me.uid, targetUid);
         const isMuted = !!mutedChats[cid];
-        const isBlocked = !!blocks[targetUid];
+        const iBlocked = isBlockedByMe(targetUid);
 
         document.getElementById("profMuteStateTxt").textContent = isMuted ? "OFF (Muted)" : "ON (Active)";
         document.getElementById("profToggleMuteBtn").onclick = () => {
@@ -2164,9 +2341,9 @@
         };
 
         const blkBtn = document.getElementById("profToggleBlockBtn");
-        blkBtn.textContent = isBlocked ? "✅ Unblock User" : "🚫 Block User";
+        blkBtn.textContent = iBlocked ? "✅ Unblock User" : "🚫 Block User";
         blkBtn.onclick = async () => {
-          await set(ref(db, `blocks/${me.uid}/${targetUid}`), isBlocked ? null : true);
+          await set(ref(db, `blocks/${me.uid}/${targetUid}`), iBlocked ? null : true);
           if (activeChat && activeChat.otherUid === targetUid) updateRoomHeaderMeta();
           renderUsersList();
           openUserProfileModal(targetUid);
@@ -2225,7 +2402,7 @@
       const payload = JSON.stringify({ app: APP_NAME, version: APP_VERSION, exportedAt: new Date().toISOString(), chats: allChatsMsgs, callLogs }, null, 2);
       const blob = new Blob([payload], { type: "application/json" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement("a"); a.href = url; a.download = "na-whatsapp-v2.0.5-backup.json"; a.click();
+      const a = document.createElement("a"); a.href = url; a.download = "na-whatsapp-v2.0.6-backup.json"; a.click();
       URL.revokeObjectURL(url);
     });
 
@@ -2247,6 +2424,7 @@
     }
 
     async function sendChatPayload(chatId, payload) {
+      if (activeChat && activeChat.id === chatId && !(await canSendInCurrentChat())) return;
       delete hiddenChats[chatId];
       localStorage.setItem("na_hidden_chats", JSON.stringify(hiddenChats));
       const dispDays = disappearSettings[chatId] || 0;
@@ -2441,6 +2619,11 @@
 
     if (notifEnabled && "Notification" in window && Notification.permission === "default") Notification.requestPermission().catch(() => {});
 
+    function syncStatusFabVisibility() {
+      const onStatusTab = document.getElementById("statusTab").classList.contains("active");
+      document.getElementById("waStatusFabStack").classList.toggle("show", onStatusTab && !selectModeActive);
+    }
+
     document.querySelectorAll(".wa-tab").forEach(tab => {
       tab.addEventListener("click", () => {
         if (selectModeActive) setSelectMode(false);
@@ -2448,6 +2631,7 @@
         document.querySelectorAll(".home-view").forEach(v => v.classList.remove("active"));
         tab.classList.add("active");
         document.getElementById(tab.dataset.tab).classList.add("active");
+        syncStatusFabVisibility();
       });
     });
 
@@ -2489,6 +2673,7 @@
         me = user;
         authScreen.style.display = "none";
         appShell.style.display = "flex";
+        syncStatusFabVisibility();
         if (appPin) document.getElementById("pinLockScreen").style.display = "block";
         const cleanInitialName = getCleanUserName(user.uid, { name: user.displayName || (user.email ? user.email.split("@")[0] : "User") });
         await update(ref(db, "users/" + me.uid), { name: cleanInitialName });
@@ -2507,7 +2692,6 @@
       }
     });
 
-    /* Immediate offline update on tab hide / page exit / back navigation */
     function markSelfOfflineImmediate() {
       if (!me) return;
       if (navigator.onLine) {
@@ -2553,7 +2737,6 @@
       return userSt.some(id => !seenStatusIds[id]) ? "status-unseen" : "status-seen";
     }
 
-    /* Strict online check: requires recent heartbeat within 38 seconds */
     function isUserOnlineNow(u, uid) {
       if (!u) return false;
       if (uid && !canViewByPrivacy(u, uid, "privLastSeen")) return false;
@@ -2562,8 +2745,8 @@
 
     function refreshTypingBadge() {
       const badge = document.getElementById("roomTyping"), actorEl = document.getElementById("typingActorName");
-      if (!activeChat || !me) { badge.style.display = "none"; return; }
-      const activeTypers = Object.entries(typingMap).filter(([uid, info]) => uid !== me.uid && !blocks[uid] && info && (Date.now() - (info.t || 0)) <= 2800 && info.chatId === activeChat.id);
+      if (!activeChat || !me || isEitherBlockedInCurrentChat()) { badge.style.display = "none"; return; }
+      const activeTypers = Object.entries(typingMap).filter(([uid, info]) => uid !== me.uid && !isEitherBlockedUser(uid) && info && (Date.now() - (info.t || 0)) <= 2800 && info.chatId === activeChat.id);
       if (!activeTypers.length) { badge.style.display = "none"; return; }
       actorEl.textContent = activeTypers.map(([uid]) => getCleanUserName(uid)).slice(0, 2).join(", ");
       badge.style.display = "inline-flex";
@@ -2592,7 +2775,20 @@
 
       onValue(ref(db, "blocks/" + me.uid), (snap) => {
         blocks = snap.val() || {};
-        renderUsersList(); renderBlockUsersBox();
+        renderUsersList(); renderBlockUsersBox(); renderStatusesList();
+        if (activeChat) { updateRoomHeaderMeta(); renderCurrentRoomMessages(); }
+      });
+
+      onValue(ref(db, "blocks"), (snap) => {
+        const allBlocks = snap.val() || {};
+        const incoming = {};
+        Object.entries(allBlocks).forEach(([blockerUid, targets]) => {
+          if (blockerUid !== me.uid && targets && targets[me.uid]) {
+            incoming[blockerUid] = true;
+          }
+        });
+        blockedByOthers = incoming;
+        renderUsersList(); renderStatusesList();
         if (activeChat) { updateRoomHeaderMeta(); renderCurrentRoomMessages(); }
       });
 
@@ -2627,9 +2823,11 @@
 
     function renderHomeMyAvatar() {
       const el = document.getElementById("homeMyAv"), ring = document.getElementById("homeMyRing");
+      const addAv = document.getElementById("waAddStatusAv");
       ring.className = "av-ring " + getUserStatusRingClass(me.uid, prefs);
-      if (!prefs.avatarData) el.innerHTML = esc((prefs.name || "U").charAt(0).toUpperCase());
-      else el.innerHTML = `<img src="${prefs.avatarData}" />`;
+      const inner = !prefs.avatarData ? esc((prefs.name || "U").charAt(0).toUpperCase()) : `<img src="${prefs.avatarData}" />`;
+      el.innerHTML = inner;
+      if (addAv) addAv.innerHTML = inner;
     }
 
     function renderUsersList() {
@@ -2657,25 +2855,28 @@
       if (!list.length) { box.innerHTML = `<p style="font-size:13px; color:#e1f5fe; padding:12px;">No users found.</p>`; return; }
 
       box.innerHTML = list.map(({ uid, u, cid, last }) => {
-        const isBlocked = !!blocks[uid];
+        const iBlocked = isBlockedByMe(uid);
+        const theyBlocked = amIBlockedBy(uid);
+        const eitherBlocked = iBlocked || theyBlocked;
         const isLocked = !!lockedChats[cid];
         const isSelected = selectedChatIds.has(cid);
         const draft = draftTexts[cid] || "";
         const tStr = last ? new Date(last.time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
-        const unread = isBlocked ? 0 : getUnreadCountForChat(cid);
+        const unread = eitherBlocked ? 0 : getUnreadCountForChat(cid);
         const displayName = getCleanUserName(uid, u);
         const canSeePic = canViewByPrivacy(u, uid, "privPhoto");
         const avHtml = (canSeePic && u.avatarData) ? `<img src="${u.avatarData}" />` : esc(displayName.charAt(0).toUpperCase());
         const ringCls = getUserStatusRingClass(uid, u);
-        const onlineShow = !isBlocked && isUserOnlineNow(u, uid) ? "show" : "";
-        const showHandle = !isBlocked && u.privateHandle && u.allowedHandleUsers && u.allowedHandleUsers[me.uid] ? ` • ${u.privateHandle}` : "";
+        const onlineShow = !eitherBlocked && isUserOnlineNow(u, uid) ? "show" : "";
+        const showHandle = !eitherBlocked && u.privateHandle && u.allowedHandleUsers && u.allowedHandleUsers[me.uid] ? ` • ${u.privateHandle}` : "";
         const mutedTag = mutedChats[cid] ? " 🔕" : "";
         const lockBadge = isLocked ? `<span class="lock-tag">🔐</span>` : "";
         const aboutTxt = canViewByPrivacy(u, uid, "privAbout") ? (u.about || "") : "";
-        const aboutLine = isBlocked ? "Blocked" : `${aboutTxt}${showHandle}`;
+        const aboutLine = iBlocked ? "Blocked by you" : (theyBlocked ? "Blocked" : `${aboutTxt}${showHandle}`);
 
         let lastLine = "";
-        if (isBlocked) lastLine = `<span class="blocked-tag">Blocked</span>`;
+        if (iBlocked) lastLine = `<span class="blocked-tag">🚫 You blocked</span>`;
+        else if (theyBlocked) lastLine = `<span class="blocked-tag">🚫 Blocked</span>`;
         else if (isLocked) lastLine = `<i>Locked chat</i>`;
         else if (draft) lastLine = `<span class="draft-tag">Draft:</span> ${esc(draft)}`;
         else lastLine = esc(last ? (last.deletedForEveryone ? "Deleted" : (last.viewOnce ? "👁 View Once" : (last.text || (last.audioData ? "🎤 Voice" : (last.photoData ? "📷 Photo" : "🎬 Video"))))) : "Tap to chat");
@@ -2898,12 +3099,16 @@
     function updateRoomHeaderMeta() {
       if (!activeChat) return;
       const sub = document.getElementById("roomSub"), av = document.getElementById("roomAv"), ring = document.getElementById("roomRing"), titleEl = document.getElementById("roomTitle"), grpManageBtn = document.getElementById("ddGroupManage");
+      const redBanner = document.getElementById("redBlockBanner"), redTxt = document.getElementById("redBlockText"), redUnblockBtn = document.getElementById("redBannerUnblockBtn");
+
       document.getElementById("ddMuteLabel").textContent = isCurrentChatMuted() ? "🔔 Unmute" : "🔕 Mute";
       document.getElementById("ddChatLockVal").textContent = lockedChats[activeChat.id] ? "Locked" : "Off";
       const dDays = disappearSettings[activeChat.id] || 0;
       document.getElementById("ddDisappearVal").textContent = dDays ? `${dDays}d` : "Off";
 
       if (activeChat.type === "group") {
+        redBanner.classList.remove("show");
+        composerInput.disabled = false; micOrSendBtn.disabled = false;
         const g = groups[activeChat.id] || {};
         titleEl.textContent = g.name || activeChat.title;
         ring.className = "av-ring"; av.innerHTML = "👥";
@@ -2913,13 +3118,42 @@
       }
 
       grpManageBtn.style.display = "none";
-      const otherUid = activeChat.otherUid, u = users[otherUid] || {}, isBlocked = !!blocks[otherUid], displayName = getCleanUserName(otherUid, u);
-      document.getElementById("ddBlockLabel").textContent = isBlocked ? "✅ Unblock" : "🚫 Block";
+      const otherUid = activeChat.otherUid, u = users[otherUid] || {}, displayName = getCleanUserName(otherUid, u);
+      const iBlocked = isBlockedByMe(otherUid);
+      const theyBlocked = amIBlockedBy(otherUid);
+      const eitherBlocked = iBlocked || theyBlocked;
+
+      document.getElementById("ddBlockLabel").textContent = iBlocked ? "✅ Unblock" : "🚫 Block";
       ring.className = "av-ring " + getUserStatusRingClass(otherUid, u);
       const canSeePic = canViewByPrivacy(u, otherUid, "privPhoto");
       av.innerHTML = (canSeePic && u.avatarData) ? `<img src="${u.avatarData}" />` : esc(displayName.charAt(0).toUpperCase());
       titleEl.textContent = displayName;
-      if (isBlocked) { sub.innerHTML = `<span style="color:#ff8a80; font-weight:700;">Blocked</span>`; return; }
+
+      if (eitherBlocked) {
+        redBanner.classList.add("show");
+        if (iBlocked && theyBlocked) {
+          redTxt.textContent = "🚫 Blocked (Both sides)";
+          redUnblockBtn.style.display = "inline-flex";
+        } else if (iBlocked) {
+          redTxt.textContent = "🚫 You blocked this user. Messages cannot be sent or received.";
+          redUnblockBtn.style.display = "inline-flex";
+        } else {
+          redTxt.textContent = "🚫 Blocked by this user. Messages cannot be sent or received.";
+          redUnblockBtn.style.display = "none";
+        }
+        redUnblockBtn.onclick = async () => {
+          await set(ref(db, `blocks/${me.uid}/${otherUid}`), null);
+          updateRoomHeaderMeta(); renderUsersList();
+        };
+        sub.innerHTML = `<span style="color:#ff8a80; font-weight:800;">Blocked</span>`;
+        composerInput.disabled = true;
+        micOrSendBtn.disabled = true;
+        return;
+      }
+
+      redBanner.classList.remove("show");
+      composerInput.disabled = false;
+      micOrSendBtn.disabled = false;
 
       let pres = "";
       if (canViewByPrivacy(u, otherUid, "privLastSeen")) {
@@ -2993,8 +3227,9 @@
 
     document.getElementById("ddBlockUser").addEventListener("click", async () => {
       if (!activeChat || activeChat.type !== "private") return;
-      await set(ref(db, `blocks/${me.uid}/${activeChat.otherUid}`), blocks[activeChat.otherUid] ? null : true);
-      updateRoomHeaderMeta(); renderUsersList();
+      const otherUid = activeChat.otherUid;
+      await set(ref(db, `blocks/${me.uid}/${otherUid}`), isBlockedByMe(otherUid) ? null : true);
+      updateRoomHeaderMeta(); renderUsersList(); renderCurrentRoomMessages(false);
     });
 
     document.getElementById("ddFontStyle").addEventListener("click", (e) => { e.stopPropagation(); fontModeIdx = (fontModeIdx + 1) % fontModes.length; applyTypography(); });
@@ -3020,7 +3255,7 @@
     document.getElementById("wpDoneBtn").addEventListener("click", () => { document.getElementById("wpModal").style.display = "none"; });
 
     function markRoomSeen() {
-      if (!activeChat || !me || !readReceiptsOn) return;
+      if (!activeChat || !me || !readReceiptsOn || isEitherBlockedInCurrentChat()) return;
       Object.entries(allChatsMsgs[activeChat.id] || {}).forEach(([mid, m]) => {
         if (!isMessageExpired(m) && m.uid !== me.uid && (!m.seenBy || !m.seenBy[me.uid])) update(ref(db, `chats/${activeChat.id}/${mid}/seenBy`), { [me.uid]: Date.now() });
       });
@@ -3044,6 +3279,7 @@
       const list = Object.entries(allChatsMsgs[activeChat.id] || {}).map(([id, val]) => ({ id, ...val }))
         .filter(m => !isMessageExpired(m))
         .filter(m => !(m.deletedFor && m.deletedFor[me.uid]))
+        .filter(m => !(activeChat.type === "private" && isEitherBlockedUser(m.uid) && m.uid !== me.uid))
         .filter(m => !onlyStarredInRoom || (m.starred && m.starred[me.uid]))
         .filter(m => {
           if (mediaFilterMode === "photo") return !!m.photoData;
@@ -3151,7 +3387,7 @@
     }
 
     window.quickToggleReact = async function(mid, emo) {
-      if (!activeChat || !me) return;
+      if (!activeChat || !me || isEitherBlockedInCurrentChat()) return;
       const cur = allChatsMsgs[activeChat.id]?.[mid]?.reactions?.[me.uid];
       await set(ref(db, `chats/${activeChat.id}/${mid}/reactions/${me.uid}`), cur === emo ? null : emo);
     };
@@ -3183,12 +3419,26 @@
     };
 
     function attachGestures(row, bub, m, isMe) {
-      let x0 = 0, xCur = 0, timer = null, swiped = false;
+      let x0 = 0, xCur = 0, timer = null, swiped = false, lastTap = 0;
       bub.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; xCur = x0; swiped = false; timer = setTimeout(() => { if (!swiped) openSheet(m.id); }, 480); }, { passive: true });
       bub.addEventListener("touchmove", (e) => { xCur = e.touches[0].clientX; const dx = xCur - x0; if (Math.abs(dx) > 12) { swiped = true; clearTimeout(timer); } if (isMe && dx < 0 && dx > -85) row.style.transform = `translateX(${dx}px)`; else if (!isMe && dx > 0 && dx < 85) row.style.transform = `translateX(${dx}px)`; }, { passive: true });
-      bub.addEventListener("touchend", () => { clearTimeout(timer); const dx = xCur - x0; row.style.transform = "translateX(0px)"; if ((isMe && dx < -55) || (!isMe && dx > 55)) setReplyTarget(m, isMe); });
+      bub.addEventListener("touchend", async () => {
+        clearTimeout(timer);
+        const dx = xCur - x0;
+        row.style.transform = "translateX(0px)";
+        if ((isMe && dx < -55) || (!isMe && dx > 55)) { setReplyTarget(m, isMe); return; }
+        if (!swiped && Math.abs(dx) < 8) {
+          const now = Date.now();
+          if (now - lastTap < 300 && activeChat && me && !m.deletedForEveryone && !isEitherBlockedInCurrentChat()) {
+            lastTap = 0;
+            await set(ref(db, `chats/${activeChat.id}/${m.id}/reactions/${me.uid}`), m.reactions?.[me.uid] ? null : "❤️");
+          } else {
+            lastTap = now;
+          }
+        }
+      });
       bub.addEventListener("dblclick", async (e) => {
-        e.stopPropagation(); if (!activeChat || !me || m.deletedForEveryone) return;
+        e.stopPropagation(); if (!activeChat || !me || m.deletedForEveryone || isEitherBlockedInCurrentChat()) return;
         await set(ref(db, `chats/${activeChat.id}/${m.id}/reactions/${me.uid}`), m.reactions?.[me.uid] ? null : "❤️");
       });
       bub.addEventListener("contextmenu", (e) => { e.preventDefault(); openSheet(m.id); });
@@ -3196,7 +3446,7 @@
 
     function getMentionLabel(m, isMe) { return (isMe || m.uid === me.uid) ? "You" : getCleanUserName(m.uid, { name: m.sender }); }
     function setReplyTarget(m, isMe = (m.uid === me.uid)) {
-      if (!m || m.deletedForEveryone) return;
+      if (!m || m.deletedForEveryone || isEitherBlockedInCurrentChat()) return;
       const mentionName = getMentionLabel(m, isMe);
       replyObj = { id: m.id, mentionName, snippet: m.text || (m.photoData ? "[Photo]" : m.videoData ? "[Video]" : m.audioData ? "[Voice]" : "Message") };
       document.getElementById("replyStrip").style.display = "flex";
@@ -3227,9 +3477,9 @@
       const isMe = m.uid === me.uid, canEdit = isMe && !m.deletedForEveryone && ((Date.now() - (m.time || 0)) <= 10 * 60 * 1000), isStar = !!(m.starred && m.starred[me.uid]);
       const actions = [];
       if (!m.deletedForEveryone) {
-        actions.push({ txt: "↩ Reply", fn: () => setReplyTarget({ id: mid, ...m }, isMe) });
+        if (!isEitherBlockedInCurrentChat()) actions.push({ txt: "↩ Reply", fn: () => setReplyTarget({ id: mid, ...m }, isMe) });
         if (m.text) actions.push({ txt: "📋 Copy", fn: async () => { try { await navigator.clipboard.writeText(m.text); await proAlert("Copied!", "Copy"); } catch (_) {} } });
-        if (canEdit) actions.push({ txt: "✏️ Edit", fn: () => editMessage(mid, m) });
+        if (canEdit && !isEitherBlockedInCurrentChat()) actions.push({ txt: "✏️ Edit", fn: () => editMessage(mid, m) });
         if (!m.viewOnce) actions.push({ txt: "↪ Forward", fn: () => openForwardModal(m) });
         actions.push({ txt: m.pin ? "📌 Unpin" : "📌 Pin", fn: () => update(ref(db, `chats/${activeChat.id}/${mid}`), { pin: !m.pin }) });
         actions.push({ txt: isStar ? "☆ Unstar" : "⭐ Star", fn: () => set(ref(db, `chats/${activeChat.id}/${mid}/starred/${me.uid}`), isStar ? null : true) });
@@ -3248,6 +3498,7 @@
     document.querySelectorAll("#sheetEmojis > span").forEach(sp => { sp.addEventListener("click", () => toggleReactionEmoji(sp.textContent.trim())); });
 
     async function editMessage(mid, m) {
+      if (!(await canSendInCurrentChat())) return;
       const next = await proPrompt("Edit message:", "Edit", m.text || "");
       if (next !== null && next.trim() !== "") await update(ref(db, `chats/${activeChat.id}/${mid}`), { text: next.trim(), edited: true, msgFont: selectedMsgFont });
     }
@@ -3256,7 +3507,11 @@
       forwardSourceMsg = m;
       document.getElementById("forwardPreviewBox").textContent = m.text || (m.photoData ? "[Photo]" : m.videoData ? "[Video]" : "[Voice]");
       const rows = [];
-      Object.entries(users).forEach(([uid, u]) => { if (uid !== me.uid && !blocks[uid]) rows.push(`<label style="display:flex; align-items:center; gap:8px; padding:6px 0; font-size:14px;"><input type="checkbox" class="fwd-target-chk" value="${getPrivateChatId(me.uid, uid)}" style="width:auto; margin:0;" /> 👤 ${esc(getCleanUserName(uid, u))}</label>`); });
+      Object.entries(users).forEach(([uid, u]) => {
+        if (uid !== me.uid && !isEitherBlockedUser(uid)) {
+          rows.push(`<label style="display:flex; align-items:center; gap:8px; padding:6px 0; font-size:14px;"><input type="checkbox" class="fwd-target-chk" value="${getPrivateChatId(me.uid, uid)}" style="width:auto; margin:0;" /> 👤 ${esc(getCleanUserName(uid, u))}</label>`);
+        }
+      });
       Object.entries(groups).forEach(([gid, g]) => { if (g.members && g.members[me.uid]) rows.push(`<label style="display:flex; align-items:center; gap:8px; padding:6px 0; font-size:14px;"><input type="checkbox" class="fwd-target-chk" value="${gid}" style="width:auto; margin:0;" /> 👥 ${esc(g.name || "Group")}</label>`); });
       document.getElementById("forwardTargetsChecks").innerHTML = rows.length ? rows.join("") : `<p style="font-size:12px; color:#b3e5fc;">None</p>`;
       pushNavState(); document.getElementById("forwardModal").style.display = "block";
@@ -3276,7 +3531,10 @@
 
     async function canSendInCurrentChat() {
       if (!me || !activeChat) return false;
-      if (activeChat.type === "private" && blocks[activeChat.otherUid]) { await proAlert("User blocked.", "Blocked"); return false; }
+      if (activeChat.type === "private") {
+        if (isBlockedByMe(activeChat.otherUid)) { await proAlert("You blocked this user.", "Blocked"); return false; }
+        if (amIBlockedBy(activeChat.otherUid)) { await proAlert("You have been blocked by this user.", "Blocked"); return false; }
+      }
       if (activeChat.type === "group") {
         const g = groups[activeChat.id] || {};
         if (g.adminOnly && g.createdBy !== me.uid) {
@@ -3296,7 +3554,7 @@
       saveCurrentDraft();
       updateLiveMarkdownPreview();
       syncSendMic();
-      if (me && activeChat && !(activeChat.type === "private" && blocks[activeChat.otherUid]) && navigator.onLine) {
+      if (me && activeChat && !isEitherBlockedInCurrentChat() && navigator.onLine) {
         set(ref(db, "typing/" + me.uid), { chatId: activeChat.id, t: Date.now() }).catch(() => {});
       }
     });
@@ -3336,302 +3594,387 @@
       vibrateAction(16);
       const isVO = document.getElementById("viewOnceChk").checked;
       const payload = { uid: me.uid, sender: prefs.name || "User", text: isVO ? "" : composerInput.value.trim(), msgFont: selectedMsgFont, viewOnce: isVO, time: Date.now() };
-      if (stagedChatMedia.kind === "photo") payload.photoData = stagedChatMedia.dataUrl; else payload.videoData = stagedChatMedia.dataUrl;
+      if (stagedChatMedia.kind === "photo") payload.photoData = stagedChatMedia.dataUrl;
+      else payload.videoData = stagedChatMedia.dataUrl;
+      if (replyObj) { payload.replyTo = { id: replyObj.id, sender: replyObj.mentionName, snippet: replyObj.snippet }; replyObj = null; document.getElementById("replyStrip").style.display = "none"; }
       await sendChatPayload(activeChat.id, payload);
-      composerInput.value = ""; saveCurrentDraft(); updateLiveMarkdownPreview(); syncSendMic();
-      stagedChatMedia = null; document.getElementById("mediaPreviewStrip").style.display = "none";
+      composerInput.value = "";
+      delete draftTexts[activeChat.id]; saveDrafts();
+      updateLiveMarkdownPreview();
+      stagedChatMedia = null; document.getElementById("mediaPreviewStrip").style.display = "none"; document.getElementById("viewOnceChk").checked = false; syncSendMic();
     });
 
-    let recObj = null, recChunks = [], recordingFlag = false, recCancelFlag = false, recSec = 0, recInt = null;
-    function stopRecTimer() { if (recInt) { clearInterval(recInt); recInt = null; } recSec = 0; document.getElementById("recStrip").style.display = "none"; document.getElementById("recTimerLabel").textContent = "0:00"; }
-    document.getElementById("cancelRecBtn").addEventListener("click", () => { recCancelFlag = true; recordingFlag = false; micOrSendBtn.classList.remove("rec"); stopRecTimer(); if (recObj && recObj.state !== "inactive") recObj.stop(); });
-    document.getElementById("stopAndSendRecBtn").addEventListener("click", () => { if (!recordingFlag) return; recCancelFlag = false; recordingFlag = false; micOrSendBtn.classList.remove("rec"); if (recObj && recObj.state !== "inactive") recObj.stop(); });
+    async function sendTextMsg() {
+      if (!(await canSendInCurrentChat())) return;
+      const text = composerInput.value.trim(); if (!text) return;
+      vibrateAction(14);
+      const payload = { uid: me.uid, sender: prefs.name || "User", text, msgFont: selectedMsgFont, time: Date.now() };
+      if (replyObj) { payload.replyTo = { id: replyObj.id, sender: replyObj.mentionName, snippet: replyObj.snippet }; replyObj = null; document.getElementById("replyStrip").style.display = "none"; }
+      await sendChatPayload(activeChat.id, payload);
+      composerInput.value = "";
+      delete draftTexts[activeChat.id]; saveDrafts();
+      updateLiveMarkdownPreview();
+      syncSendMic();
+    }
+
+    composerInput.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); sendTextMsg(); } });
+
+    let mediaRecorder = null, audioChunks = [], recTimerInterval = null, recSeconds = 0, discardRecording = false, statusVoiceRec = null;
+
+    function startRecTimer() {
+      recSeconds = 0; document.getElementById("recTimerLabel").textContent = "0:00";
+      clearInterval(recTimerInterval);
+      recTimerInterval = setInterval(() => { recSeconds++; document.getElementById("recTimerLabel").textContent = `${Math.floor(recSeconds / 60)}:${String(recSeconds % 60).padStart(2, "0")}`; }, 1000);
+    }
+
+    async function startVoiceRecordingFor(mode) {
+      if (mode === "chat" && !(await canSendInCurrentChat())) return;
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return await proAlert("Microphone not supported.", "Voice");
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioChunks = []; discardRecording = false;
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.ondataavailable = (ev) => { if (ev.data && ev.data.size > 0) audioChunks.push(ev.data); };
+        mediaRecorder.onstop = async () => {
+          stream.getTracks().forEach(t => t.stop());
+          clearInterval(recTimerInterval);
+          document.getElementById("recStrip").style.display = "none";
+          micOrSendBtn.classList.remove("rec");
+          if (discardRecording || !audioChunks.length) return;
+          const blob = new Blob(audioChunks, { type: mediaRecorder.mimeType || "audio/webm" });
+          const rd = new FileReader();
+          rd.onload = async () => {
+            if (mode === "status") {
+              await push(ref(db, "statuses"), { uid: me.uid, name: prefs.name || "User", type: "voice", audioData: rd.result, text: document.getElementById("stTextInput").value.trim() || "🎤 Voice status", time: Date.now() });
+              document.getElementById("stTextInput").value = "";
+              document.getElementById("statusComposerModal").style.display = "none";
+            } else if (activeChat) {
+              await sendChatPayload(activeChat.id, { uid: me.uid, sender: prefs.name || "User", audioData: rd.result, time: Date.now() });
+            }
+          };
+          rd.readAsDataURL(blob);
+        };
+        mediaRecorder.start();
+        micOrSendBtn.classList.add("rec");
+        if (mode === "chat") document.getElementById("recStrip").style.display = "flex";
+        startRecTimer();
+      } catch (_) { await proAlert("Microphone permission needed.", "Voice"); }
+    }
 
     micOrSendBtn.addEventListener("click", async () => {
-      if (!(await canSendInCurrentChat())) return;
-      vibrateAction(16);
-      const txt = composerInput.value.trim();
-      if (txt) {
-        let finalTxt = txt;
-        if (replyObj && !finalTxt.startsWith(replyObj.mentionName + " ")) finalTxt = `${replyObj.mentionName} ${finalTxt}`;
-        composerInput.value = ""; saveCurrentDraft(); updateLiveMarkdownPreview(); syncSendMic();
-        const r = replyObj ? { id: replyObj.id, sender: replyObj.mentionName, snippet: replyObj.snippet } : null;
-        replyObj = null; document.getElementById("replyStrip").style.display = "none";
-        await sendChatPayload(activeChat.id, { uid: me.uid, sender: prefs.name || "User", text: finalTxt, msgFont: selectedMsgFont, replyTo: r, time: Date.now() });
-        return;
-      }
-
-      if (!recordingFlag) {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-          recChunks = []; recCancelFlag = false; recObj = new MediaRecorder(stream);
-          recObj.ondataavailable = (ev) => { if (ev.data.size > 0) recChunks.push(ev.data); };
-          recObj.onstop = () => {
-            stream.getTracks().forEach(t => t.stop()); stopRecTimer();
-            if (recCancelFlag) { recCancelFlag = false; return; }
-            const blob = new Blob(recChunks, { type: "audio/webm" });
-            const rd = new FileReader();
-            rd.onload = async () => { await sendChatPayload(activeChat.id, { uid: me.uid, sender: prefs.name || "User", audioData: rd.result, time: Date.now() }); };
-            rd.readAsDataURL(blob);
-          };
-          recObj.start(); recordingFlag = true; micOrSendBtn.classList.add("rec");
-          document.getElementById("recStrip").style.display = "flex"; recSec = 0;
-          recInt = setInterval(() => { recSec++; document.getElementById("recTimerLabel").textContent = `${Math.floor(recSec / 60)}:${String(recSec % 60).padStart(2, "0")}`; }, 1000);
-        } catch (_) { await proAlert("Microphone permission needed.", "Permission"); }
-      } else {
-        recordingFlag = false; micOrSendBtn.classList.remove("rec");
-        if (recObj && recObj.state !== "inactive") recObj.stop();
-      }
+      if (composerInput.value.trim()) { await sendTextMsg(); return; }
+      if (mediaRecorder && mediaRecorder.state === "recording") { discardRecording = false; mediaRecorder.stop(); }
+      else { await startVoiceRecordingFor("chat"); }
     });
+    document.getElementById("stopAndSendRecBtn").addEventListener("click", () => { if (mediaRecorder && mediaRecorder.state === "recording") { discardRecording = false; mediaRecorder.stop(); } });
+    document.getElementById("cancelRecBtn").addEventListener("click", () => { if (mediaRecorder && mediaRecorder.state === "recording") { discardRecording = true; mediaRecorder.stop(); } });
 
-    composerInput.addEventListener("keypress", (e) => { if (e.key === "Enter") micOrSendBtn.click(); });
-
-    window.showFull = function(kind, encUrl) {
-      const u = decodeURIComponent(encUrl); currentFullMediaUrl = u;
-      document.getElementById("fullViewerContent").innerHTML = kind === "img" ? `<img src="${u}" />` : `<video src="${u}" controls controlsList="nodownload noplaybackrate" autoplay playsinline></video>`;
-      pushNavState(); document.getElementById("fullViewer").style.display = "flex";
-    };
-    document.getElementById("downloadFullMediaBtn").addEventListener("click", () => {
-      if (!currentFullMediaUrl) return;
-      const a = document.createElement("a"); a.href = currentFullMediaUrl; a.download = `na-whatsapp-${Date.now()}`;
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    });
-    document.getElementById("closeFullViewer").addEventListener("click", () => { document.getElementById("fullViewer").style.display = "none"; document.getElementById("fullViewerContent").innerHTML = ""; currentFullMediaUrl = ""; });
-
-    /* Status Posting (Text, Voice Status, Photo, Video) */
-    function refreshStatusMediaUi() {
-      document.getElementById("postStMediaBtn").disabled = !stagedStatusMedia;
-      document.getElementById("clearStPhotoBtn").style.display = (stagedStatusMedia && stagedStatusMedia.kind === "photo") ? "inline-flex" : "none";
-      document.getElementById("clearStVideoBtn").style.display = (stagedStatusMedia && stagedStatusMedia.kind === "video") ? "inline-flex" : "none";
+    /* Status Composer Modal Controls (WhatsApp Screenshot Style) */
+    function openStatusComposer(focusMode = "all") {
+      stagedStatusMedia = null;
+      document.getElementById("stPhotoInput").value = "";
+      document.getElementById("stVideoInput").value = "";
+      document.getElementById("stPhotoName").textContent = "No photo selected";
+      document.getElementById("stVideoName").textContent = "No video selected";
+      document.getElementById("clearStPhotoBtn").style.display = "none";
+      document.getElementById("clearStVideoBtn").style.display = "none";
+      document.getElementById("postStMediaBtn").disabled = true;
+      pushNavState();
+      document.getElementById("statusComposerModal").style.display = "block";
+      if (focusMode === "text") {
+        setTimeout(() => document.getElementById("stTextInput").focus(), 60);
+      } else if (focusMode === "photo") {
+        document.getElementById("stPhotoInput").click();
+      } else if (focusMode === "voice") {
+        document.getElementById("stVoiceRecBtn").click();
+      }
     }
-    document.getElementById("clearStPhotoBtn").addEventListener("click", () => { stagedStatusMedia = null; document.getElementById("stPhotoInput").value = ""; document.getElementById("stPhotoName").textContent = "No photo selected"; refreshStatusMediaUi(); });
-    document.getElementById("clearStVideoBtn").addEventListener("click", () => { stagedStatusMedia = null; document.getElementById("stVideoInput").value = ""; document.getElementById("stVideoName").textContent = "No video selected"; refreshStatusMediaUi(); });
+
+    document.getElementById("waAddStatusRow").addEventListener("click", () => openStatusComposer("all"));
+    document.getElementById("waFloatingTextBtn").addEventListener("click", () => openStatusComposer("text"));
+    document.getElementById("waFloatingVoiceBtn").addEventListener("click", () => openStatusComposer("voice"));
+    document.getElementById("waFloatingCamBtn").addEventListener("click", () => openStatusComposer("photo"));
+    document.getElementById("closeStComposerBtn").addEventListener("click", () => { document.getElementById("statusComposerModal").style.display = "none"; });
 
     document.getElementById("stPostTextBtn").addEventListener("click", async () => {
-      const t = document.getElementById("stTextInput").value.trim(); if (!t || !me) return;
-      vibrateAction(15);
-      await push(ref(db, "statuses"), { uid: me.uid, sender: prefs.name || "User", type: "text", text: t, time: Date.now(), totalViewCount: 0, views: {}, likes: {} });
-      document.getElementById("stTextInput").value = ""; document.getElementById("stInfo").textContent = "Posted!";
+      const txt = document.getElementById("stTextInput").value.trim(); if (!txt) return await proAlert("Enter status text.", "Status");
+      await push(ref(db, "statuses"), { uid: me.uid, name: prefs.name || "User", type: "text", text: txt, time: Date.now() });
+      document.getElementById("stTextInput").value = "";
+      document.getElementById("statusComposerModal").style.display = "none";
     });
 
-    let voiceStatusRec = null, voiceStatusChunks = [];
     document.getElementById("stVoiceRecBtn").addEventListener("click", async () => {
-      if (!me) return;
-      vibrateAction(15);
-      if (!voiceStatusRec) {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-          voiceStatusChunks = [];
-          voiceStatusRec = new MediaRecorder(stream);
-          voiceStatusRec.ondataavailable = (e) => { if (e.data.size > 0) voiceStatusChunks.push(e.data); };
-          voiceStatusRec.onstop = () => {
-            stream.getTracks().forEach(t => t.stop());
-            const blob = new Blob(voiceStatusChunks, { type: "audio/webm" });
-            const rd = new FileReader();
-            rd.onload = async () => {
-              const cap = document.getElementById("stTextInput").value.trim() || "Voice Status";
-              await push(ref(db, "statuses"), { uid: me.uid, sender: prefs.name || "User", type: "audio", audioData: rd.result, text: cap, time: Date.now(), totalViewCount: 0, views: {}, likes: {} });
-              document.getElementById("stTextInput").value = "";
-              document.getElementById("stInfo").textContent = "Voice status posted!";
-            };
-            rd.readAsDataURL(blob);
-            voiceStatusRec = null;
-            document.getElementById("stVoiceRecBtn").textContent = "🎤 Voice";
+      if (statusVoiceRec && statusVoiceRec.state === "recording") { statusVoiceRec.stop(); return; }
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return await proAlert("Microphone not supported.", "Voice");
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const chunks = [];
+        statusVoiceRec = new MediaRecorder(stream);
+        document.getElementById("stVoiceRecBtn").textContent = "⏹ Stop & Post";
+        statusVoiceRec.ondataavailable = (ev) => { if (ev.data && ev.data.size > 0) chunks.push(ev.data); };
+        statusVoiceRec.onstop = () => {
+          stream.getTracks().forEach(t => t.stop());
+          document.getElementById("stVoiceRecBtn").textContent = "🎤 Voice";
+          if (!chunks.length) return;
+          const blob = new Blob(chunks, { type: statusVoiceRec.mimeType || "audio/webm" });
+          const rd = new FileReader();
+          rd.onload = async () => {
+            await push(ref(db, "statuses"), { uid: me.uid, name: prefs.name || "User", type: "voice", audioData: rd.result, text: document.getElementById("stTextInput").value.trim() || "🎤 Voice status", time: Date.now() });
+            document.getElementById("stTextInput").value = "";
+            document.getElementById("statusComposerModal").style.display = "none";
           };
-          voiceStatusRec.start();
-          document.getElementById("stVoiceRecBtn").textContent = "⏹ Stop Voice";
-          document.getElementById("stInfo").textContent = "Recording voice status...";
-        } catch (_) { await proAlert("Microphone permission needed.", "Permission"); }
-      } else if (voiceStatusRec.state !== "inactive") {
-        voiceStatusRec.stop();
-      }
+          rd.readAsDataURL(blob);
+        };
+        statusVoiceRec.start();
+      } catch (_) { await proAlert("Microphone permission needed.", "Voice"); }
     });
 
-    document.getElementById("stPhotoInput").addEventListener("change", (e) => {
+    document.getElementById("stPhotoInput").addEventListener("change", async (e) => {
       const f = e.target.files[0]; if (!f) return;
-      stagedStatusMedia = { kind: "photo", file: f };
-      document.getElementById("stPhotoName").textContent = f.name; document.getElementById("stVideoName").textContent = "No video selected";
-      refreshStatusMediaUi();
+      stagedStatusMedia = { kind: "photo", dataUrl: await compressImg(f, 1080, 0.85), name: f.name };
+      document.getElementById("stPhotoName").textContent = f.name;
+      document.getElementById("clearStPhotoBtn").style.display = "inline-flex";
+      document.getElementById("stVideoName").textContent = "No video selected";
+      document.getElementById("clearStVideoBtn").style.display = "none";
+      document.getElementById("postStMediaBtn").disabled = false;
+    });
+
+    document.getElementById("clearStPhotoBtn").addEventListener("click", () => {
+      document.getElementById("stPhotoInput").value = ""; document.getElementById("stPhotoName").textContent = "No photo selected";
+      document.getElementById("clearStPhotoBtn").style.display = "none";
+      if (stagedStatusMedia?.kind === "photo") { stagedStatusMedia = null; document.getElementById("postStMediaBtn").disabled = true; }
     });
 
     document.getElementById("stVideoInput").addEventListener("change", (e) => {
       const f = e.target.files[0]; if (!f) return;
-      stagedStatusMedia = { kind: "video", file: f };
-      document.getElementById("stVideoName").textContent = f.name; document.getElementById("stPhotoName").textContent = "No photo selected";
-      refreshStatusMediaUi();
+      const rd = new FileReader();
+      rd.onload = () => {
+        stagedStatusMedia = { kind: "video", dataUrl: rd.result, name: f.name };
+        document.getElementById("stVideoName").textContent = f.name;
+        document.getElementById("clearStVideoBtn").style.display = "inline-flex";
+        document.getElementById("stPhotoName").textContent = "No photo selected";
+        document.getElementById("clearStPhotoBtn").style.display = "none";
+        document.getElementById("postStMediaBtn").disabled = false;
+      };
+      rd.readAsDataURL(f);
+    });
+
+    document.getElementById("clearStVideoBtn").addEventListener("click", () => {
+      document.getElementById("stVideoInput").value = ""; document.getElementById("stVideoName").textContent = "No video selected";
+      document.getElementById("clearStVideoBtn").style.display = "none";
+      if (stagedStatusMedia?.kind === "video") { stagedStatusMedia = null; document.getElementById("postStMediaBtn").disabled = true; }
     });
 
     document.getElementById("postStMediaBtn").addEventListener("click", async () => {
-      if (!stagedStatusMedia || !me) return;
-      vibrateAction(16);
+      if (!stagedStatusMedia) return;
       const cap = document.getElementById("stTextInput").value.trim();
-      if (stagedStatusMedia.kind === "photo") {
-        document.getElementById("stInfo").textContent = "Posting photo status...";
-        const d = await compressImg(stagedStatusMedia.file, 1080, 0.84);
-        await push(ref(db, "statuses"), { uid: me.uid, sender: prefs.name || "User", type: "photo", photoData: d, text: cap, time: Date.now(), totalViewCount: 0, views: {}, likes: {} });
-        document.getElementById("stInfo").textContent = "Photo status shared!";
-      } else {
-        document.getElementById("stInfo").textContent = "Preparing video status (max 60s)...";
-        const blob = await trim60s(stagedStatusMedia.file);
-        const dataUrl = await new Promise((res) => { const rd = new FileReader(); rd.onload = () => res(rd.result); rd.readAsDataURL(blob); });
-        await push(ref(db, "statuses"), { uid: me.uid, sender: prefs.name || "User", type: "video", videoData: dataUrl, text: cap, time: Date.now(), totalViewCount: 0, views: {}, likes: {} });
-        document.getElementById("stInfo").textContent = "Video status shared!";
-      }
-      document.getElementById("stTextInput").value = ""; document.getElementById("stPhotoInput").value = ""; document.getElementById("stVideoInput").value = "";
+      const payload = { uid: me.uid, name: prefs.name || "User", type: stagedStatusMedia.kind, text: cap, time: Date.now() };
+      if (stagedStatusMedia.kind === "photo") payload.photoData = stagedStatusMedia.dataUrl;
+      else payload.videoData = stagedStatusMedia.dataUrl;
+      await push(ref(db, "statuses"), payload);
+      document.getElementById("stTextInput").value = "";
+      document.getElementById("stPhotoInput").value = ""; document.getElementById("stVideoInput").value = "";
       document.getElementById("stPhotoName").textContent = "No photo selected"; document.getElementById("stVideoName").textContent = "No video selected";
-      stagedStatusMedia = null; refreshStatusMediaUi();
+      document.getElementById("clearStPhotoBtn").style.display = "none"; document.getElementById("clearStVideoBtn").style.display = "none";
+      document.getElementById("postStMediaBtn").disabled = true; stagedStatusMedia = null;
+      document.getElementById("statusComposerModal").style.display = "none";
     });
 
     function renderStatusesList() {
-      const q = document.getElementById("searchBox").value.trim().toLowerCase(), box = document.getElementById("statusFeedList"), now = Date.now();
-      const active = Object.entries(statuses).filter(([, s]) => {
-        if (!s || blocks[s.uid] || (now - (s.time || 0)) >= 86400000) return false;
-        const ownerObj = s.uid === me.uid ? prefs : (users[s.uid] || {});
-        if (!canViewByPrivacy(ownerObj, s.uid, "privStatus")) return false;
-        const sName = getCleanUserName(s.uid, { name: s.sender }).toLowerCase();
-        return !q || sName.includes(q) || (s.text || "").toLowerCase().includes(q);
-      }).map(([id, v]) => ({ id, ...v })).sort((a, b) => b.time - a.time);
+      const q = document.getElementById("searchBox").value.trim().toLowerCase();
+      const now = Date.now();
+      const active = Object.entries(statuses)
+        .filter(([, s]) => {
+          if ((now - (s.time || 0)) >= 86400000) return false;
+          if (s.uid !== me.uid && isEitherBlockedUser(s.uid)) return false;
+          const authorUser = s.uid === me.uid ? prefs : (users[s.uid] || {});
+          return canViewByPrivacy(authorUser, s.uid, "privStatus");
+        })
+        .map(([id, v]) => ({ id, ...v }))
+        .sort((a, b) => b.time - a.time);
 
       orderedStoryIds = active.map(x => x.id);
-      if (!active.length) { box.innerHTML = `<p style="font-size:13px; color:#e1f5fe; padding:12px;">No recent status updates.</p>`; return; }
+      const filtered = active.filter(s => {
+        const sName = getCleanUserName(s.uid, { name: s.name });
+        return !q || sName.toLowerCase().includes(q) || (s.text || "").toLowerCase().includes(q);
+      });
 
-      box.innerHTML = active.map(s => {
-        const isSeen = !!seenStatusIds[s.id], isMine = s.uid === me.uid, viewsCount = s.totalViewCount || Object.keys(s.views || {}).length, likesCount = Object.keys(s.likes || {}).length;
-        const sName = getCleanUserName(s.uid, { name: s.sender });
-        let thumbHtml = `<div class="av">${esc(sName.charAt(0).toUpperCase())}</div>`;
-        if (s.type === "photo" && s.photoData) thumbHtml = `<div class="st-thumb-box"><img src="${s.photoData}" /></div>`;
-        else if (s.type === "video" && s.videoData) thumbHtml = `<div class="st-thumb-box"><video src="${s.videoData}" muted playsinline preload="metadata"></video></div>`;
-        else if (s.type === "audio") thumbHtml = `<div class="st-thumb-box" style="font-size:22px;">🎤</div>`;
+      document.getElementById("statusFeedList").innerHTML = filtered.length ? filtered.map(s => {
+        const isMine = s.uid === me.uid;
+        const sName = isMine ? "My status" : getCleanUserName(s.uid, { name: s.name });
+        const uObj = isMine ? prefs : (users[s.uid] || {});
+        const canSeePic = canViewByPrivacy(uObj, s.uid, "privPhoto");
+        const avHtml = (canSeePic && uObj.avatarData) ? `<img src="${uObj.avatarData}" />` : esc(sName.charAt(0).toUpperCase());
+        const ringCls = seenStatusIds[s.id] ? "status-seen" : "status-unseen";
+        const viewsCount = s.views ? Object.keys(s.views).length : 0;
+        const likesCount = s.likes ? Object.keys(s.likes).length : 0;
+        const timeAgo = Math.max(1, Math.floor((now - (s.time || now)) / 60000));
+        const timeStr = timeAgo < 60 ? `${timeAgo} min ago` : new Date(s.time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        const subLine = s.text || (s.type === "video" ? "Video" : s.type === "voice" ? "Voice status" : "Photo");
+
+        let rightThumb = `<div class="wa-status-right-thumb">Aa</div>`;
+        if (s.photoData) rightThumb = `<div class="wa-status-right-thumb"><img src="${s.photoData}" /></div>`;
+        else if (s.videoData) rightThumb = `<div class="wa-status-right-thumb"><video src="${s.videoData}" muted playsinline></video></div>`;
+        else if (s.type === "voice") rightThumb = `<div class="wa-status-right-thumb">🎤</div>`;
 
         return `
-          <div class="pro-card" onclick="openStatusStory('${s.id}')">
-            <div class="av-ring ${isSeen ? "status-seen" : "status-unseen"}" style="width:46px; height:46px; min-width:46px; min-height:46px;">${thumbHtml}</div>
-            <div class="row-body">
-              <div class="row-head">
-                <span class="row-title">${esc(sName)} ${isMine ? "(You)" : ""}</span>
-                <span class="row-time">${new Date(s.time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
-              </div>
-              <div class="row-last">${esc(s.text || (s.type === "photo" ? "Photo status" : s.type === "video" ? "Video status" : s.type === "audio" ? "Voice status" : "Status"))}</div>
-              <div style="font-size:11px; color:#81d4fa; margin-top:3px;">👁 ${viewsCount} views • ❤️ ${likesCount} likes</div>
+          <div class="wa-status-feed-item" onclick="openStatusStory('${s.id}')">
+            <div class="av-ring ${ringCls}" style="width:52px; height:52px; min-width:52px; min-height:52px;">
+              <div class="av">${avHtml}</div>
             </div>
+            <div class="row-body">
+              <div class="row-title">${esc(sName)}</div>
+              <div class="row-about">${esc(subLine)} • ${esc(timeStr)}</div>
+              ${isMine ? `<div style="font-size:11px; color:#81d4fa; margin-top:2px;">👁 ${viewsCount} views • ❤️ ${likesCount} likes</div>` : ""}
+            </div>
+            ${rightThumb}
           </div>
         `;
-      }).join("");
-      applyCardTone();
+      }).join("") : `<p style="font-size:13px; color:#b3e5fc; padding:8px;">No recent status updates.</p>`;
     }
 
     function syncStorySocialCounts() {
-      const s = statuses[orderedStoryIds[currentStoryIdx]]; if (!s) return;
-      const viewsCount = s.totalViewCount || Object.keys(s.views || {}).length, likesObj = s.likes || {}, likesCount = Object.keys(likesObj).length, iLiked = !!(me && likesObj[me.uid]);
-      document.getElementById("storyViewsBadge").textContent = String(viewsCount);
+      const sId = orderedStoryIds[currentStoryIdx];
+      const st = statuses[sId];
+      if (!st || !me) return;
+      const isMine = st.uid === me.uid;
+      const likesObj = st.likes || {};
+      const viewsObj = st.views || {};
+      const iLiked = !!likesObj[me.uid];
+
       document.getElementById("storyLikeHeart").textContent = iLiked ? "❤️" : "🤍";
-      document.getElementById("storyLikeCount").textContent = String(likesCount);
-      document.getElementById("storyQuickStats").textContent = `👁 ${viewsCount} • ❤️ ${likesCount}`;
+      document.getElementById("storyLikeCount").textContent = String(Object.keys(likesObj).length);
+
+      const vBtn = document.getElementById("viewersStoryBtn");
+      const delBtn = document.getElementById("deleteCurrentStoryBtn");
+      const statsEl = document.getElementById("storyQuickStats");
+
+      if (isMine) {
+        vBtn.style.display = "inline-flex";
+        delBtn.style.display = "inline-flex";
+        document.getElementById("storyViewsBadge").textContent = String(Object.keys(viewsObj).length);
+        statsEl.textContent = `👁 ${Object.keys(viewsObj).length} views`;
+      } else {
+        vBtn.style.display = "none";
+        delBtn.style.display = "none";
+        statsEl.textContent = "";
+      }
     }
 
-    window.openStatusStory = function(sid) {
-      const idx = orderedStoryIds.indexOf(sid); if (idx < 0) return;
-      currentStoryIdx = idx; showStoryAtIndex(); pushNavState(); document.getElementById("statusStoryModal").style.display = "flex";
+    window.openStatusStory = function(storyId) {
+      const idx = orderedStoryIds.indexOf(storyId);
+      if (idx === -1) return;
+      currentStoryIdx = idx; showStoryAtIndex();
+      pushNavState(); document.getElementById("statusStoryModal").style.display = "flex";
     };
 
     function showStoryAtIndex() {
-      if (storyTimer) clearTimeout(storyTimer);
-      const sid = orderedStoryIds[currentStoryIdx]; if (!sid) return;
-      const s = statuses[sid]; if (!s) return;
+      clearTimeout(storyTimer);
+      if (currentStoryIdx < 0) currentStoryIdx = 0;
+      if (currentStoryIdx >= orderedStoryIds.length) { document.getElementById("statusStoryModal").style.display = "none"; return; }
+      const sId = orderedStoryIds[currentStoryIdx], st = statuses[sId];
+      if (!st) return;
 
-      seenStatusIds[sid] = true; localStorage.setItem("na_seen_statuses", JSON.stringify(seenStatusIds));
-      renderStatusesList(); renderUsersList(); renderHomeMyAvatar();
-
-      if (me && s.uid !== me.uid) {
-        update(ref(db, `statuses/${sid}/views/${me.uid}`), { name: prefs.name || "User", time: Date.now() });
-        runTransaction(ref(db, `statuses/${sid}/totalViewCount`), (cur) => (cur || 0) + 1);
+      seenStatusIds[sId] = true; localStorage.setItem("na_seen_statuses", JSON.stringify(seenStatusIds)); renderStatusesList(); renderUsersList(); renderHomeMyAvatar();
+      if (st.uid !== me.uid && readReceiptsOn) {
+        update(ref(db, `statuses/${sId}/views/${me.uid}`), { name: prefs.name || "User", time: Date.now() }).catch(() => {});
       }
 
-      const isMine = me && s.uid === me.uid;
-      document.getElementById("viewersStoryBtn").style.display = isMine ? "inline-flex" : "none";
-      document.getElementById("deleteCurrentStoryBtn").style.display = isMine ? "inline-flex" : "none";
-      document.getElementById("storyReplyBar").style.display = isMine ? "none" : "flex";
+      const authorName = st.uid === me.uid ? "My status" : getCleanUserName(st.uid, { name: st.name });
+      document.getElementById("storyAuthorName").textContent = authorName;
+      document.getElementById("storyTimeLabel").textContent = new Date(st.time || Date.now()).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      document.getElementById("storyReplyBar").style.display = st.uid === me.uid ? "none" : "flex";
+      syncStorySocialCounts();
 
-      document.getElementById("storyAuthorName").textContent = getCleanUserName(s.uid, { name: s.sender }) + (isMine ? " (You)" : "");
-      document.getElementById("storyTimeLabel").textContent = new Date(s.time || Date.now()).toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+      const fill = document.getElementById("storyBarFill");
+      fill.style.animation = "none"; void fill.offsetWidth;
+      const durMs = st.type === "video" ? 12000 : 6000;
+      fill.style.setProperty("--story-dur", durMs + "ms");
+      fill.style.animation = `storyFillAnim ${durMs}ms linear forwards`;
 
       const box = document.getElementById("storyMediaContent");
-      let durMs = 6000;
-      if (s.type === "photo" && s.photoData) {
-        box.innerHTML = `<img src="${s.photoData}" class="wa-status-full-media" />${s.text ? `<div style="margin-top:10px; font-size:15px; font-weight:700; background:rgba(0,0,0,0.6); padding:6px 14px; border-radius:999px;">${formatRichWhatsAppText(s.text)}</div>` : ""}`;
-      } else if (s.type === "video" && s.videoData) {
-        durMs = 15000;
-        box.innerHTML = `<video src="${s.videoData}" class="wa-status-full-media" controls controlsList="nodownload noplaybackrate" autoplay playsinline></video>${s.text ? `<div style="margin-top:8px; font-size:14px; font-weight:700; background:rgba(0,0,0,0.6); padding:6px 14px; border-radius:999px;">${formatRichWhatsAppText(s.text)}</div>` : ""}`;
-      } else if (s.type === "audio" && s.audioData) {
-        durMs = 12000;
-        box.innerHTML = `<div style="font-size:48px; margin-bottom:12px;">🎤</div><div style="font-size:18px; font-weight:700; margin-bottom:14px;">${formatRichWhatsAppText(s.text || "Voice Status")}</div><audio src="${s.audioData}" controls autoplay style="max-width:90%;"></audio>`;
+      if (st.photoData) {
+        box.innerHTML = `<img class="wa-status-full-media" src="${st.photoData}" />${st.text ? `<div style="margin-top:10px; font-size:15px; font-weight:700; color:#fff; background:rgba(0,0,0,0.6); padding:6px 12px; border-radius:12px;">${formatRichWhatsAppText(st.text)}</div>` : ""}`;
+      } else if (st.videoData) {
+        box.innerHTML = `<video class="wa-status-full-media" src="${st.videoData}" autoplay playsinline controls></video>${st.text ? `<div style="margin-top:10px; font-size:15px; font-weight:700; color:#fff; background:rgba(0,0,0,0.6); padding:6px 12px; border-radius:12px;">${formatRichWhatsAppText(st.text)}</div>` : ""}`;
+      } else if (st.audioData) {
+        box.innerHTML = `<div style="font-size:44px; margin-bottom:10px;">🎤</div><audio src="${st.audioData}" autoplay controls></audio><div style="margin-top:10px; font-size:16px;">${formatRichWhatsAppText(st.text || "Voice status")}</div>`;
       } else {
-        box.innerHTML = `<div style="font-size:24px; font-weight:800; max-width:92%; line-height:1.4; padding:18px; border-radius:20px; background:linear-gradient(145deg,#0d47a1,#0288d1);">${formatRichWhatsAppText(s.text || "")}</div>`;
+        box.innerHTML = `<div style="font-size:23px; font-weight:800; padding:18px; max-width:92%;">${formatRichWhatsAppText(st.text || "")}</div>`;
       }
 
-      const bar = document.getElementById("storyBarFill");
-      bar.style.animation = "none"; bar.offsetHeight;
-      bar.style.setProperty("--story-dur", `${durMs}ms`);
-      bar.style.animation = `storyFillAnim ${durMs}ms linear forwards`;
-      syncStorySocialCounts();
-      storyTimer = setTimeout(() => { if (currentStoryIdx < orderedStoryIds.length - 1) { currentStoryIdx++; showStoryAtIndex(); } else closeStoryModal(); }, durMs);
+      storyTimer = setTimeout(() => { currentStoryIdx++; showStoryAtIndex(); }, durMs);
     }
 
     document.getElementById("likeCurrentStoryBtn").addEventListener("click", async () => {
-      const sid = orderedStoryIds[currentStoryIdx]; if (!sid || !me) return;
-      vibrateAction(14);
-      const cur = !!(statuses[sid]?.likes && statuses[sid].likes[me.uid]);
-      await set(ref(db, `statuses/${sid}/likes/${me.uid}`), cur ? null : true);
+      const sId = orderedStoryIds[currentStoryIdx];
+      if (!sId || !me) return;
+      const curLiked = !!(statuses[sId]?.likes && statuses[sId].likes[me.uid]);
+      await set(ref(db, `statuses/${sId}/likes/${me.uid}`), curLiked ? null : { name: prefs.name || "User", time: Date.now() });
     });
 
     document.getElementById("viewersStoryBtn").addEventListener("click", () => {
-      const sid = orderedStoryIds[currentStoryIdx]; const s = statuses[sid]; if (!s) return;
-      const viewsObj = s.views || {}, keys = Object.keys(viewsObj), totalCount = s.totalViewCount || keys.length;
-      document.getElementById("statusViewersSummary").textContent = `Total Views: ${totalCount} • Unique Viewers: ${keys.length}`;
-      document.getElementById("statusViewersList").innerHTML = keys.length ? keys.map(uid => {
-        const v = viewsObj[uid], t = v?.time ? new Date(v.time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
-        return `<div class="item-card" style="display:flex; justify-content:space-between; align-items:center;"><span>👁 <b>${esc(getCleanUserName(uid, { name: v?.name }))}</b></span><span style="font-size:11px; color:#b3e5fc;">${t}</span></div>`;
-      }).join("") : `<p style="font-size:13px; color:#b3e5fc;">No viewers yet.</p>`;
-      pushNavState(); document.getElementById("statusViewersModal").style.display = "block";
+      const sId = orderedStoryIds[currentStoryIdx];
+      const st = statuses[sId];
+      if (!st) return;
+      const viewsList = Object.entries(st.views || {}).map(([uid, info]) => ({ uid, name: getCleanUserName(uid, info), time: info.time || 0 })).sort((a, b) => b.time - a.time);
+      const likesList = Object.entries(st.likes || {}).map(([uid, info]) => ({ uid, name: getCleanUserName(uid, info), time: info.time || 0 }));
+      document.getElementById("statusViewersSummary").textContent = `👁 ${viewsList.length} viewed • ❤️ ${likesList.length} liked`;
+      document.getElementById("statusViewersList").innerHTML = viewsList.length
+        ? viewsList.map(v => `<div class="item-card" style="display:flex; justify-content:space-between; align-items:center;"><span>${likesList.some(l => l.uid === v.uid) ? "❤️ " : ""}${esc(v.name)}</span><span style="font-size:11px; color:#b3e5fc;">${v.time ? new Date(v.time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : ""}</span></div>`).join("")
+        : `<p style="font-size:12.5px; color:#b3e5fc;">No viewers yet.</p>`;
+      pushNavState();
+      document.getElementById("statusViewersModal").style.display = "block";
     });
     document.getElementById("closeStatusViewersModal").addEventListener("click", () => { document.getElementById("statusViewersModal").style.display = "none"; });
 
     document.getElementById("deleteCurrentStoryBtn").addEventListener("click", async () => {
-      const sid = orderedStoryIds[currentStoryIdx]; const s = statuses[sid]; if (!s || s.uid !== me.uid) return;
+      const sId = orderedStoryIds[currentStoryIdx];
+      if (!sId || statuses[sId]?.uid !== me.uid) return;
       if (!(await proConfirm("Delete this status?", "Delete Status"))) return;
-      if (storyTimer) clearTimeout(storyTimer);
-      await remove(ref(db, "statuses/" + sid));
-      delete seenStatusIds[sid]; localStorage.setItem("na_seen_statuses", JSON.stringify(seenStatusIds));
-      closeStoryModal();
+      clearTimeout(storyTimer);
+      await remove(ref(db, `statuses/${sId}`));
+      document.getElementById("statusStoryModal").style.display = "none";
     });
+
+    document.getElementById("prevStoryBtn").addEventListener("click", () => { currentStoryIdx--; showStoryAtIndex(); });
+    document.getElementById("nextStoryBtn").addEventListener("click", () => { currentStoryIdx++; showStoryAtIndex(); });
+    document.getElementById("closeStoryModalBtn").addEventListener("click", () => { clearTimeout(storyTimer); document.getElementById("statusStoryModal").style.display = "none"; });
 
     document.getElementById("sendStoryReplyBtn").addEventListener("click", async () => {
-      const sid = orderedStoryIds[currentStoryIdx]; const s = statuses[sid];
-      const txt = document.getElementById("storyReplyInput").value.trim();
-      if (!s || !txt || blocks[s.uid]) return;
-      await sendChatPayload(getPrivateChatId(me.uid, s.uid), { uid: me.uid, sender: prefs.name || "User", text: txt, replyTo: { id: sid, sender: getCleanUserName(s.uid, { name: s.sender }) + "'s Status", snippet: s.text || "[Status]" }, time: Date.now() });
-      document.getElementById("storyReplyInput").value = ""; await proAlert("Reply sent!", "Status");
+      const txt = document.getElementById("storyReplyInput").value.trim(), st = statuses[orderedStoryIds[currentStoryIdx]];
+      if (!txt || !st) return;
+      if (isEitherBlockedUser(st.uid)) return await proAlert("Cannot reply when blocked.", "Blocked");
+      await sendChatPayload(getPrivateChatId(me.uid, st.uid), { uid: me.uid, sender: prefs.name || "User", text: `Status reply: ${txt}`, msgFont: selectedMsgFont, time: Date.now() });
+      document.getElementById("storyReplyInput").value = "";
+      await proAlert("Reply sent!", "Status");
     });
-
-    document.getElementById("prevStoryBtn").addEventListener("click", () => { if (currentStoryIdx > 0) { currentStoryIdx--; showStoryAtIndex(); } });
-    document.getElementById("nextStoryBtn").addEventListener("click", () => { if (currentStoryIdx < orderedStoryIds.length - 1) { currentStoryIdx++; showStoryAtIndex(); } else closeStoryModal(); });
-    function closeStoryModal() { if (storyTimer) clearTimeout(storyTimer); document.getElementById("statusStoryModal").style.display = "none"; }
-    document.getElementById("closeStoryModalBtn").addEventListener("click", closeStoryModal);
 
     document.getElementById("btnStarred").addEventListener("click", () => {
-      const box = document.getElementById("starredBody"), items = [];
-      Object.entries(allChatsMsgs).forEach(([cid, mObj]) => {
+      const items = [];
+      Object.entries(allChatsMsgs || {}).forEach(([cid, mObj]) => {
         Object.entries(mObj || {}).forEach(([mid, m]) => {
-          if (!isMessageExpired(m) && m.starred && m.starred[me.uid] && !m.deletedForEveryone && !(m.deletedFor && m.deletedFor[me.uid])) items.push({ cid, mid, ...m });
+          if (!isMessageExpired(m) && m.starred && m.starred[me.uid] && !m.deletedForEveryone && !(m.deletedFor && m.deletedFor[me.uid])) {
+            const gName = groups[cid]?.name;
+            const otherUid = cid.split("__").find(x => x && x !== me.uid);
+            const cLabel = gName || (otherUid ? getCleanUserName(otherUid) : "Chat");
+            items.push({ cid, mid, cLabel, ...m });
+          }
         });
       });
-      box.innerHTML = items.length ? items.sort((a, b) => (b.time || 0) - (a.time || 0)).map(m => `<div class="item-card"><b>${esc(getCleanUserName(m.uid, { name: m.sender }))}:</b> ${esc(m.text || "[Media]")}</div>`).join("") : `<p style="font-size:13px; color:#b3e5fc;">No starred messages.</p>`;
+      items.sort((a, b) => (b.time || 0) - (a.time || 0));
+      document.getElementById("starredBody").innerHTML = items.length ? items.map(it => `<div class="item-card" style="cursor:pointer;" onclick="jumpToStarred('${it.cid}', '${it.mid}')"><div style="font-size:11px; color:#81d4fa;">${esc(it.cLabel)} • ${esc(getCleanUserName(it.uid, { name: it.sender }))}</div><div>${formatRichWhatsAppText(it.text || "[Media]")}</div></div>`).join("") : `<p style="font-size:13px; color:#b3e5fc;">No starred messages.</p>`;
       pushNavState(); document.getElementById("starredModal").style.display = "block";
     });
+    window.jumpToStarred = async function(cid, mid) {
+      document.getElementById("starredModal").style.display = "none";
+      if (groups[cid]) await window.openGroupRoom(cid);
+      else { const otherUid = cid.split("__").find(x => x && x !== me.uid); if (otherUid) await window.openPrivateRoom(otherUid); }
+      setTimeout(() => window.flashTarget(mid), 250);
+    };
     document.getElementById("closeStarredModal").addEventListener("click", () => { document.getElementById("starredModal").style.display = "none"; });
 
     document.getElementById("btnSettings").addEventListener("click", () => {
-      tempAv = ""; prefs.clearAvatarFlag = false;
       document.getElementById("setDisplayNameInput").value = prefs.name || "";
       document.getElementById("setAboutInput").value = prefs.about || "";
       document.getElementById("setAppPinInput").value = appPin || "";
@@ -3642,224 +3985,94 @@
       document.getElementById("setNotifEnabled").checked = notifEnabled;
       document.getElementById("setReadReceipts").checked = readReceiptsOn;
       document.getElementById("setPrivateHandle").value = prefs.privateHandle || "";
-      document.getElementById("setAvatarName").textContent = prefs.avatarData ? "Current DP set" : "No DP";
-      document.getElementById("setToneName").textContent = customToneData ? "Custom tone set" : "Default";
       document.getElementById("setCardColorPicker").value = cardBgHex;
+      document.getElementById("btnIconTintSelect").value = btnIconTint;
+      tempAv = prefs.avatarData || ""; prefs.clearAvatarFlag = false;
+      document.getElementById("setAvatarName").textContent = tempAv ? "Photo set" : "None";
+      document.getElementById("setToneName").textContent = customToneData ? "Custom" : "Default";
       applySnakeCustomizer();
-      renderBlockUsersBox(); renderTargetedHandleList(); pushNavState(); document.getElementById("settingsModal").style.display = "block";
+      renderTargetedHandleList(); renderBlockUsersBox();
+      pushNavState(); document.getElementById("settingsModal").style.display = "block";
     });
-    document.getElementById("closeSettingsModal").addEventListener("click", () => { applyCardTone(); document.getElementById("settingsModal").style.display = "none"; });
-    document.getElementById("setAvatarFile").addEventListener("change", async (e) => { const f = e.target.files[0]; if (!f) return; tempAv = await compressImg(f, 360, 0.82); prefs.clearAvatarFlag = false; document.getElementById("setAvatarName").textContent = f.name; });
+
+    document.getElementById("setAvatarFile").addEventListener("change", async (e) => {
+      const f = e.target.files[0]; if (!f) return;
+      tempAv = await compressImg(f, 360, 0.75); prefs.clearAvatarFlag = false;
+      document.getElementById("setAvatarName").textContent = f.name;
+    });
+
+    function renderTargetedHandleList() {
+      const allowed = prefs.allowedHandleUsers || {};
+      const others = Object.entries(users).filter(([uid]) => uid !== me.uid);
+      document.getElementById("targetedHandleList").innerHTML = others.length ? others.map(([uid, u]) => `<label style="display:flex; align-items:center; gap:8px; padding:4px 0; font-size:13px;"><input type="checkbox" class="handle-allow-chk" value="${uid}" ${allowed[uid] ? "checked" : ""} style="width:auto; margin:0;" />${esc(getCleanUserName(uid, u))}</label>`).join("") : `<div style="font-size:12px; color:#b3e5fc;">No other users.</div>`;
+    }
+
+    function renderBlockUsersBox() {
+      const others = Object.entries(users).filter(([uid]) => uid !== me.uid);
+      document.getElementById("blockUsersBox").innerHTML = others.length ? others.map(([uid, u]) => {
+        const blk = isBlockedByMe(uid);
+        return `<div class="item-card" style="display:flex; justify-content:space-between; align-items:center;"><span>${esc(getCleanUserName(uid, u))}</span><button class="${blk ? "wave-btn" : "btn-danger"} btn-sm" onclick="toggleBlockUid('${uid}')">${blk ? "Unblock" : "Block"}</button></div>`;
+      }).join("") : `<div style="font-size:12px; color:#b3e5fc;">No other users.</div>`;
+    }
+    window.toggleBlockUid = async function(uid) { await set(ref(db, `blocks/${me.uid}/${uid}`), isBlockedByMe(uid) ? null : true); };
+
     document.getElementById("setCardColorPicker").addEventListener("input", (e) => { cardBgHex = e.target.value; applyCardTone(); });
     document.getElementById("resetCardColorBtn").addEventListener("click", () => { cardBgHex = "#081c3c"; applyCardTone(); });
 
-    function renderTargetedHandleList() {
-      const box = document.getElementById("targetedHandleList"), allowed = prefs.allowedHandleUsers || {};
-      const others = Object.entries(users).filter(([uid]) => uid !== me.uid);
-      box.innerHTML = others.length ? others.map(([uid, u]) => `<label style="display:flex; align-items:center; gap:8px; padding:4px 0; font-size:13px;"><input type="checkbox" class="handle-allow-chk" value="${uid}" ${allowed[uid] ? "checked" : ""} style="width:auto; margin:0;" />${esc(getCleanUserName(uid, u))}</label>`).join("") : `<p style="font-size:12px; color:#b3e5fc;">No other users.</p>`;
-    }
-
     document.getElementById("savePrefsBtn").addEventListener("click", async () => {
-      if (!me) return;
-      vibrateAction(16);
-      const nextName = getCleanUserName(me.uid, { name: document.getElementById("setDisplayNameInput").value.trim() || prefs.name || "User" });
+      const nextName = getCleanUserName(me.uid, { name: document.getElementById("setDisplayNameInput").value.trim() });
       const nextAbout = document.getElementById("setAboutInput").value.trim() || `Using ${APP_NAME}`;
       const nextPin = document.getElementById("setAppPinInput").value.trim();
+      if (nextPin && !/^\d{4,6}$/.test(nextPin)) return await proAlert("PIN must be 4–6 digits.", "PIN");
+      appPin = nextPin; localStorage.setItem("na_app_pin", appPin);
+      notifEnabled = document.getElementById("setNotifEnabled").checked; localStorage.setItem("na_notif_on", String(notifEnabled));
+      readReceiptsOn = document.getElementById("setReadReceipts").checked; localStorage.setItem("na_read_receipts", String(readReceiptsOn));
+
       const privLastSeen = document.getElementById("privLastSeenSelect").value;
       const privPhoto = document.getElementById("privPhotoSelect").value;
       const privAbout = document.getElementById("privAboutSelect").value;
       const privStatus = document.getElementById("privStatusSelect").value;
 
-      notifEnabled = document.getElementById("setNotifEnabled").checked;
-      readReceiptsOn = document.getElementById("setReadReceipts").checked;
-      localStorage.setItem("na_notif_on", String(notifEnabled));
-      localStorage.setItem("na_read_receipts", String(readReceiptsOn));
-
-      if (nextPin && (!/^\d{4,6}$/.test(nextPin))) return await proAlert("PIN must be 4–6 digits.", "PIN");
-      appPin = nextPin; localStorage.setItem("na_app_pin", appPin);
-      localStorage.setItem("na_card_bg_hex", cardBgHex); applyCardTone(); applySnakeCustomizer();
-
-      let finalAv = prefs.avatarData || "";
-      if (prefs.clearAvatarFlag) finalAv = "";
-      else if (tempAv) finalAv = tempAv;
-
-      const allowedMap = {};
+      const handleVal = document.getElementById("setPrivateHandle").value.trim(), allowedMap = {};
       document.querySelectorAll(".handle-allow-chk:checked").forEach(ch => { allowedMap[ch.value] = true; });
-      const handleVal = document.getElementById("setPrivateHandle").value.trim();
-      const patch = {
-        name: nextName,
-        about: nextAbout,
-        privLastSeen,
-        privPhoto,
-        privAbout,
-        privStatus,
-        hideLastSeen: privLastSeen === "nobody",
-        hideProfilePic: privPhoto === "nobody",
-        avatarData: finalAv,
-        privateHandle: handleVal,
-        allowedHandleUsers: allowedMap,
-        cardBgHex,
-        selectedLiveWp,
-        online: privLastSeen !== "nobody" && navigator.onLine && document.visibilityState === "visible",
-        lastSeen: Date.now()
-      };
-      await update(ref(db, "users/" + me.uid), patch);
-      prefs = { ...prefs, ...patch, clearAvatarFlag: false }; tempAv = "";
-      renderHomeMyAvatar(); renderUsersList();
+      cardBgHex = document.getElementById("setCardColorPicker").value; localStorage.setItem("na_card_bg_hex", cardBgHex);
+      btnIconTint = document.getElementById("btnIconTintSelect").value; applyBtnIconTint();
+      applySnakeCustomizer();
+
+      let nextAv = prefs.avatarData || "";
+      if (prefs.clearAvatarFlag) nextAv = ""; else if (tempAv) nextAv = tempAv;
+
+      prefs = { name: nextName, about: nextAbout, privLastSeen, privPhoto, privAbout, privStatus, avatarData: nextAv, clearAvatarFlag: false, privateHandle: handleVal, allowedHandleUsers: allowedMap };
+      await update(ref(db, "users/" + me.uid), { name: nextName, about: nextAbout, privLastSeen, privPhoto, privAbout, privStatus, avatarData: nextAv, privateHandle: handleVal, allowedHandleUsers: allowedMap, cardBgHex, selectedLiveWp });
+      applyCardTone(); renderHomeMyAvatar(); renderUsersList();
       if (activeChat && activeChat.type === "private") updateRoomHeaderMeta();
+      touchPresence(true);
       document.getElementById("settingsModal").style.display = "none";
-      await proAlert("Settings & Privacy saved!", "Settings");
     });
+    document.getElementById("closeSettingsModal").addEventListener("click", () => { document.getElementById("settingsModal").style.display = "none"; });
 
-    function renderBlockUsersBox() {
-      const box = document.getElementById("blockUsersBox"), others = Object.entries(users).filter(([uid]) => uid !== me.uid);
-      box.innerHTML = others.length ? others.map(([uid, u]) => {
-        const isB = !!blocks[uid];
-        return `<div class="item-card" style="display:flex; justify-content:space-between; align-items:center;"><span>${esc(getCleanUserName(uid, u))}</span><button type="button" class="${isB ? "wave-btn" : "btn-danger"} btn-sm" onclick="toggleBlockUid('${uid}')">${isB ? "Unblock" : "Block"}</button></div>`;
-      }).join("") : `<p style="font-size:12px; color:#b3e5fc;">No other users.</p>`;
-    }
-    window.toggleBlockUid = async function(uid) { if (!me) return; await set(ref(db, `blocks/${me.uid}/${uid}`), blocks[uid] ? null : true); };
-
-    /* WebRTC Voice & Video Call */
-    let pc = null, localStream = null, currentCallId = null, callPeerUid = null, callMode = "audio", callTimerInt = null, callSec = 0, callConnected = false, speakerOn = true, camFacing = "user";
-    const rtcConfig = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }, { urls: "stun:stun1.l.google.com:19302" }] };
-
-    document.getElementById("voiceCallBtn").addEventListener("click", () => startCall("audio"));
-    document.getElementById("videoCallBtn").addEventListener("click", () => startCall("video"));
-
-    async function startCall(mode) {
-      if (!activeChat || activeChat.type !== "private") return await proAlert("Direct chat only.", "Call");
-      const peerUid = activeChat.otherUid;
-      if (blocks[peerUid]) return await proAlert("User blocked.", "Blocked");
-      callMode = mode; callPeerUid = peerUid; callConnected = false; camFacing = "user";
-      const cRef = push(ref(db, "calls")); currentCallId = cRef.key;
-      await set(cRef, { callerUid: me.uid, callerName: prefs.name || "User", calleeUid: peerUid, mode, status: "ringing", time: Date.now() });
-      await push(ref(db, `callLogs/${me.uid}`), { peerUid, peerName: getCleanUserName(peerUid), mode, direction: "Outgoing", statusLabel: "Calling", time: Date.now() });
-      showCallOverlay(getCleanUserName(peerUid), "Calling...", false);
-      try {
-        localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: mode === "video" ? { facingMode: camFacing } : false });
-        setupLocalMediaPreview(); setupPeerConnection();
-        localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
-        const offer = await pc.createOffer(); await pc.setLocalDescription(offer);
-        await update(ref(db, `calls/${currentCallId}`), { offer: { type: offer.type, sdp: offer.sdp } });
-        listenCallSignaling();
-      } catch (_) { await proAlert("Microphone/Camera permission denied.", "Permission"); hangupCall("Failed"); }
-    }
-
-    function listenCalls() {
-      if (callsListenerAttached) return; callsListenerAttached = true;
-      onValue(ref(db, "calls"), (snap) => {
-        const all = snap.val() || {};
-        Object.entries(all).forEach(([cid, c]) => {
-          if (!c || watchedCallIds.has(cid)) return;
-          if (c.calleeUid === me.uid && c.status === "ringing" && !blocks[c.callerUid]) {
-            watchedCallIds.add(cid); currentCallId = cid; callPeerUid = c.callerUid; callMode = c.mode || "audio"; callConnected = false;
-            showCallOverlay(getCleanUserName(c.callerUid, { name: c.callerName }), `Incoming ${callMode === "video" ? "Video" : "Voice"} Call...`, true);
-            startIncomingRingLoop(); listenCallSignaling();
-          }
-        });
-      });
-    }
-
-    function listenCallSignaling() {
-      if (!currentCallId) return;
-      onValue(ref(db, `calls/${currentCallId}`), async (snap) => {
-        const c = snap.val(); if (!c) return;
-        if (c.status === "rejected" || c.status === "ended") { cleanupCallUi(c.status === "rejected" ? "Declined" : "Ended"); return; }
-        if (c.answer && pc && !pc.currentRemoteDescription) { await pc.setRemoteDescription(new RTCSessionDescription(c.answer)); callConnected = true; document.getElementById("callStateText").textContent = "Connected"; startCallTimer(); }
-        if (c.candidates) {
-          for (const [k, cand] of Object.entries(c.candidates)) {
-            if (cand.from !== me.uid && pc && !cand.applied) { try { await pc.addIceCandidate(new RTCIceCandidate(cand.candidate)); await set(ref(db, `calls/${currentCallId}/candidates/${k}/applied`), true); } catch (_) {} }
-          }
-        }
-      });
-    }
-
-    document.getElementById("acceptCallBtn").addEventListener("click", async () => {
-      stopIncomingRingLoop(); document.getElementById("incomingCallBar").style.display = "none";
-      try {
-        localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: callMode === "video" ? { facingMode: camFacing } : false });
-        setupLocalMediaPreview(); setupPeerConnection();
-        localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
-        const snap = await new Promise(res => onValue(ref(db, `calls/${currentCallId}`), s => res(s.val()), { onlyOnce: true }));
-        if (snap && snap.offer) {
-          await pc.setRemoteDescription(new RTCSessionDescription(snap.offer));
-          const ans = await pc.createAnswer(); await pc.setLocalDescription(ans);
-          await update(ref(db, `calls/${currentCallId}`), { answer: { type: ans.type, sdp: ans.sdp }, status: "accepted" });
-          callConnected = true; document.getElementById("callStateText").textContent = "Connected"; startCallTimer();
-        }
-      } catch (_) { await proAlert("Microphone/Camera permission denied.", "Permission"); hangupCall("Failed"); }
+    window.showFull = function(kind, encUrl) {
+      currentFullMediaUrl = decodeURIComponent(encUrl);
+      document.getElementById("fullViewerContent").innerHTML = kind === "img" ? `<img src="${currentFullMediaUrl}" />` : `<video src="${currentFullMediaUrl}" controls autoplay playsinline></video>`;
+      pushNavState(); document.getElementById("fullViewer").style.display = "flex";
+    };
+    document.getElementById("downloadFullMediaBtn").addEventListener("click", () => {
+      if (!currentFullMediaUrl) return;
+      const a = document.createElement("a"); a.href = currentFullMediaUrl; a.download = `na-whatsapp-media-${Date.now()}`; a.click();
     });
+    document.getElementById("closeFullViewer").addEventListener("click", () => { document.getElementById("fullViewer").style.display = "none"; document.getElementById("fullViewerContent").innerHTML = ""; });
 
-    document.getElementById("rejectCallBtn").addEventListener("click", async () => {
-      stopIncomingRingLoop();
-      if (currentCallId) await update(ref(db, `calls/${currentCallId}`), { status: "rejected" });
-      if (callPeerUid) await push(ref(db, `callLogs/${me.uid}`), { peerUid: callPeerUid, peerName: getCleanUserName(callPeerUid), mode: callMode, direction: "Incoming", statusLabel: "Declined", time: Date.now() });
-      cleanupCallUi("Declined");
-    });
-
-    function setupPeerConnection() {
-      pc = new RTCPeerConnection(rtcConfig);
-      pc.onicecandidate = (ev) => { if (ev.candidate && currentCallId) push(ref(db, `calls/${currentCallId}/candidates`), { from: me.uid, candidate: ev.candidate.toJSON(), applied: false }); };
-      pc.ontrack = (ev) => {
-        const stream = ev.streams[0] || new MediaStream([ev.track]);
-        if (callMode === "video") { const rv = document.getElementById("remoteVideo"); rv.srcObject = stream; rv.style.display = "block"; document.getElementById("audioCallAvatar").style.display = "none"; }
-        else { const ra = document.getElementById("remoteAudio"); ra.srcObject = stream; ra.play().catch(() => {}); }
-      };
-    }
-
-    function setupLocalMediaPreview() {
-      const lv = document.getElementById("localVideo"), av = document.getElementById("audioCallAvatar");
-      if (callMode === "video" && localStream) { lv.srcObject = localStream; lv.style.display = "block"; av.style.display = "none"; }
-      else { lv.style.display = "none"; av.style.display = "flex"; }
-    }
-
-    document.getElementById("toggleSpeakerBtn").addEventListener("click", () => { speakerOn = !speakerOn; const b = document.getElementById("toggleSpeakerBtn"), ra = document.getElementById("remoteAudio"); if (ra) ra.volume = speakerOn ? 1.0 : 0.25; b.classList.toggle("speaker-on", speakerOn); });
-    document.getElementById("toggleMuteBtn").addEventListener("click", () => { if (!localStream) return; const at = localStream.getAudioTracks()[0]; if (!at) return; at.enabled = !at.enabled; document.getElementById("toggleMuteBtn").classList.toggle("active-off", !at.enabled); });
-    document.getElementById("toggleCamBtn").addEventListener("click", () => { if (!localStream) return; const vt = localStream.getVideoTracks()[0]; if (!vt) return; vt.enabled = !vt.enabled; document.getElementById("toggleCamBtn").classList.toggle("active-off", !vt.enabled); });
-    document.getElementById("flipCamBtn").addEventListener("click", async () => {
-      if (callMode !== "video" || !localStream || !pc) return;
-      camFacing = camFacing === "user" ? "environment" : "user";
-      try {
-        const ns = await navigator.mediaDevices.getUserMedia({ video: { facingMode: camFacing }, audio: false });
-        const nv = ns.getVideoTracks()[0], sender = pc.getSenders().find(s => s.track && s.track.kind === "video");
-        if (sender && nv) await sender.replaceTrack(nv);
-        const ov = localStream.getVideoTracks()[0]; if (ov) { localStream.removeTrack(ov); ov.stop(); }
-        localStream.addTrack(nv); setupLocalMediaPreview();
-      } catch (_) {}
-    });
-
-    document.getElementById("hangupBtn").addEventListener("click", () => hangupCall("Ended"));
-    async function hangupCall(reason) {
-      stopIncomingRingLoop();
-      if (currentCallId) await update(ref(db, `calls/${currentCallId}`), { status: "ended" }).catch(() => {});
-      if (callPeerUid) await push(ref(db, `callLogs/${me.uid}`), { peerUid: callPeerUid, peerName: getCleanUserName(callPeerUid), mode: callMode, direction: callConnected ? "Connected" : "Outgoing", statusLabel: callConnected ? "Completed" : (reason || "No Answer"), duration: callConnected ? formatCallDur(callSec) : "", time: Date.now() });
-      cleanupCallUi(reason || "Ended");
-    }
-
-    function showCallOverlay(name, stateTxt, isIncoming) { document.getElementById("callPeerName").textContent = name; document.getElementById("callStateText").textContent = stateTxt; document.getElementById("callTimerText").textContent = ""; document.getElementById("incomingCallBar").style.display = isIncoming ? "flex" : "none"; document.getElementById("callOverlay").style.display = "flex"; }
-    function startCallTimer() { if (callTimerInt) clearInterval(callTimerInt); callSec = 0; callTimerInt = setInterval(() => { callSec++; document.getElementById("callTimerText").textContent = formatCallDur(callSec); }, 1000); }
-    function formatCallDur(s) { return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; }
-    function cleanupCallUi() {
-      stopIncomingRingLoop();
-      if (callTimerInt) { clearInterval(callTimerInt); callTimerInt = null; }
-      if (localStream) { localStream.getTracks().forEach(t => t.stop()); localStream = null; }
-      if (pc) { pc.close(); pc = null; }
-      document.getElementById("remoteVideo").style.display = "none"; document.getElementById("localVideo").style.display = "none";
-      document.getElementById("audioCallAvatar").style.display = "flex"; document.getElementById("incomingCallBar").style.display = "none";
-      document.getElementById("callOverlay").style.display = "none"; currentCallId = null; callPeerUid = null; callConnected = false;
-    }
-
-    function compressImg(file, maxW = 900, q = 0.78) {
-      return new Promise((res) => {
+    function compressImg(file, maxDim = 950, quality = 0.78) {
+      return new Promise((resolve) => {
         const rd = new FileReader();
         rd.onload = () => {
           const img = new Image();
           img.onload = () => {
             let w = img.width, h = img.height;
-            if (w > maxW) { h = Math.round(h * (maxW / w)); w = maxW; }
+            if (w > maxDim || h > maxDim) { if (w >= h) { h = Math.round((h * maxDim) / w); w = maxDim; } else { w = Math.round((w * maxDim) / h); h = maxDim; } }
             const c = document.createElement("canvas"); c.width = w; c.height = h;
-            c.getContext("2d").drawImage(img, 0, 0, w, h); res(c.toDataURL("image/jpeg", q));
+            c.getContext("2d").drawImage(img, 0, 0, w, h);
+            resolve(c.toDataURL("image/jpeg", quality));
           };
           img.src = rd.result;
         };
@@ -3867,24 +4080,183 @@
       });
     }
 
-    function trim60s(file) {
-      return new Promise((res) => {
-        const v = document.createElement("video"); v.preload = "metadata"; v.muted = true; v.src = URL.createObjectURL(file);
-        v.onloadedmetadata = () => {
-          const dur = v.duration || 0; URL.revokeObjectURL(v.src);
-          if (dur <= 60 || !v.captureStream) return res(file);
-          v.src = URL.createObjectURL(file); v.currentTime = 0;
-          v.oncanplay = () => {
-            const st = v.captureStream(), rec = new MediaRecorder(st), ch = [];
-            rec.ondataavailable = (e) => { if (e.data.size > 0) ch.push(e.data); };
-            rec.onstop = () => { URL.revokeObjectURL(v.src); res(new Blob(ch, { type: "video/webm" })); };
-            rec.start(); v.play(); setTimeout(() => { v.pause(); if (rec.state !== "inactive") rec.stop(); }, 60000);
-          };
-        };
+    function esc(s) { return String(s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+
+    /* WebRTC Calls */
+    const rtcConfig = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }, { urls: "stun:stun1.l.google.com:19302" }] };
+    let pc = null, localStream = null, currentCallId = null, currentCallPeerUid = null, currentCallMode = "audio", callTimerInt = null, callSeconds = 0, callAnswered = false, isCallerRole = false, speakerOn = true, micMuted = false, camOff = false, facingMode = "user";
+
+    async function appendCallHistory(peerUid, peerName, mode, direction, statusLabel, duration = "") {
+      if (!me || !peerUid) return;
+      await push(ref(db, `callLogs/${me.uid}`), { peerUid, peerName: getCleanUserName(peerUid, { name: peerName }), mode, direction, statusLabel, duration, time: Date.now() });
+    }
+
+    document.getElementById("voiceCallBtn").addEventListener("click", () => startCall("audio"));
+    document.getElementById("videoCallBtn").addEventListener("click", () => startCall("video"));
+
+    async function startCall(mode) {
+      if (!activeChat || activeChat.type !== "private") return await proAlert("Calls work in private chats.", "Call");
+      if (isEitherBlockedInCurrentChat()) return await proAlert("Cannot call when blocked.", "Blocked");
+      currentCallMode = mode; currentCallPeerUid = activeChat.otherUid; isCallerRole = true; callAnswered = false;
+      const peerName = getCleanUserName(currentCallPeerUid);
+      showCallOverlay(peerName, "Calling...", mode, false);
+      try {
+        localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: mode === "video" ? { facingMode } : false });
+        setupLocalMediaPreview(mode);
+        pc = new RTCPeerConnection(rtcConfig); attachPeerEvents();
+        localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
+        const offer = await pc.createOffer(); await pc.setLocalDescription(offer);
+        const cRef = push(ref(db, "calls/" + currentCallPeerUid));
+        currentCallId = cRef.key;
+        await set(cRef, { fromUid: me.uid, fromName: prefs.name || "User", mode, status: "ringing", offer: { type: offer.type, sdp: offer.sdp }, time: Date.now() });
+        listenCallState(currentCallPeerUid, currentCallId);
+      } catch (e) { await proAlert("Camera/Mic error: " + e.message, "Call"); endCallCleanup(false, "Failed"); }
+    }
+
+    function setupLocalMediaPreview(mode) {
+      const rv = document.getElementById("remoteVideo"), lv = document.getElementById("localVideo"), av = document.getElementById("audioCallAvatar");
+      if (mode === "video") { av.style.display = "none"; rv.style.display = "block"; lv.style.display = "block"; lv.srcObject = localStream; }
+      else { av.style.display = "flex"; rv.style.display = "none"; lv.style.display = "none"; }
+    }
+
+    function attachPeerEvents() {
+      pc.ontrack = (ev) => {
+        const stream = ev.streams[0]; if (!stream) return;
+        if (currentCallMode === "video") document.getElementById("remoteVideo").srcObject = stream;
+        else { const ra = document.getElementById("remoteAudio"); ra.srcObject = stream; ra.play().catch(() => {}); }
+      };
+      pc.onicecandidate = (ev) => {
+        if (ev.candidate && currentCallPeerUid && currentCallId) push(ref(db, `calls/${currentCallPeerUid}/${currentCallId}/callerCandidates`), ev.candidate.toJSON());
+      };
+    }
+
+    function listenCallState(targetUid, callId) {
+      onValue(ref(db, `calls/${targetUid}/${callId}`), async (snap) => {
+        const val = snap.val(); if (!val) return;
+        if (val.answer && pc && !pc.currentRemoteDescription) {
+          callAnswered = true; stopIncomingRingLoop();
+          await pc.setRemoteDescription(new RTCSessionDescription(val.answer));
+          document.getElementById("callStateText").textContent = "Connected"; startCallTimer();
+        }
+        if (val.calleeCandidates && pc) {
+          for (const c of Object.values(val.calleeCandidates)) { try { await pc.addIceCandidate(new RTCIceCandidate(c)); } catch (_) {} }
+        }
+        if (val.status === "declined") { await appendCallHistory(targetUid, getCleanUserName(targetUid), currentCallMode, "Outgoing", "Declined"); endCallCleanup(false, "Declined"); }
+        else if (val.status === "ended") { endCallCleanup(false, "Ended"); }
       });
     }
 
-    function esc(s) { return String(s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+    function listenCalls() {
+      if (!me || callsListenerAttached) return; callsListenerAttached = true;
+      onValue(ref(db, "calls/" + me.uid), (snap) => {
+        const obj = snap.val() || {};
+        Object.entries(obj).forEach(([cid, call]) => {
+          if (!call || call.status !== "ringing" || watchedCallIds.has(cid)) return;
+          if (isEitherBlockedUser(call.fromUid)) return;
+          watchedCallIds.add(cid);
+          currentCallId = cid; currentCallPeerUid = call.fromUid; currentCallMode = call.mode || "audio"; isCallerRole = false; callAnswered = false;
+          showCallOverlay(getCleanUserName(call.fromUid, { name: call.fromName }), `Incoming ${currentCallMode} call...`, currentCallMode, true);
+          startIncomingRingLoop();
+
+          document.getElementById("acceptCallBtn").onclick = async () => {
+            stopIncomingRingLoop(); callAnswered = true;
+            document.getElementById("incomingCallBar").style.display = "none";
+            document.getElementById("callStateText").textContent = "Connected";
+            try {
+              localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: currentCallMode === "video" ? { facingMode } : false });
+              setupLocalMediaPreview(currentCallMode);
+              pc = new RTCPeerConnection(rtcConfig);
+              pc.ontrack = (ev) => {
+                const stream = ev.streams[0]; if (!stream) return;
+                if (currentCallMode === "video") document.getElementById("remoteVideo").srcObject = stream;
+                else { const ra = document.getElementById("remoteAudio"); ra.srcObject = stream; ra.play().catch(() => {}); }
+              };
+              pc.onicecandidate = (ev) => { if (ev.candidate) push(ref(db, `calls/${me.uid}/${cid}/calleeCandidates`), ev.candidate.toJSON()); };
+              localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
+              await pc.setRemoteDescription(new RTCSessionDescription(call.offer));
+              const ans = await pc.createAnswer(); await pc.setLocalDescription(ans);
+              await update(ref(db, `calls/${me.uid}/${cid}`), { status: "accepted", answer: { type: ans.type, sdp: ans.sdp } });
+              if (call.callerCandidates) { for (const c of Object.values(call.callerCandidates)) { try { await pc.addIceCandidate(new RTCIceCandidate(c)); } catch (_) {} } }
+              startCallTimer();
+            } catch (_) { endCallCleanup(true, "Failed"); }
+          };
+
+          document.getElementById("rejectCallBtn").onclick = async () => {
+            stopIncomingRingLoop();
+            await update(ref(db, `calls/${me.uid}/${cid}`), { status: "declined" });
+            await appendCallHistory(currentCallPeerUid, getCleanUserName(currentCallPeerUid), currentCallMode, "Incoming", "Declined");
+            endCallCleanup(false, "Declined");
+          };
+        });
+      });
+    }
+
+    function showCallOverlay(peerName, stateTxt, mode, incoming) {
+      speakerOn = true; micMuted = false; camOff = false;
+      document.getElementById("toggleSpeakerBtn").classList.add("speaker-on");
+      document.getElementById("toggleMuteBtn").classList.remove("active-off");
+      document.getElementById("toggleCamBtn").classList.remove("active-off");
+      document.getElementById("callPeerName").textContent = peerName;
+      document.getElementById("callStateText").textContent = stateTxt;
+      document.getElementById("callTimerText").textContent = "";
+      document.getElementById("incomingCallBar").style.display = incoming ? "flex" : "none";
+      document.getElementById("toggleCamBtn").style.display = mode === "video" ? "inline-block" : "none";
+      document.getElementById("flipCamBtn").style.display = mode === "video" ? "inline-block" : "none";
+      document.getElementById("callOverlay").style.display = "flex";
+    }
+
+    function startCallTimer() {
+      callSeconds = 0; clearInterval(callTimerInt);
+      callTimerInt = setInterval(() => { callSeconds++; document.getElementById("callTimerText").textContent = `${String(Math.floor(callSeconds / 60)).padStart(2, "0")}:${String(callSeconds % 60).padStart(2, "0")}`; }, 1000);
+    }
+
+    document.getElementById("toggleSpeakerBtn").addEventListener("click", () => {
+      speakerOn = !speakerOn;
+      const ra = document.getElementById("remoteAudio"); if (ra) ra.muted = !speakerOn;
+      document.getElementById("toggleSpeakerBtn").classList.toggle("speaker-on", speakerOn);
+    });
+    document.getElementById("toggleMuteBtn").addEventListener("click", () => {
+      if (!localStream) return; micMuted = !micMuted;
+      localStream.getAudioTracks().forEach(t => { t.enabled = !micMuted; });
+      document.getElementById("toggleMuteBtn").classList.toggle("active-off", micMuted);
+    });
+    document.getElementById("toggleCamBtn").addEventListener("click", () => {
+      if (!localStream) return; camOff = !camOff;
+      localStream.getVideoTracks().forEach(t => { t.enabled = !camOff; });
+      document.getElementById("toggleCamBtn").classList.toggle("active-off", camOff);
+    });
+    document.getElementById("flipCamBtn").addEventListener("click", async () => {
+      if (currentCallMode !== "video" || !pc) return;
+      facingMode = facingMode === "user" ? "environment" : "user";
+      try {
+        const nextStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode }, audio: false });
+        const nextTrack = nextStream.getVideoTracks()[0];
+        const sender = pc.getSenders().find(s => s.track && s.track.kind === "video");
+        if (sender && nextTrack) await sender.replaceTrack(nextTrack);
+        if (localStream) { localStream.getVideoTracks().forEach(t => t.stop()); localStream.removeTrack(localStream.getVideoTracks()[0]); localStream.addTrack(nextTrack); document.getElementById("localVideo").srcObject = localStream; }
+      } catch (_) {}
+    });
+
+    document.getElementById("hangupBtn").addEventListener("click", async () => {
+      stopIncomingRingLoop();
+      const durStr = document.getElementById("callTimerText").textContent || "";
+      if (currentCallPeerUid && currentCallId) {
+        const targetPath = isCallerRole ? `calls/${currentCallPeerUid}/${currentCallId}` : `calls/${me.uid}/${currentCallId}`;
+        await update(ref(db, targetPath), { status: "ended" }).catch(() => {});
+        const statusLbl = callAnswered ? "Completed" : (isCallerRole ? "No answer" : "Missed");
+        await appendCallHistory(currentCallPeerUid, getCleanUserName(currentCallPeerUid), currentCallMode, isCallerRole ? "Outgoing" : "Incoming", statusLbl, durStr);
+      }
+      endCallCleanup(false, "Ended");
+    });
+
+    function endCallCleanup(notifyRemote, reasonText) {
+      stopIncomingRingLoop(); clearInterval(callTimerInt);
+      if (notifyRemote && currentCallPeerUid && currentCallId) update(ref(db, `calls/${currentCallPeerUid}/${currentCallId}`), { status: "ended" }).catch(() => {});
+      if (localStream) { localStream.getTracks().forEach(t => t.stop()); localStream = null; }
+      if (pc) { pc.close(); pc = null; }
+      document.getElementById("callStateText").textContent = reasonText || "Ended";
+      setTimeout(() => { document.getElementById("callOverlay").style.display = "none"; }, 350);
+    }
   </script>
 </body>
 </html>
