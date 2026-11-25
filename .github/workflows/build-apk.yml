@@ -46,29 +46,37 @@ jobs:
           mkdir -p android-app/app/src/main/res/mipmap-xxxhdpi
 
           if [ -f "1000394929.jpg" ]; then
+            pip install -q pillow || true
             python3 - << 'PYEOF'
-          from PIL import Image
+          import shutil
 
-          img = Image.open("1000394929.jpg").convert("RGBA")
-          w, h = img.size
+          try:
+              from PIL import Image
+              img = Image.open("1000394929.jpg").convert("RGBA")
+              w, h = img.size
 
-          # Center square crop around the middle icon
-          side = int(min(w, h) * 0.24)
-          left = (w - side) // 2
-          top = (h - side) // 2
-          icon_img = img.crop((left, top, left + side, top + side))
+              # Center square crop around the middle icon
+              side = int(min(w, h) * 0.24)
+              left = (w - side) // 2
+              top = (h - side) // 2
+              icon_img = img.crop((left, top, left + side, top + side))
 
-          sizes = {
-              "mipmap-mdpi": 48,
-              "mipmap-hdpi": 72,
-              "mipmap-xhdpi": 96,
-              "mipmap-xxhdpi": 144,
-              "mipmap-xxxhdpi": 192,
-          }
-          for folder, size in sizes.items():
-              resized = icon_img.resize((size, size), Image.Resampling.LANCZOS)
-              resized.save(f"android-app/app/src/main/res/{folder}/ic_launcher.png")
-              resized.save(f"android-app/app/src/main/res/{folder}/ic_launcher_round.png")
+              sizes = {
+                  "mipmap-mdpi": 48,
+                  "mipmap-hdpi": 72,
+                  "mipmap-xhdpi": 96,
+                  "mipmap-xxhdpi": 144,
+                  "mipmap-xxxhdpi": 192,
+              }
+              for folder, size in sizes.items():
+                  resized = icon_img.resize((size, size), Image.Resampling.LANCZOS)
+                  resized.save(f"android-app/app/src/main/res/{folder}/ic_launcher.png")
+                  resized.save(f"android-app/app/src/main/res/{folder}/ic_launcher_round.png")
+          except Exception as e:
+              print("Fallback copy due to:", e)
+              for d in ["mipmap-mdpi", "mipmap-hdpi", "mipmap-xhdpi", "mipmap-xxhdpi", "mipmap-xxxhdpi"]:
+                  shutil.copyfile("1000394929.jpg", f"android-app/app/src/main/res/{d}/ic_launcher.jpg")
+                  shutil.copyfile("1000394929.jpg", f"android-app/app/src/main/res/{d}/ic_launcher_round.jpg")
           PYEOF
           fi
 
