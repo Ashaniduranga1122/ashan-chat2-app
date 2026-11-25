@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- NA Whatsapp | Version 2.0.3 (v2.0.3 - Configured: chat-app-v1-641af) -->
+  <!-- NA Whatsapp | Version 2.0.5 (v2.0.5 - Configured: chat-app-v1-641af) -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>NA Whatsapp (v2.0.3)</title>
+  <title>NA Whatsapp (v2.0.5)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Fredoka:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+Sinhala:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -13,13 +13,14 @@
       --bg-dark: #030b1a;
       --bg-mid: #0b2956;
       --bg-light: #1565c0;
-      --bg-card: rgba(8, 28, 60, 0.86);
-      --card-inner-bg: linear-gradient(145deg, rgba(16, 56, 112, 0.9) 0%, rgba(4, 15, 34, 0.95) 100%);
+      --bg-card: rgba(8, 28, 60, 0.88);
+      --card-inner-bg: linear-gradient(145deg, rgba(16, 56, 112, 0.92) 0%, rgba(4, 15, 34, 0.96) 100%);
       --accent: #29b6f6;
       --accent-2: #81d4fa;
+      --btn-icon-color: #ffffff;
       --text: #f0f8ff;
       --muted: #b3e5fc;
-      --border: rgba(129, 212, 250, 0.28);
+      --border: rgba(129, 212, 250, 0.32);
       --danger: #e53935;
 
       /* Snake / Animated Card Border Custom Variables */
@@ -30,7 +31,19 @@
       --snake-speed: 3.6s;
     }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    input, textarea, [contenteditable="true"], .allow-select {
+      user-select: text;
+      -webkit-user-select: text;
+      -webkit-touch-callout: default;
+    }
 
     html, body {
       margin: 0;
@@ -41,8 +54,8 @@
       color: var(--text);
       font-family: "Plus Jakarta Sans", "Noto Serif Sinhala", sans-serif;
       background: linear-gradient(135deg, #030b1a 0%, #0d47a1 38%, #29b6f6 72%, #061936 100%);
-      background-size: 280% 280%;
-      animation: blueWaveAnim 14s ease infinite;
+      background-size: 260% 260%;
+      animation: blueWaveAnim 15s ease infinite;
     }
 
     @keyframes blueWaveAnim {
@@ -61,12 +74,30 @@
       50% { opacity: 1; }
     }
 
+    @keyframes typingDotBounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.35; }
+      40% { transform: translateY(-3.5px); opacity: 1; }
+    }
+
     body.font-default, .msg-font-default { font-family: "Plus Jakarta Sans", "Noto Serif Sinhala", sans-serif; }
     body.font-rounded, .msg-font-rounded { font-family: "Fredoka", "Noto Serif Sinhala", sans-serif; }
     body.font-serif, .msg-font-serif { font-family: "Noto Serif Sinhala", Georgia, serif; }
     body.font-mono, .msg-font-mono { font-family: "JetBrains Mono", monospace; }
     .msg-font-script { font-family: "Dancing Script", "Noto Serif Sinhala", cursive; font-size: 1.16em; }
     .msg-font-display { font-family: "Plus Jakarta Sans", "Noto Serif Sinhala", sans-serif; font-weight: 800; letter-spacing: 0.03em; }
+
+    /* Yellow letters with thin black border for typing & typing indicator */
+    .typing-yellow-bordered {
+      color: #ffd54f !important;
+      font-weight: 800;
+      -webkit-text-stroke: 0.65px #000000;
+      text-shadow:
+        -0.75px -0.75px 0 #000,
+         0.75px -0.75px 0 #000,
+        -0.75px  0.75px 0 #000,
+         0.75px  0.75px 0 #000,
+         0 1px 2px rgba(0, 0, 0, 0.9);
+    }
 
     .emoji-3d {
       display: inline-block;
@@ -76,7 +107,7 @@
     }
 
     .wa-header {
-      background: linear-gradient(120deg, rgba(3, 13, 30, 0.92), rgba(13, 71, 161, 0.92), rgba(2, 136, 209, 0.88));
+      background: linear-gradient(120deg, rgba(3, 13, 30, 0.94), rgba(13, 71, 161, 0.94), rgba(2, 136, 209, 0.9));
       background-size: 220% 220%;
       animation: blueWaveAnim 16s ease infinite;
       color: #fff;
@@ -85,41 +116,45 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.42);
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.45);
       border-bottom: 1px solid var(--border);
       z-index: 20;
       flex-shrink: 0;
     }
 
     .wa-brand-wrap { display: flex; align-items: center; gap: 6px; min-width: 0; }
-    .wa-brand { font-weight: 800; font-size: 15.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .wa-brand { font-weight: 800; font-size: 15.5px; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .ver-pill {
       font-size: 10px;
       font-weight: 800;
-      background: rgba(129, 212, 250, 0.22);
-      color: #e1f5fe;
-      border: 1px solid rgba(129, 212, 250, 0.45);
+      background: rgba(129, 212, 250, 0.24);
+      color: #ffffff;
+      border: 1px solid rgba(129, 212, 250, 0.55);
       padding: 2px 7px;
       border-radius: 999px;
       white-space: nowrap;
       flex-shrink: 0;
     }
 
+    /* Compact WhatsApp-style buttons sized cleanly to text */
     .hdr-actions { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
     .hdr-btn {
-      background: rgba(255, 255, 255, 0.14);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.16);
+      color: var(--btn-icon-color);
+      border: 1px solid rgba(255, 255, 255, 0.34);
       border-radius: 999px;
-      padding: 6px 9px;
-      font-size: 12px;
+      padding: 5px 9px;
+      font-size: 11.5px;
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
+      width: auto;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 4px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
     }
     .hdr-circle-btn {
       width: 34px;
@@ -128,21 +163,26 @@
       min-height: 34px;
       padding: 0;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.16);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.26);
-      font-size: 15px;
+      background: rgba(2, 136, 209, 0.36);
+      color: var(--btn-icon-color);
+      border: 1.5px solid rgba(225, 245, 254, 0.58);
+      font-size: 14px;
       font-weight: 800;
       cursor: pointer;
       flex-shrink: 0;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    }
+    .hdr-circle-btn svg {
+      stroke: var(--btn-icon-color);
+      fill: var(--btn-icon-color);
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
     }
     .hdr-btn:active, .hdr-circle-btn:active { transform: scale(0.95); }
-    .hdr-btn.danger { background: rgba(229, 57, 53, 0.36); border-color: rgba(255, 138, 128, 0.45); }
+    .hdr-btn.danger { background: rgba(229, 57, 53, 0.52); border-color: rgba(255, 138, 128, 0.7); color: #fff; }
 
-    /* Non-Stretching Perfect Circle Avatar System */
     .av-container {
       position: relative;
       width: 48px;
@@ -162,7 +202,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.2);
       flex-shrink: 0;
       cursor: pointer;
     }
@@ -191,6 +231,7 @@
       object-fit: cover;
       object-position: center;
       display: block;
+      pointer-events: none;
     }
 
     .online-dot {
@@ -227,7 +268,7 @@
     .na-center-icon {
       width: 82px;
       height: 82px;
-      border-radius: 26px;
+      border-radius: 28px;
       background: linear-gradient(145deg, #4fc3f7, #1565c0 55%, #041633 100%);
       border: 2px solid rgba(225, 245, 254, 0.55);
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), 0 0 24px rgba(79, 195, 247, 0.45);
@@ -244,7 +285,7 @@
       background: var(--bg-card);
       backdrop-filter: blur(10px);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 20px;
       padding: 18px;
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     }
@@ -252,28 +293,31 @@
     .pass-wrap { position: relative; display: flex; align-items: center; }
     .pass-wrap input { padding-right: 42px; }
     .eye-toggle-btn {
-      position: absolute; right: 10px; background: none; border: none;
-      color: #b3e5fc; cursor: pointer; font-size: 15px; padding: 4px;
+      position: absolute; right: 10px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px; color: #ffffff; cursor: pointer; font-size: 13px; padding: 4px 8px; width: auto;
     }
 
     input, textarea, select {
-      width: 100%; padding: 10px 12px; margin: 6px 0;
-      border: 1px solid var(--border); border-radius: 10px; font-size: 14px;
-      background: rgba(4, 15, 34, 0.85); color: var(--text); outline: none; font-family: inherit;
+      width: 100%; padding: 10px 13px; margin: 6px 0;
+      border: 1px solid var(--border); border-radius: 14px; font-size: 14px;
+      background: rgba(4, 15, 34, 0.88); color: var(--text); outline: none; font-family: inherit;
     }
     input:focus, textarea:focus, select:focus { border-color: var(--accent-2); }
 
+    /* Pill / soft-rounded buttons sized to content */
     .wave-btn {
       background: linear-gradient(135deg, #0288d1, #1565c0);
-      color: #fff; border: none; padding: 10px 14px; border-radius: 10px;
-      font-weight: 700; cursor: pointer; font-size: 13px;
-      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-      box-shadow: 0 4px 12px rgba(2, 136, 209, 0.35);
+      color: #ffffff; border: 1px solid rgba(179, 229, 252, 0.38); padding: 7px 14px; border-radius: 999px;
+      font-weight: 700; cursor: pointer; font-size: 12.5px; width: auto;
+      display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      box-shadow: 0 3px 10px rgba(2, 136, 209, 0.35);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
     }
+    .wave-btn.full-w { width: 100%; }
     .wave-btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
-    .btn-secondary { background: rgba(255, 255, 255, 0.14); color: #fff; border: 1px solid var(--border); box-shadow: none; }
-    .btn-danger { background: var(--danger); color: #fff; border: none; box-shadow: none; cursor: pointer; font-weight: 700; }
-    .btn-sm { padding: 6px 10px; font-size: 12px; border-radius: 8px; }
+    .btn-secondary { background: rgba(255, 255, 255, 0.15); color: #ffffff; border: 1px solid rgba(179, 229, 252, 0.36); box-shadow: none; }
+    .btn-danger { background: var(--danger); color: #ffffff; border: 1px solid rgba(255, 138, 128, 0.5); box-shadow: none; cursor: pointer; font-weight: 700; padding: 7px 13px; border-radius: 999px; font-size: 12.5px; width: auto; display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+    .btn-sm { padding: 5px 11px; font-size: 11.5px; border-radius: 999px; }
 
     #appShell {
       display: none;
@@ -283,26 +327,39 @@
     }
 
     .search-wrap {
-      padding: 8px 12px 6px;
-      background: rgba(4, 17, 38, 0.78);
-      border-bottom: 1px solid rgba(129, 212, 250, 0.18);
+      padding: 7px 12px 6px;
+      background: rgba(4, 17, 38, 0.82);
+      border-bottom: 1px solid rgba(129, 212, 250, 0.2);
       display: flex; gap: 6px; align-items: center; flex-shrink: 0;
     }
-    .search-wrap input { margin: 0; border-radius: 999px; padding: 8px 14px; font-size: 13px; }
+    .search-wrap input { margin: 0; border-radius: 999px; padding: 7px 14px; font-size: 13px; }
+
+    /* Multi-select action bar on Home screen */
+    .multi-select-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 7px 12px;
+      background: linear-gradient(90deg, rgba(13, 71, 161, 0.96), rgba(2, 136, 209, 0.96));
+      border-bottom: 1px solid rgba(129, 212, 250, 0.45);
+      flex-shrink: 0;
+    }
+    .multi-select-bar.show { display: flex; }
 
     .wa-tabs {
       display: flex;
-      background: rgba(4, 17, 38, 0.88);
+      background: rgba(4, 17, 38, 0.9);
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
     }
     .wa-tab {
       flex: 1; text-align: center; padding: 11px 4px; font-size: 12px; font-weight: 800;
-      color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; user-select: none;
+      color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent;
     }
-    .wa-tab.active { color: #fff; border-bottom-color: var(--accent-2); background: rgba(41, 182, 246, 0.16); }
+    .wa-tab.active { color: #ffffff; border-bottom-color: var(--accent-2); background: rgba(41, 182, 246, 0.18); }
 
-    .home-body { flex: 1; overflow-y: auto; position: relative; padding-bottom: 84px; }
+    .home-body { flex: 1; overflow-y: auto; position: relative; padding-bottom: 84px; will-change: scroll-position; }
     .home-view { display: none; padding: 10px 12px; }
     .home-view.active { display: block; }
 
@@ -314,23 +371,28 @@
       gap: 12px;
       padding: 11px 12px;
       margin-bottom: 10px;
-      border-radius: 16px;
+      border-radius: 18px;
       cursor: pointer;
       background: var(--card-inner-bg);
-      border: var(--snake-size) solid rgba(129, 212, 250, 0.24);
+      border: var(--snake-size) solid rgba(129, 212, 250, 0.25);
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
       overflow: hidden;
       isolation: isolate;
       transition: transform 0.12s ease;
+    }
+    .pro-card.selected-chat {
+      outline: 2.5px solid #ffd54f;
+      background: rgba(25, 118, 210, 0.34);
     }
     .pro-card > * { position: relative; z-index: 2; }
 
     .pro-card::before {
       content: "";
       position: absolute;
-      inset: -120%;
+      inset: -90%;
       z-index: 0;
       pointer-events: none;
+      will-change: transform;
       background: conic-gradient(
         from 0deg,
         transparent 0deg,
@@ -349,7 +411,7 @@
       position: absolute;
       inset: var(--snake-size);
       z-index: 1;
-      border-radius: calc(16px - var(--snake-size));
+      border-radius: calc(18px - var(--snake-size));
       background: var(--card-inner-bg);
       pointer-events: none;
     }
@@ -395,16 +457,24 @@
     body.snake-pat-off .pro-card::before { display: none; }
     .pro-card:active { transform: scale(0.985); }
 
+    .select-check-circle {
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 2px solid #81d4fa; display: none; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; color: #041226; background: transparent; flex-shrink: 0;
+    }
+    body.select-mode .select-check-circle { display: inline-flex; }
+    .pro-card.selected-chat .select-check-circle { background: #ffd54f; border-color: #ffd54f; }
+
     .row-body { flex: 1; min-width: 0; }
     .row-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
     .row-title { font-weight: 700; font-size: 15px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .row-time { font-size: 11px; color: #b3e5fc; flex-shrink: 0; }
     .row-about { font-size: 11.5px; color: #81d4fa; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .row-last-wrap { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 3px; }
-    .row-last { font-size: 13px; color: #e1f5fe; opacity: 0.88; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
+    .row-last { font-size: 13px; color: #e1f5fe; opacity: 0.9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
 
     .st-thumb-box {
-      width: 50px; height: 50px; border-radius: 12px; overflow: hidden;
+      width: 50px; height: 50px; border-radius: 14px; overflow: hidden;
       flex-shrink: 0; border: 1.5px solid rgba(129, 212, 250, 0.45);
       background: #041226; display: flex; align-items: center; justify-content: center;
     }
@@ -438,10 +508,11 @@
     }
 
     .fab {
-      position: fixed; right: 18px; bottom: 20px; width: 56px; height: 56px;
+      position: fixed; right: 18px; bottom: 20px; width: 54px; height: 54px;
       border-radius: 50%; background: linear-gradient(135deg, #29b6f6, #1565c0);
-      color: #fff; border: none; font-size: 26px;
-      box-shadow: 0 8px 22px rgba(41, 182, 246, 0.45); cursor: pointer; z-index: 25;
+      color: #ffffff; border: 2px solid rgba(225, 245, 254, 0.6); font-size: 25px;
+      box-shadow: 0 8px 22px rgba(41, 182, 246, 0.5); cursor: pointer; z-index: 25;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
     }
 
     #roomScreen {
@@ -450,7 +521,7 @@
     }
 
     .wp-layer { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; pointer-events: none; overflow: hidden; }
-    .wp-space-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #030b1a 0%, #0d47a1 45%, #29b6f6 82%, #061936 100%); background-size: 280% 280%; animation: blueWaveAnim 15s ease infinite; }
+    .wp-space-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #030b1a 0%, #0d47a1 45%, #29b6f6 82%, #061936 100%); background-size: 260% 260%; animation: blueWaveAnim 15s ease infinite; }
     .wp-planets-container { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
     .orbit-ring { position: absolute; border-radius: 50%; border: 1px dashed rgba(179, 229, 252, 0.24); transform: translate(-50%, -50%); left: 50%; top: 50%; }
     .planet-body { position: absolute; left: 50%; top: 50%; border-radius: 50%; box-shadow: inset -4px -4px 10px rgba(0, 0, 0, 0.65), 0 0 14px rgba(129, 212, 250, 0.35); animation: orbitSpin var(--orbit-dur, 18s) linear infinite; }
@@ -465,17 +536,44 @@
     .wp-dim-layer { position: absolute; inset: 0; background: #030b1a; opacity: 0.25; z-index: 1; pointer-events: none; }
     .room-fg { position: relative; z-index: 2; display: flex; flex-direction: column; height: 100%; min-height: 0; }
     .room-sub { font-size: 11.5px; color: #e1f5fe; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* Animated Typing... Indicator with yellow bordered letters + animated 3 dots */
     .typing-pill {
-      display: none; background: rgba(0, 230, 118, 0.2); color: #69f0ae;
-      border: 1px solid rgba(105, 240, 174, 0.45); font-size: 10.5px; font-weight: 800;
-      padding: 2px 8px; border-radius: 999px; margin-left: 6px; white-space: nowrap;
+      display: none;
+      align-items: center;
+      gap: 3px;
+      background: rgba(8, 28, 60, 0.88);
+      border: 1px solid rgba(255, 213, 79, 0.65);
+      font-size: 11.5px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      margin-left: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
+    .typing-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 2.5px;
+      margin-left: 2px;
+    }
+    .typing-dots span {
+      width: 4.5px;
+      height: 4.5px;
+      border-radius: 50%;
+      background: #ffd54f;
+      border: 0.5px solid #000;
+      display: inline-block;
+      animation: typingDotBounce 1.15s infinite ease-in-out;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
 
     .room-menu-wrap { position: relative; }
     .room-dropdown {
       display: none; position: fixed; right: 10px; top: 56px; width: 256px;
       max-height: 78dvh; overflow-y: auto; background: #081e3e; color: #fff;
-      border: 1px solid var(--border); border-radius: 14px;
+      border: 1px solid var(--border); border-radius: 16px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65); z-index: 95; padding: 6px 0;
     }
     .room-dd-item {
@@ -483,14 +581,14 @@
       display: flex; align-items: center; justify-content: space-between; gap: 8px;
     }
     .room-dd-item:hover { background: rgba(41, 182, 246, 0.2); }
-    .dd-val-pill { font-size: 11px; background: rgba(255, 255, 255, 0.14); padding: 2px 7px; border-radius: 999px; color: #81d4fa; }
+    .dd-val-pill { font-size: 11px; background: rgba(255, 255, 255, 0.16); padding: 2px 7px; border-radius: 999px; color: #ffffff; }
 
     .in-chat-search { display: none; flex-direction: column; background: #071b38; padding: 6px 10px; border-bottom: 1px solid var(--border); gap: 6px; }
     .in-chat-search-row { display: flex; gap: 6px; align-items: center; }
     .in-chat-search input { margin: 0; padding: 7px 10px; font-size: 13px; }
     .media-filter-bar { display: flex; gap: 5px; overflow-x: auto; }
-    .mf-chip { background: rgba(255, 255, 255, 0.08); color: #e1f5fe; border: 1px solid transparent; border-radius: 999px; padding: 3px 9px; font-size: 11px; font-weight: 700; cursor: pointer; }
-    .mf-chip.active { background: rgba(129, 212, 250, 0.24); border-color: var(--accent-2); color: #fff; }
+    .mf-chip { background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255,255,255,0.18); border-radius: 999px; padding: 3px 9px; font-size: 11px; font-weight: 700; cursor: pointer; width: auto; }
+    .mf-chip.active { background: rgba(129, 212, 250, 0.28); border-color: var(--accent-2); color: #fff; }
 
     .pinned-banner { display: none; background: rgba(13, 42, 82, 0.94); border-bottom: 1px solid var(--border); padding: 7px 12px; font-size: 12px; color: #e3f2fd; cursor: pointer; }
 
@@ -499,86 +597,85 @@
 
     .scroll-bottom-btn {
       display: none; position: absolute; right: 14px; bottom: 12px; min-width: 38px; height: 38px;
-      padding: 0 10px; border-radius: 999px; background: rgba(8, 32, 68, 0.95);
-      color: #81d4fa; border: 1px solid rgba(129, 212, 250, 0.45);
+      padding: 0 10px; border-radius: 999px; background: rgba(8, 32, 68, 0.96);
+      color: var(--btn-icon-color); border: 1.5px solid rgba(129, 212, 250, 0.55);
       font-size: 15px; font-weight: 800; align-items: center; justify-content: center; gap: 4px;
       cursor: pointer; z-index: 15; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
     }
 
-    .m-row { display: flex; flex-direction: column; max-width: 82%; transition: transform 0.16s ease; user-select: none; }
+    .m-row { display: flex; flex-direction: column; max-width: 82%; transition: transform 0.16s ease; }
     .m-row.me { align-self: flex-end; }
     .m-row.other { align-self: flex-start; }
 
     .m-bubble {
-      padding: 8px 11px; border-radius: 15px; position: relative; word-wrap: break-word;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 8px 11px; border-radius: 16px; position: relative; word-wrap: break-word;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.16);
     }
     .m-row.me .m-bubble { background: linear-gradient(135deg, #1976d2, #0d47a1); color: #fff; border-bottom-right-radius: 4px; }
-    .m-row.other .m-bubble { background: rgba(8, 28, 60, 0.92); color: #f1f8ff; border-bottom-left-radius: 4px; }
+    .m-row.other .m-bubble { background: rgba(8, 28, 60, 0.94); color: #f1f8ff; border-bottom-left-radius: 4px; }
 
     .m-bubble.sticker-bubble {
       background: transparent !important;
       border: none !important;
       box-shadow: none !important;
       padding: 2px 4px;
-      font-size: 56px;
+      font-size: 52px;
       line-height: 1.1;
     }
 
     .m-bubble.media-only { padding: 2px; background: transparent !important; border: 1px solid rgba(144, 202, 249, 0.35) !important; position: relative; }
-    .m-bubble.media-only .m-meta { position: absolute; right: 6px; bottom: 6px; background: rgba(0, 0, 0, 0.62); padding: 2px 7px; border-radius: 999px; margin-top: 0; }
+    .m-bubble.media-only .m-meta { position: absolute; right: 6px; bottom: 6px; background: rgba(0, 0, 0, 0.68); padding: 2px 7px; border-radius: 999px; margin-top: 0; }
     .m-bubble.flash { outline: 3px solid #81d4fa; }
     .m-sender { font-size: 11px; font-weight: 800; color: #81d4fa; margin-bottom: 2px; }
     .m-tags { font-size: 10.5px; color: #ffd54f; margin-bottom: 3px; font-weight: 700; }
 
-    .fwd-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(0, 0, 0, 0.28); border: 1px solid rgba(255, 255, 255, 0.18); padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; margin-bottom: 5px; }
+    .fwd-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.2); padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; margin-bottom: 5px; }
     .fwd-dp { width: 18px; height: 18px; border-radius: 50%; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; background: #1976d2; color: #fff; font-size: 10px; font-weight: 800; flex-shrink: 0; }
     .fwd-dp img { width: 100%; height: 100%; object-fit: cover; }
 
-    .m-quote { background: rgba(0, 0, 0, 0.28); border-left: 3px solid #81d4fa; padding: 5px 8px; border-radius: 6px; margin-bottom: 5px; font-size: 12px; cursor: pointer; }
+    .m-quote { background: rgba(0, 0, 0, 0.3); border-left: 3px solid #81d4fa; padding: 5px 8px; border-radius: 8px; margin-bottom: 5px; font-size: 12px; cursor: pointer; }
     .m-quote strong { display: block; font-size: 11px; color: #81d4fa; }
 
-    .m-meta { font-size: 10.5px; opacity: 0.88; margin-top: 4px; display: flex; justify-content: flex-end; align-items: center; gap: 4px; }
+    .m-meta { font-size: 10.5px; opacity: 0.9; margin-top: 4px; display: flex; justify-content: flex-end; align-items: center; gap: 4px; }
     .m-ticks { font-weight: 800; letter-spacing: -1px; color: #cfd8dc; }
     .m-ticks.seen-yellow { color: #ffeb3b; }
 
-    .m-img { max-width: 240px; max-height: 290px; width: auto; height: auto; border-radius: 10px; margin-top: 3px; display: block; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.22); }
-    .m-vid { max-width: 250px; max-height: 240px; border-radius: 10px; margin-top: 3px; display: block; border: 1px solid rgba(255, 255, 255, 0.22); background: #000; }
+    .m-img { max-width: 240px; max-height: 290px; width: auto; height: auto; border-radius: 12px; margin-top: 3px; display: block; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.22); }
+    .m-vid { max-width: 250px; max-height: 240px; border-radius: 12px; margin-top: 3px; display: block; border: 1px solid rgba(255, 255, 255, 0.22); background: #000; }
 
     .view-once-box {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 12px; border-radius: 12px;
+      padding: 8px 12px; border-radius: 999px;
       background: rgba(0, 0, 0, 0.35); border: 1px dashed #81d4fa;
       font-size: 12.5px; font-weight: 700; cursor: pointer; margin-top: 3px;
     }
 
     .wa-voice-card {
       display: flex; align-items: center; gap: 10px; min-width: 220px; max-width: 265px;
-      padding: 7px 9px; border-radius: 12px; background: rgba(3, 14, 30, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 7px 9px; border-radius: 14px; background: rgba(3, 14, 30, 0.48);
+      border: 1px solid rgba(255, 255, 255, 0.18);
     }
     .wa-voice-play {
-      width: 36px; height: 36px; border-radius: 50%; border: none; background: #00a884;
-      color: #fff; font-size: 13px; font-weight: 800; cursor: pointer;
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.45); background: #00a884;
+      color: #ffffff; font-size: 13px; font-weight: 800; cursor: pointer;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .wa-voice-track-col { flex: 1; display: flex; flex-direction: column; gap: 5px; min-width: 0; }
     .wa-voice-slider { width: 100%; margin: 0; height: 5px; accent-color: #00e676; cursor: pointer; }
     .wa-voice-sub { display: flex; align-items: center; justify-content: space-between; font-size: 10.5px; color: #e0f2f1; }
-    .wa-speed-pill { background: rgba(255, 255, 255, 0.15); color: #fff; border: none; border-radius: 999px; padding: 2px 6px; font-size: 10px; font-weight: 800; cursor: pointer; }
-    .wa-speed-pill.active { background: #00a884; color: #fff; }
+    .wa-speed-pill { background: rgba(255, 255, 255, 0.18); color: #ffffff; border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; padding: 2px 6px; font-size: 10px; font-weight: 800; cursor: pointer; width: auto; }
+    .wa-speed-pill.active { background: #00a884; color: #ffffff; border-color: #69f0ae; }
 
     .m-reacts { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
-    .m-react-chip { background: rgba(4, 15, 34, 0.72); border: 1px solid rgba(129, 212, 250, 0.35); border-radius: 999px; padding: 1px 7px; font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; }
+    .m-react-chip { background: rgba(4, 15, 34, 0.78); border: 1px solid rgba(129, 212, 250, 0.38); border-radius: 999px; padding: 1px 7px; font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; }
 
     .reply-strip, .media-preview-strip, .rec-strip { display: none; background: rgba(7, 25, 52, 0.96); border-top: 1px solid var(--border); padding: 7px 12px; font-size: 12px; align-items: center; justify-content: space-between; gap: 8px; }
-    .upload-status-bar { font-size: 11px; color: #b3e5fc; padding: 0 12px 3px; text-align: right; min-height: 15px; background: rgba(3, 11, 26, 0.75); }
+    .upload-status-bar { font-size: 11px; color: #b3e5fc; padding: 0 12px 3px; text-align: right; min-height: 15px; background: rgba(3, 11, 26, 0.78); }
 
-    /* Live Font & Markdown Formatting Strip (v2.0.3 New Feature) */
     .font-format-bar {
       display: none;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       padding: 6px 10px;
       background: rgba(4, 15, 34, 0.96);
       border-top: 1px solid var(--border);
@@ -587,16 +684,17 @@
     }
     .font-format-bar.open { display: flex; }
     .ff-chip {
-      background: rgba(255, 255, 255, 0.1);
-      color: #e1f5fe;
-      border: 1px solid rgba(129, 212, 250, 0.25);
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      border: 1px solid rgba(129, 212, 250, 0.3);
       border-radius: 999px;
       padding: 4px 10px;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
+      width: auto;
     }
     .ff-chip.active {
       background: linear-gradient(135deg, #0288d1, #1565c0);
@@ -606,11 +704,10 @@
 
     .live-md-preview {
       display: none;
-      padding: 5px 12px;
-      background: rgba(13, 71, 161, 0.26);
-      border-top: 1px dashed rgba(129, 212, 250, 0.35);
-      font-size: 13px;
-      color: #fff;
+      padding: 6px 12px;
+      background: rgba(8, 28, 60, 0.92);
+      border-top: 1px dashed rgba(129, 212, 250, 0.45);
+      font-size: 13.5px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -618,73 +715,118 @@
     }
     .live-md-preview.show { display: block; }
 
-    .wa-composer { display: flex; align-items: center; gap: 6px; padding: 6px 8px 10px; background: rgba(3, 11, 26, 0.92); border-top: 1px solid rgba(129, 212, 250, 0.16); flex-shrink: 0; }
-    .composer-pill { flex: 1; display: flex; align-items: center; gap: 4px; background: rgba(10, 32, 66, 0.95); border: 1px solid var(--border); border-radius: 26px; padding: 4px 9px; min-height: 44px; min-width: 0; }
-    .composer-pill input { flex: 1; border: none; background: transparent; color: #fff; padding: 6px 4px; margin: 0; font-size: 14px; min-width: 0; }
+    .wa-composer { display: flex; align-items: center; gap: 6px; padding: 6px 8px 10px; background: rgba(3, 11, 26, 0.94); border-top: 1px solid rgba(129, 212, 250, 0.2); flex-shrink: 0; }
+    .composer-pill { flex: 1; display: flex; align-items: center; gap: 4px; background: rgba(10, 32, 66, 0.96); border: 1.5px solid var(--border); border-radius: 26px; padding: 4px 9px; min-height: 44px; min-width: 0; }
+    .composer-pill input { flex: 1; border: none; background: transparent; padding: 6px 4px; margin: 0; font-size: 14px; min-width: 0; }
+    .composer-pill input::placeholder { color: #90caf9; -webkit-text-stroke: 0; text-shadow: none; font-weight: 400; }
 
-    .icon-tap { background: transparent; border: none; color: #b3e5fc; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 4px; border-radius: 50%; flex-shrink: 0; font-weight: 800; font-size: 13px; }
-    .icon-tap:active, .icon-tap.active-glow { background: rgba(41, 182, 246, 0.24); color: #fff; }
+    .icon-tap {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--btn-icon-color);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      width: auto;
+      font-weight: 800;
+      font-size: 12px;
+    }
+    .icon-tap svg {
+      fill: var(--btn-icon-color);
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.75));
+    }
+    .icon-tap:active, .icon-tap.active-glow { background: rgba(41, 182, 246, 0.34); border-color: #81d4fa; color: #fff; }
 
-    .mic-send-fab { width: 46px; height: 46px; min-width: 46px; min-height: 46px; border-radius: 50%; border: none; background: linear-gradient(135deg, #29b6f6, #1565c0); color: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
-    .mic-send-fab.rec { background: #e53935; }
+    .mic-send-fab {
+      width: 46px; height: 46px; min-width: 46px; min-height: 46px; border-radius: 50%;
+      border: 1.5px solid rgba(225, 245, 254, 0.65);
+      background: linear-gradient(135deg, #29b6f6, #1565c0);
+      color: var(--btn-icon-color);
+      display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+    }
+    .mic-send-fab svg {
+      fill: var(--btn-icon-color);
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
+    }
+    .mic-send-fab.rec { background: #e53935; border-color: #ff8a80; }
 
     .emoji-picker-drawer { display: none; flex-direction: column; background: #071b38; border-top: 1px solid var(--border); max-height: 255px; flex-shrink: 0; }
     .emoji-cat-tabs { display: flex; overflow-x: auto; gap: 4px; padding: 6px 8px; background: #041022; border-bottom: 1px solid rgba(129, 212, 250, 0.16); scrollbar-width: none; }
     .emoji-cat-tabs::-webkit-scrollbar { display: none; }
-    .emoji-cat-btn { background: rgba(255, 255, 255, 0.08); color: #e1f5fe; border: 1px solid transparent; border-radius: 999px; padding: 4px 10px; font-size: 11px; font-weight: 700; white-space: nowrap; cursor: pointer; }
-    .emoji-cat-btn.active { background: rgba(129, 212, 250, 0.22); color: #fff; border-color: var(--accent-2); }
+    .emoji-cat-btn { background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid transparent; border-radius: 999px; padding: 4px 10px; font-size: 11px; font-weight: 700; white-space: nowrap; cursor: pointer; width: auto; }
+    .emoji-cat-btn.active { background: rgba(129, 212, 250, 0.25); color: #fff; border-color: var(--accent-2); }
     .emoji-grid-scroll { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; padding: 8px; overflow-y: auto; flex: 1; }
-    .emoji-pick-cell { font-size: 22px; text-align: center; padding: 5px 2px; border-radius: 8px; cursor: pointer; }
+    .emoji-pick-cell { font-size: 22px; text-align: center; padding: 5px 2px; border-radius: 10px; cursor: pointer; }
 
-    .custom-react-grid { display: none; grid-template-columns: repeat(8, 1fr); gap: 4px; max-height: 155px; overflow-y: auto; padding: 8px; margin-top: 6px; background: rgba(4, 15, 34, 0.92); border: 1px solid var(--border); border-radius: 12px; }
+    .custom-react-grid { display: none; grid-template-columns: repeat(8, 1fr); gap: 4px; max-height: 155px; overflow-y: auto; padding: 8px; margin-top: 6px; background: rgba(4, 15, 34, 0.92); border: 1px solid var(--border); border-radius: 14px; }
 
     .sheet-overlay { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.65); z-index: 80; align-items: flex-end; }
-    .sheet-box { background: #081e3e; color: #fff; border-top: 1px solid var(--border); width: 100%; border-radius: 18px 18px 0 0; padding: 14px; max-height: 82dvh; overflow-y: auto; }
+    .sheet-box { background: #081e3e; color: #fff; border-top: 1px solid var(--border); width: 100%; border-radius: 20px 20px 0 0; padding: 14px; max-height: 82dvh; overflow-y: auto; }
     .sheet-emojis { display: flex; justify-content: space-around; align-items: center; font-size: 24px; padding: 6px 0 10px; border-bottom: 1px solid var(--border); }
     .sheet-emojis span { cursor: pointer; }
     .sheet-opt { padding: 11px 8px; font-size: 14px; font-weight: 600; border-bottom: 1px solid rgba(255, 255, 255, 0.08); cursor: pointer; }
 
     .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.72); z-index: 75; padding: 16px; overflow-y: auto; }
-    .modal-card { background: #081e3e; color: #fff; border: 1px solid var(--border); max-width: 470px; margin: 20px auto; border-radius: 16px; padding: 16px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65); }
-    .item-card { background: rgba(4, 15, 34, 0.75); border: 1px solid rgba(129, 212, 250, 0.18); padding: 9px 11px; border-radius: 10px; margin-bottom: 7px; font-size: 13px; }
+    .modal-card { background: #081e3e; color: #fff; border: 1px solid var(--border); max-width: 470px; margin: 20px auto; border-radius: 20px; padding: 16px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65); }
+    .item-card { background: rgba(4, 15, 34, 0.78); border: 1px solid rgba(129, 212, 250, 0.22); padding: 10px 12px; border-radius: 14px; margin-bottom: 8px; font-size: 13px; }
 
-    .live-wp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; max-height: 210px; overflow-y: auto; padding: 4px; margin: 8px 0; background: rgba(4, 15, 34, 0.78); border-radius: 10px; border: 1px solid var(--border); }
-    .lwp-chip { padding: 7px 9px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; background: rgba(255, 255, 255, 0.07); border: 1px solid transparent; color: #e3f2fd; }
-    .lwp-chip.active { background: rgba(129, 212, 250, 0.22); border-color: var(--accent-2); color: #fff; }
+    .privacy-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 10px 12px; border-radius: 14px;
+      background: rgba(4, 15, 34, 0.82); border: 1px solid rgba(129, 212, 250, 0.25);
+      margin-bottom: 8px;
+    }
+    .privacy-row select { width: auto; min-width: 132px; margin: 0; padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+
+    .live-wp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; max-height: 210px; overflow-y: auto; padding: 4px; margin: 8px 0; background: rgba(4, 15, 34, 0.78); border-radius: 14px; border: 1px solid var(--border); }
+    .lwp-chip { padding: 7px 9px; border-radius: 999px; font-size: 12px; font-weight: 700; cursor: pointer; background: rgba(255, 255, 255, 0.08); border: 1px solid transparent; color: #e3f2fd; text-align: center; }
+    .lwp-chip.active { background: rgba(129, 212, 250, 0.24); border-color: var(--accent-2); color: #fff; }
 
     .full-viewer { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 100; flex-direction: column; align-items: center; justify-content: center; padding: 12px; }
-    .full-viewer img, .full-viewer video { max-width: 98vw; max-height: 84dvh; width: auto; height: auto; border-radius: 10px; }
+    .full-viewer img, .full-viewer video { max-width: 98vw; max-height: 84dvh; width: auto; height: auto; border-radius: 12px; }
 
+    /* WhatsApp-style full-bleed Status Story Modal */
     .status-story-modal {
       display: none; position: fixed; inset: 0;
-      background: linear-gradient(160deg, #030b1a 0%, #0b2956 55%, #041226 100%);
-      z-index: 96; flex-direction: column; justify-content: space-between; padding: 14px; color: #fff;
+      background: #020813;
+      z-index: 96; flex-direction: column; justify-content: space-between; padding: 12px; color: #fff;
     }
-    .story-progress-track { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.25); border-radius: 999px; overflow: hidden; margin-bottom: 10px; }
-    .story-progress-fill { height: 100%; width: 100%; background: #81d4fa; transform-origin: left center; animation: storyFillAnim var(--story-dur, 6000ms) linear forwards; }
+    .story-progress-track { width: 100%; height: 3.5px; background: rgba(255, 255, 255, 0.25); border-radius: 999px; overflow: hidden; margin-bottom: 10px; }
+    .story-progress-fill { height: 100%; width: 100%; background: #29b6f6; transform-origin: left center; animation: storyFillAnim var(--story-dur, 6000ms) linear forwards; }
     @keyframes storyFillAnim { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
     .story-stage {
       flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; overflow: hidden; padding: 8px 0;
+      text-align: center; overflow: hidden; padding: 4px 0; position: relative;
     }
-    .story-stage img, .story-stage video {
-      max-width: 100%; max-height: 62dvh; width: auto; height: auto;
-      border-radius: 12px; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+    .story-stage img.wa-status-full-media,
+    .story-stage video.wa-status-full-media {
+      width: 100%;
+      max-width: 100vw;
+      max-height: 70dvh;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.75);
     }
 
     .story-bottom-bar {
       display: flex; align-items: center; justify-content: space-between; gap: 8px;
-      background: rgba(4, 15, 34, 0.78); border: 1px solid var(--border);
-      border-radius: 14px; padding: 8px 10px;
+      background: rgba(8, 28, 60, 0.88); border: 1px solid var(--border);
+      border-radius: 999px; padding: 6px 12px;
     }
 
     .call-overlay { display: none; position: fixed; inset: 0; background: linear-gradient(160deg, #030b1a, #0d47a1, #041226); z-index: 110; color: #fff; flex-direction: column; justify-content: space-between; padding: 18px; }
-    .video-stage { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; margin: 12px 0; background: #000; border-radius: 16px; overflow: hidden; }
+    .video-stage { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; margin: 12px 0; background: #000; border-radius: 18px; overflow: hidden; }
     #remoteVideo { width: 100%; height: 100%; object-fit: cover; display: none; }
-    #localVideo { position: absolute; right: 12px; bottom: 12px; width: 104px; height: 142px; object-fit: cover; border-radius: 12px; border: 2px solid #81d4fa; display: none; }
+    #localVideo { position: absolute; right: 12px; bottom: 12px; width: 104px; height: 142px; object-fit: cover; border-radius: 14px; border: 2px solid #81d4fa; display: none; }
     .call-controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-    .c-btn { width: 52px; height: 52px; border-radius: 50%; border: none; font-size: 19px; cursor: pointer; color: #fff; background: rgba(255, 255, 255, 0.18); }
+    .c-btn { width: 50px; height: 50px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.35); font-size: 18px; cursor: pointer; color: #fff; background: rgba(255, 255, 255, 0.2); }
     .c-btn.active-off { background: #ff9800; }
     .c-btn.speaker-on { background: #00c853; }
     .c-btn.end { background: #e53935; }
@@ -692,7 +834,7 @@
     #pinLockScreen { display: none; position: fixed; inset: 0; background: #041226; z-index: 120; color: #fff; padding: 24px; text-align: center; }
 
     #proDialogModal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.78); z-index: 130; align-items: center; justify-content: center; padding: 18px; }
-    .pro-dialog-box { width: 100%; max-width: 360px; background: #081e3e; border: 1px solid var(--border); border-radius: 16px; padding: 18px; box-shadow: 0 16px 38px rgba(0, 0, 0, 0.7); }
+    .pro-dialog-box { width: 100%; max-width: 360px; background: #081e3e; border: 1px solid var(--border); border-radius: 20px; padding: 18px; box-shadow: 0 16px 38px rgba(0, 0, 0, 0.7); }
   </style>
 </head>
 <body class="font-default snake-pat-sweep">
@@ -700,17 +842,17 @@
   <!-- Splash Loader -->
   <div id="splashLoader">
     <div class="na-center-icon">NA</div>
-    <div style="font-weight:800; font-size:17px; letter-spacing:0.4px;">NA Whatsapp <span class="ver-pill">v2.0.3</span></div>
+    <div style="font-weight:800; font-size:17px; letter-spacing:0.4px;">NA Whatsapp <span class="ver-pill">v2.0.5</span></div>
     <div style="font-size:12px; color:#b3e5fc;">Loading...</div>
   </div>
 
   <!-- App PIN Lock Screen -->
   <div id="pinLockScreen">
-    <div style="max-width:340px; margin:70px auto; background:#081e3e; border:1px solid var(--border); padding:22px; border-radius:16px;">
+    <div style="max-width:340px; margin:70px auto; background:#081e3e; border:1px solid var(--border); padding:22px; border-radius:20px;">
       <h3>🔒 App Locked</h3>
       <p style="font-size:13px; color:#b3e5fc;">Enter your 4–6 digit PIN</p>
       <input type="password" id="unlockPinInput" maxlength="6" placeholder="••••" style="text-align:center; font-size:20px; letter-spacing:6px;" />
-      <button id="unlockPinBtn" class="wave-btn" style="width:100%; margin-top:8px;">Unlock</button>
+      <button id="unlockPinBtn" class="wave-btn full-w" style="margin-top:8px;">Unlock</button>
       <p id="unlockPinErr" style="color:#ff8a80; font-size:12px; margin-top:8px;"></p>
     </div>
   </div>
@@ -719,7 +861,7 @@
   <div id="proDialogModal">
     <div class="pro-dialog-box">
       <div id="proDialogTitle" style="font-weight:800; font-size:15px; color:#81d4fa; margin-bottom:8px;">Notice</div>
-      <div id="proDialogMsg" style="font-size:13.5px; color:#f0f8ff; line-height:1.45; white-space:pre-line; margin-bottom:14px;"></div>
+      <div id="proDialogMsg" class="allow-select" style="font-size:13.5px; color:#f0f8ff; line-height:1.45; white-space:pre-line; margin-bottom:14px;"></div>
       <input type="password" id="proDialogPromptInput" style="display:none; margin-bottom:12px;" placeholder="Enter PIN..." />
       <div style="display:flex; justify-content:flex-end; gap:8px;">
         <button id="proDialogCancelBtn" class="wave-btn btn-secondary btn-sm" style="display:none;">Cancel</button>
@@ -732,7 +874,7 @@
   <div id="authScreen">
     <div class="auth-logo-center">
       <div class="na-center-icon">NA</div>
-      <div style="margin-top:10px; font-weight:800; font-size:20px; color:#fff;">NA Whatsapp <span class="ver-pill">v2.0.3</span></div>
+      <div style="margin-top:10px; font-weight:800; font-size:20px; color:#fff;">NA Whatsapp <span class="ver-pill">v2.0.5</span></div>
       <div style="font-size:12px; color:#e1f5fe; margin-top:3px;">Live Fonts • Rich Formatting • Smart Profiles</div>
     </div>
 
@@ -747,8 +889,8 @@
         <button id="doLogin" class="wave-btn" style="flex:1;">Login</button>
         <button id="doSignup" class="wave-btn btn-secondary" style="flex:1;">Sign Up</button>
       </div>
-      <button type="button" id="openAuthConfigBtn" class="wave-btn btn-secondary btn-sm" style="width:100%; margin-top:10px;">⚙️ Server Settings</button>
-      <p id="authError" style="color:#ff8a80; font-size:12px; margin-top:8px; word-break:break-word;"></p>
+      <button type="button" id="openAuthConfigBtn" class="wave-btn btn-secondary btn-sm full-w" style="margin-top:10px;">⚙️ Server Settings</button>
+      <p id="authError" class="allow-select" style="color:#ff8a80; font-size:12px; margin-top:8px; word-break:break-word;"></p>
     </div>
   </div>
 
@@ -761,14 +903,25 @@
         </div>
         <div class="wa-brand-wrap">
           <div class="wa-brand">NA Whatsapp</div>
-          <span class="ver-pill">v2.0.3</span>
+          <span class="ver-pill">v2.0.5</span>
         </div>
       </div>
       <div class="hdr-actions">
+        <button id="btnSelectMode" class="hdr-btn" title="Select Chats">☑</button>
         <button id="btnLockNow" class="hdr-btn" title="Lock">🔒</button>
         <button id="btnStarred" class="hdr-btn" title="Starred">⭐</button>
-        <button id="btnSettings" class="hdr-btn" title="Settings & Snake Border">⚙️</button>
+        <button id="btnSettings" class="hdr-btn" title="Settings & Privacy">⚙️</button>
         <button id="btnLogout" class="hdr-btn danger">Logout</button>
+      </div>
+    </div>
+
+    <!-- Multiple Select Bar for Home Chats -->
+    <div id="multiSelectBar" class="multi-select-bar">
+      <span id="multiSelectCount" style="font-size:12.5px; font-weight:800; color:#fff;">0 selected</span>
+      <div style="display:flex; gap:6px; align-items:center;">
+        <button type="button" id="msMuteBtn" class="hdr-btn">🔕 Mute</button>
+        <button type="button" id="msRemoveListBtn" class="hdr-btn danger">🗑️ Remove</button>
+        <button type="button" id="msCancelBtn" class="hdr-btn">✕</button>
       </div>
     </div>
 
@@ -789,31 +942,35 @@
         <div id="usersChatList"></div>
       </div>
 
+      <!-- WhatsApp-style Status Tab -->
       <div id="statusTab" class="home-view">
         <div class="pro-card" style="display:block; cursor:default;">
-          <div style="font-weight:700; margin-bottom:6px; color:#81d4fa;">New Status (24h)</div>
-          <input type="text" id="stTextInput" placeholder="Caption or text status..." />
-          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;">
-            <button type="button" id="stPostTextBtn" class="wave-btn btn-sm">Post Text</button>
-            <button type="button" id="stVoiceRecBtn" class="wave-btn btn-secondary btn-sm">🎤 Voice Status</button>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-weight:800; font-size:13.5px; color:#81d4fa;">My Status (24h)</span>
+            <span style="font-size:11px; color:#b3e5fc;">WhatsApp Style</span>
+          </div>
+          <input type="text" id="stTextInput" placeholder="Add a caption or type a text status..." />
+          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
+            <button type="button" id="stPostTextBtn" class="wave-btn btn-sm">✏️ Text</button>
+            <button type="button" id="stVoiceRecBtn" class="wave-btn btn-secondary btn-sm">🎤 Voice</button>
             <button type="button" id="pickStPhotoBtn" class="wave-btn btn-secondary btn-sm">📷 Photo</button>
             <button type="button" id="clearStPhotoBtn" class="btn-danger btn-sm" style="display:none;">✕ Photo</button>
-            <button type="button" id="pickStVideoBtn" class="wave-btn btn-secondary btn-sm">🎬 Video (60s)</button>
+            <button type="button" id="pickStVideoBtn" class="wave-btn btn-secondary btn-sm">🎬 Video</button>
             <button type="button" id="clearStVideoBtn" class="btn-danger btn-sm" style="display:none;">✕ Video</button>
           </div>
           <input type="file" id="stPhotoInput" accept="image/*" style="display:none;" />
           <input type="file" id="stVideoInput" accept="video/*" style="display:none;" />
-          <div id="stPhotoName" style="font-size:11px; color:#b3e5fc; margin-top:5px;">No photo selected</div>
+          <div id="stPhotoName" style="font-size:11px; color:#b3e5fc; margin-top:6px;">No photo selected</div>
           <div id="stVideoName" style="font-size:11px; color:#b3e5fc; margin-top:2px;">No video selected</div>
-          <button type="button" id="postStMediaBtn" class="wave-btn btn-sm" style="margin-top:8px;" disabled>Post Media</button>
+          <button type="button" id="postStMediaBtn" class="wave-btn btn-sm" style="margin-top:8px;" disabled>➤ Share Status</button>
           <div id="stInfo" style="font-size:12px; color:#69f0ae; margin-top:6px;"></div>
         </div>
-        <div style="font-weight:700; font-size:13px; color:#e1f5fe; margin:10px 0 6px;">Statuses</div>
+        <div style="font-weight:700; font-size:13px; color:#e1f5fe; margin:10px 0 6px;">Recent Updates</div>
         <div id="statusFeedList"></div>
       </div>
 
       <div id="groupsTab" class="home-view">
-        <button id="openCreateGroupBtn" class="wave-btn" style="width:100%; margin-bottom:10px;">+ New Group</button>
+        <button id="openCreateGroupBtn" class="wave-btn full-w" style="margin-bottom:10px;">+ New Group</button>
         <div id="groupsList"></div>
       </div>
 
@@ -837,24 +994,34 @@
     <div class="room-fg">
       <div class="wa-header">
         <div style="display:flex; align-items:center; gap:8px; min-width:0; flex:1;">
-          <button id="backToHomeBtn" class="hdr-circle-btn" title="Back">←</button>
+          <button id="backToHomeBtn" class="hdr-circle-btn" title="Back">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+          </button>
           <div class="av-ring" id="roomRing" style="width:40px; height:40px; min-width:40px; min-height:40px;" title="Touch DP">
             <div class="av" id="roomAv" style="font-size:15px;">U</div>
           </div>
           <div id="roomTitleTouchZone" style="min-width:0; flex:1; cursor:pointer;" title="Contact / Group Info">
             <div style="display:flex; align-items:center; gap:4px; min-width:0;">
               <div id="roomTitle" style="font-weight:800; font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Chat</div>
-              <span id="roomTyping" class="typing-pill"><span id="typingActorName">User</span> typing...</span>
+              <span id="roomTyping" class="typing-pill typing-yellow-bordered">
+                <span id="typingActorName">User</span> typing<span class="typing-dots"><span></span><span></span><span></span></span>
+              </span>
             </div>
             <div id="roomSub" class="room-sub"></div>
           </div>
         </div>
 
         <div class="hdr-actions">
-          <button id="voiceCallBtn" class="hdr-circle-btn" title="Voice Call">📞</button>
-          <button id="videoCallBtn" class="hdr-circle-btn" title="Video Call">📹</button>
+          <button id="voiceCallBtn" class="hdr-circle-btn" title="Voice Call">
+            <svg viewBox="0 0 24 24" width="17" height="17"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </button>
+          <button id="videoCallBtn" class="hdr-circle-btn" title="Video Call">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+          </button>
           <div class="room-menu-wrap">
-            <button id="roomMenuBtn" class="hdr-circle-btn" title="More">⋮</button>
+            <button id="roomMenuBtn" class="hdr-circle-btn" title="More">
+              <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+            </button>
             <div id="roomDropdown" class="room-dropdown">
               <div class="room-dd-item" id="ddContactInfo"><span>👤 Contact / Group Info</span></div>
               <div class="room-dd-item" id="ddSearchChat"><span>🔍 Search & Filter</span></div>
@@ -919,7 +1086,7 @@
 
       <div class="upload-status-bar" id="uploadStatusTxt"></div>
 
-      <!-- Per-Message Font Style & Markdown Bar -->
+      <!-- Per-Message Font Style & Markdown Formatting Strip -->
       <div id="fontFormatBar" class="font-format-bar">
         <button type="button" class="ff-chip active" data-msgfont="msg-font-default">Default</button>
         <button type="button" class="ff-chip" data-msgfont="msg-font-rounded">Rounded</button>
@@ -933,26 +1100,26 @@
       </div>
 
       <!-- Live Typing Preview Strip -->
-      <div id="liveMdPreview" class="live-md-preview"></div>
+      <div id="liveMdPreview" class="live-md-preview typing-yellow-bordered"></div>
 
       <div class="wa-composer">
         <div class="composer-pill">
           <button type="button" class="icon-tap" id="trayToggleBtn" title="Emoji & Stickers">
-            <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-3.5-6.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm7 0c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm-3.5 3.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
+            <svg viewBox="0 0 24 24" width="21" height="21"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-3.5-6.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm7 0c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm-3.5 3.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
           </button>
           <button type="button" class="icon-tap" id="toggleFontBarBtn" title="Message Font & *Bold* _Italic_">Aa</button>
-          <input type="text" id="composerInput" class="msg-font-default" placeholder="Message (*bold* _italic_ ~strike~)..." autocomplete="off" />
+          <input type="text" id="composerInput" class="msg-font-default typing-yellow-bordered" placeholder="Message (*bold* _italic_ ~strike~)..." autocomplete="off" />
           <button type="button" class="icon-tap" id="pickChatPhotoBtn" title="Photo">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
           </button>
           <button type="button" class="icon-tap" id="pickChatVideoBtn" title="Video">
-            <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            <svg viewBox="0 0 24 24" width="21" height="21"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
           </button>
         </div>
 
         <button type="button" id="micOrSendBtn" class="mic-send-fab" title="Voice / Send">
-          <svg id="svgMicIcon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V21c0 .55.45 1 1 1s1-.45 1-1v-3.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/></svg>
-          <svg id="svgSendIcon" viewBox="0 0 24 24" width="21" height="21" fill="currentColor" style="display:none;"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          <svg id="svgMicIcon" viewBox="0 0 24 24" width="22" height="22"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V21c0 .55.45 1 1 1s1-.45 1-1v-3.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/></svg>
+          <svg id="svgSendIcon" viewBox="0 0 24 24" width="21" height="21" style="display:none;"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
         </button>
 
         <input type="file" id="sendPhotoFile" accept="image/*" style="display:none;" />
@@ -966,7 +1133,7 @@
     </div>
   </div>
 
-  <!-- DP Touch Choice Modal (Status vs DP & Info) -->
+  <!-- DP Touch Choice Modal -->
   <div id="dpChoiceModal" class="modal-bg">
     <div class="modal-card">
       <h3 id="dpChoiceTitle" style="margin-top:0;">View Status or DP?</h3>
@@ -975,11 +1142,11 @@
         <button type="button" id="btnChooseViewStatus" class="wave-btn" style="flex:1;">👁 View Status</button>
         <button type="button" id="btnChooseViewDpInfo" class="wave-btn btn-secondary" style="flex:1;">👤 DP & Info</button>
       </div>
-      <button type="button" onclick="document.getElementById('dpChoiceModal').style.display='none'" class="wave-btn btn-secondary btn-sm" style="width:100%; margin-top:10px;">Close</button>
+      <button type="button" onclick="document.getElementById('dpChoiceModal').style.display='none'" class="wave-btn btn-secondary btn-sm full-w" style="margin-top:10px;">Close</button>
     </div>
   </div>
 
-  <!-- Full Contact Profile & Info Modal (WhatsApp Style) -->
+  <!-- Full Contact Profile & Info Modal -->
   <div id="userProfileModal" class="modal-bg">
     <div class="modal-card">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
@@ -993,21 +1160,21 @@
         <div id="profModalPresence" style="font-size:12px; color:#81d4fa; margin-top:2px;"></div>
       </div>
 
-      <div class="item-card">
+      <div id="profModalAboutCard" class="item-card">
         <div style="font-size:11px; color:#81d4fa;">About</div>
-        <div id="profModalAbout" style="font-size:13.5px; margin-top:2px;">Available</div>
+        <div id="profModalAbout" class="allow-select" style="font-size:13.5px; margin-top:2px;">Available</div>
       </div>
 
       <div id="profModalHandleCard" class="item-card" style="display:none;">
         <div style="font-size:11px; color:#81d4fa;">Private Handle</div>
-        <div id="profModalHandle" style="font-size:13.5px; margin-top:2px; font-weight:700;"></div>
+        <div id="profModalHandle" class="allow-select" style="font-size:13.5px; margin-top:2px; font-weight:700;"></div>
       </div>
 
       <div id="profModalActionsBox" style="display:flex; flex-direction:column; gap:8px; margin-top:10px;">
-        <button type="button" id="profToggleMuteBtn" class="wave-btn btn-secondary" style="width:100%; justify-content:space-between;">
+        <button type="button" id="profToggleMuteBtn" class="wave-btn btn-secondary full-w" style="justify-content:space-between;">
           <span>🔔 Notifications</span><span id="profMuteStateTxt">ON</span>
         </button>
-        <button type="button" id="profToggleBlockBtn" class="btn-danger wave-btn" style="width:100%; justify-content:center;">
+        <button type="button" id="profToggleBlockBtn" class="btn-danger wave-btn full-w" style="justify-content:center;">
           🚫 Block User
         </button>
       </div>
@@ -1048,7 +1215,7 @@
       </div>
       <div id="customReactGrid" class="custom-react-grid"></div>
       <div id="sheetMenuList"></div>
-      <button id="closeSheetMenu" class="wave-btn btn-secondary" style="width:100%; margin-top:10px;">Close</button>
+      <button id="closeSheetMenu" class="wave-btn btn-secondary full-w" style="margin-top:10px;">Close</button>
     </div>
   </div>
 
@@ -1126,7 +1293,7 @@
     <div class="modal-card">
       <h3 style="margin-top:0;">⭐ Starred</h3>
       <div id="starredBody" style="max-height:280px; overflow-y:auto;"></div>
-      <button id="closeStarredModal" class="wave-btn btn-secondary" style="width:100%; margin-top:10px;">Close</button>
+      <button id="closeStarredModal" class="wave-btn btn-secondary full-w" style="margin-top:10px;">Close</button>
     </div>
   </div>
 
@@ -1136,15 +1303,69 @@
       <h3 style="margin-top:0;">👁 Status Viewers</h3>
       <div id="statusViewersSummary" style="font-size:13px; color:#81d4fa; margin-bottom:10px; font-weight:700;"></div>
       <div id="statusViewersList" style="max-height:280px; overflow-y:auto;"></div>
-      <button id="closeStatusViewersModal" class="wave-btn btn-secondary" style="width:100%; margin-top:10px;">Close</button>
+      <button id="closeStatusViewersModal" class="wave-btn btn-secondary full-w" style="margin-top:10px;">Close</button>
     </div>
   </div>
 
-  <!-- Settings & Snake Border Customizer Modal -->
+  <!-- Settings, WhatsApp Privacy & Snake Border Modal -->
   <div id="settingsModal" class="modal-bg">
     <div class="modal-card">
-      <h3 style="margin-top:0;">Settings & Snake Border</h3>
+      <h3 style="margin-top:0;">Settings & Privacy</h3>
 
+      <!-- WhatsApp-style Privacy Controls -->
+      <div class="item-card" style="border-color:rgba(79,195,247,0.45); margin-bottom:12px;">
+        <div style="font-weight:800; font-size:13px; color:#81d4fa; margin-bottom:8px;">🛡️ Privacy (WhatsApp Style)</div>
+
+        <div class="privacy-row">
+          <div>
+            <div style="font-weight:700; font-size:12.5px;">Last seen & Online</div>
+            <div style="font-size:10.5px; color:#b3e5fc;">Who can see when you're online</div>
+          </div>
+          <select id="privLastSeenSelect">
+            <option value="everyone">Everyone</option>
+            <option value="contacts">My Contacts</option>
+            <option value="nobody">Nobody</option>
+          </select>
+        </div>
+
+        <div class="privacy-row">
+          <div>
+            <div style="font-weight:700; font-size:12.5px;">Profile photo</div>
+            <div style="font-size:10.5px; color:#b3e5fc;">Who can see your DP</div>
+          </div>
+          <select id="privPhotoSelect">
+            <option value="everyone">Everyone</option>
+            <option value="contacts">My Contacts</option>
+            <option value="nobody">Nobody</option>
+          </select>
+        </div>
+
+        <div class="privacy-row">
+          <div>
+            <div style="font-weight:700; font-size:12.5px;">About</div>
+            <div style="font-size:10.5px; color:#b3e5fc;">Who can see your About info</div>
+          </div>
+          <select id="privAboutSelect">
+            <option value="everyone">Everyone</option>
+            <option value="contacts">My Contacts</option>
+            <option value="nobody">Nobody</option>
+          </select>
+        </div>
+
+        <div class="privacy-row" style="margin-bottom:0;">
+          <div>
+            <div style="font-weight:700; font-size:12.5px;">Status</div>
+            <div style="font-size:10.5px; color:#b3e5fc;">Who can view your status updates</div>
+          </div>
+          <select id="privStatusSelect">
+            <option value="everyone">Everyone</option>
+            <option value="contacts">My Contacts</option>
+            <option value="nobody">Nobody</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Snake Border Customizer -->
       <div class="item-card" style="border-color:rgba(79,195,247,0.45); margin-bottom:12px;">
         <div style="font-weight:800; font-size:13px; color:#81d4fa; margin-bottom:6px;">🐍 Snake / Animated Card Border</div>
 
@@ -1185,6 +1406,14 @@
         </div>
       </div>
 
+      <label style="font-size:12px; color:#b3e5fc;">Button / Icon Color:</label>
+      <select id="btnIconTintSelect">
+        <option value="#ffffff">Bright White (High Contrast)</option>
+        <option value="#81d4fa">Sky Cyan</option>
+        <option value="#ffd54f">Warm Gold</option>
+        <option value="#69f0ae">Neon Mint</option>
+      </select>
+
       <label style="font-size:12px; color:#b3e5fc;">Name:</label>
       <input type="text" id="setDisplayNameInput" placeholder="Your name" />
 
@@ -1194,11 +1423,11 @@
       <label style="font-size:12px; color:#b3e5fc;">App PIN Lock (4–6 digits):</label>
       <input type="password" id="setAppPinInput" maxlength="6" placeholder="PIN" />
 
-      <div style="margin-top:6px;">
+      <div style="margin-top:6px; display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
         <button type="button" id="pickAvatarBtn" class="wave-btn btn-secondary btn-sm">🖼️ Photo</button>
         <button type="button" id="clearAvatarBtn" class="btn-danger btn-sm">Remove</button>
         <input type="file" id="setAvatarFile" accept="image/*" style="display:none;" />
-        <span id="setAvatarName" style="font-size:11px; color:#b3e5fc; margin-left:6px;"></span>
+        <span id="setAvatarName" style="font-size:11px; color:#b3e5fc;"></span>
       </div>
 
       <div style="margin-top:10px;">
@@ -1224,12 +1453,6 @@
       <label style="display:flex; align-items:center; gap:8px; font-size:13px; margin-top:6px;">
         <input type="checkbox" id="setReadReceipts" style="width:auto; margin:0;" /> Send Read Receipts (Seen Ticks)
       </label>
-      <label style="display:flex; align-items:center; gap:8px; font-size:13px; margin-top:6px;">
-        <input type="checkbox" id="setHideLastSeen" style="width:auto; margin:0;" /> Hide Online / Last Seen
-      </label>
-      <label style="display:flex; align-items:center; gap:8px; font-size:13px; margin-top:6px;">
-        <input type="checkbox" id="setHidePic" style="width:auto; margin:0;" /> Hide Profile Photo
-      </label>
 
       <div style="margin-top:10px;">
         <label style="font-size:12px; color:#b3e5fc;">Private Handle:</label>
@@ -1242,7 +1465,7 @@
         <div id="blockUsersBox" style="max-height:120px; overflow-y:auto;"></div>
       </div>
 
-      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;">
+      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:12px;">
         <button type="button" id="openSettingsFbConfigBtn" class="wave-btn btn-secondary btn-sm">🔥 Server</button>
         <button type="button" id="toggleLangBtn" class="wave-btn btn-secondary btn-sm">🌐 EN / සිංහල</button>
         <button type="button" id="exportChatsBtn" class="wave-btn btn-secondary btn-sm">📤 Backup</button>
@@ -1256,7 +1479,7 @@
     </div>
   </div>
 
-  <!-- Status Story Modal -->
+  <!-- WhatsApp-style Full Photo/Video Status Story Modal -->
   <div id="statusStoryModal" class="status-story-modal">
     <div>
       <div class="story-progress-track">
@@ -1279,13 +1502,13 @@
 
     <div>
       <div class="story-bottom-bar" style="margin-bottom:6px;">
-        <button type="button" id="likeCurrentStoryBtn" class="wave-btn btn-sm" style="background:rgba(255,255,255,0.14);">
+        <button type="button" id="likeCurrentStoryBtn" class="wave-btn btn-sm" style="background:rgba(255,255,255,0.16);">
           <span id="storyLikeHeart">🤍</span> Like (<span id="storyLikeCount">0</span>)
         </button>
         <span id="storyQuickStats" style="font-size:12px; color:#b3e5fc; font-weight:700;"></span>
       </div>
       <div id="storyReplyBar" style="display:flex; gap:6px; margin-bottom:8px;">
-        <input type="text" id="storyReplyInput" placeholder="Reply to status..." style="margin:0; padding:8px 10px; font-size:13px;" />
+        <input type="text" id="storyReplyInput" placeholder="Reply to status..." style="margin:0; padding:8px 12px; font-size:13px;" />
         <button type="button" id="sendStoryReplyBtn" class="wave-btn btn-sm">Send</button>
       </div>
       <div style="display:flex; justify-content:space-between; gap:10px;">
@@ -1339,7 +1562,7 @@
     import { getDatabase, ref, push, set, update, onValue, remove, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     const APP_NAME = "NA Whatsapp";
-    const APP_VERSION = "Version 2.0.3 (v2.0.3)";
+    const APP_VERSION = "Version 2.0.5 (v2.0.5)";
     window.NA_WHATSAPP_VERSION = APP_VERSION;
 
     const DEFAULT_FIREBASE_CONFIG = {
@@ -1365,6 +1588,13 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getDatabase(app);
+
+    /* Safe vibration helper: ONLY vibrates on explicit buttons/actions, never on non-button touch */
+    function vibrateAction(pattern = 18) {
+      try {
+        if (navigator.vibrate) navigator.vibrate(pattern);
+      } catch (_) {}
+    }
 
     document.getElementById("toggleAuthPassBtn").addEventListener("click", () => {
       const inp = document.getElementById("authPass");
@@ -1455,7 +1685,7 @@
       location.reload();
     });
 
-    /* Emoji Categories + Stickers Category (v2.0.3) */
+    /* Emoji Categories + Stickers Category */
     const emojiCategories = {
       "Stickers": ["🔥", "🤖", "🚀", "😎", "❤️", "⚡", "🎉", "👑", "💯", "🥳", "🤩", "🙏", "💪", "🌟", "🎯", "🦋"],
       "Smileys": ["😀","😃","😄","😁","😆","😅","🤣","😂","🙂","🙃","😉","😊","😇","🥰","😍","🤩","😘","😗","☺","😚","😙","🥲","😋","😛","😜","🤪","😝","🤑","🤗","🤭","🤫","🤔","🫡","🤐","🤨","😐","😑","😶","😏","😒","🙄","😬","😌","😔","😪","🤤","😴","😷","🤒","🤕","🤢","🤮","🤧","🥵","🥶","🥴","😵","🤯","🤠","🥳","😎","🤓","🧐","😕","😟","🙁","😮","😯","😲","😳","🥺","🥹","😦","😧","😨","😰","😥","😢","😭","😱","😖","😣","😞","😓","😩","😫","🥱","😤","😡","😠","🤬","😈","👿","💀","👻","👽","👾","🤖"],
@@ -1574,6 +1804,7 @@
     let orderedStoryIds = [], currentStoryIdx = 0, storyTimer = null;
     let seenStatusIds = JSON.parse(localStorage.getItem("na_seen_statuses") || "{}");
     let mutedChats = JSON.parse(localStorage.getItem("na_muted_chats") || "{}");
+    let hiddenChats = JSON.parse(localStorage.getItem("na_hidden_chats") || "{}");
     let lockedChats = JSON.parse(localStorage.getItem("na_locked_chats") || "{}");
     let disappearSettings = JSON.parse(localStorage.getItem("na_disappear_chats") || "{}");
     let draftTexts = JSON.parse(localStorage.getItem("na_drafts") || "{}");
@@ -1585,8 +1816,26 @@
     let readReceiptsOn = localStorage.getItem("na_read_receipts") !== "false";
     let onlyStarredInRoom = false, inChatQuery = "", mediaFilterMode = "all", ringLoopTimer = null;
     let stagedStatusMedia = null, stagedChatMedia = null, currentFullMediaUrl = "";
+    let callsListenerAttached = false;
+    const watchedCallIds = new Set();
 
-    /* Per-Message Font Style & WhatsApp Markdown Formatting (v2.0.3) */
+    /* Multiple Select State for Home Chats */
+    let selectModeActive = false;
+    const selectedChatIds = new Set();
+
+    let btnIconTint = localStorage.getItem("na_btn_icon_tint") || "#ffffff";
+    function applyBtnIconTint() {
+      document.documentElement.style.setProperty("--btn-icon-color", btnIconTint);
+      const sel = document.getElementById("btnIconTintSelect");
+      if (sel) sel.value = btnIconTint;
+      localStorage.setItem("na_btn_icon_tint", btnIconTint);
+    }
+    applyBtnIconTint();
+    document.getElementById("btnIconTintSelect").addEventListener("change", (e) => {
+      btnIconTint = e.target.value;
+      applyBtnIconTint();
+    });
+
     const msgFontClasses = ["msg-font-default", "msg-font-rounded", "msg-font-serif", "msg-font-mono", "msg-font-script", "msg-font-display"];
     let selectedMsgFont = localStorage.getItem("na_selected_msg_font") || "msg-font-default";
 
@@ -1617,6 +1866,7 @@
     }
 
     document.getElementById("toggleFontBarBtn").addEventListener("click", () => {
+      vibrateAction(14);
       const bar = document.getElementById("fontFormatBar");
       const isOpen = bar.classList.toggle("open");
       document.getElementById("toggleFontBarBtn").classList.toggle("active-glow", isOpen);
@@ -1634,8 +1884,13 @@
       const start = composerInput.selectionStart ?? composerInput.value.length;
       const end = composerInput.selectionEnd ?? composerInput.value.length;
       const val = composerInput.value;
-      composerInput.value = val.slice(0, start) + marker + val.slice(start, end) + marker + val.slice(end);
+      const before = val.slice(0, start);
+      const sel = val.slice(start, end);
+      const after = val.slice(end);
+      composerInput.value = before + marker + sel + marker + after;
+      const cursorPos = start + marker.length + sel.length;
       composerInput.focus();
+      try { composerInput.setSelectionRange(cursorPos, cursorPos); } catch (_) {}
       saveCurrentDraft();
       updateLiveMarkdownPreview();
       syncSendMic();
@@ -1645,7 +1900,6 @@
     document.getElementById("mdWrapItalic").addEventListener("click", () => wrapComposerSelection("_"));
     document.getElementById("mdWrapStrike").addEventListener("click", () => wrapComposerSelection("~"));
 
-    /* Snake Border Customizer State */
     const snakePresets = {
       "cyan-blue": { c1: "#4fc3f7", c2: "#00e5ff", c3: "#2979ff" },
       "emerald-neon": { c1: "#69f0ae", c2: "#00e676", c3: "#00bfa5" },
@@ -1714,9 +1968,14 @@
       });
     });
 
+    /* WhatsApp Privacy State: everyone | contacts | nobody */
     let prefs = {
       name: "", about: `Hey! Using ${APP_NAME}.`,
-      hideLastSeen: false, hideProfilePic: false, avatarData: "", clearAvatarFlag: false,
+      privLastSeen: "everyone",
+      privPhoto: "everyone",
+      privAbout: "everyone",
+      privStatus: "everyone",
+      avatarData: "", clearAvatarFlag: false,
       privateHandle: "", allowedHandleUsers: {}
     };
     let tempAv = "";
@@ -1749,17 +2008,81 @@
 
     applySelectedMsgFont();
 
-    /* DP Touch Handler (Status vs DP & Full Profile Info) */
+    /* Privacy evaluation helper for viewing another user's fields */
+    function isContactWithMe(targetUid) {
+      if (!me || !targetUid || targetUid === me.uid) return true;
+      const cid = getPrivateChatId(me.uid, targetUid);
+      return !!(allChatsMsgs[cid] && Object.keys(allChatsMsgs[cid]).length > 0);
+    }
+
+    function canViewByPrivacy(targetUserObj, targetUid, fieldKey) {
+      if (!me || !targetUid) return true;
+      if (targetUid === me.uid) return true;
+      const mode = (targetUserObj && targetUserObj[fieldKey]) || (fieldKey === "privLastSeen" && targetUserObj?.hideLastSeen ? "nobody" : null) || (fieldKey === "privPhoto" && targetUserObj?.hideProfilePic ? "nobody" : "everyone");
+      if (mode === "nobody") return false;
+      if (mode === "contacts") return isContactWithMe(targetUid);
+      return true;
+    }
+
+    /* Multiple Select Helpers for Home Chat List */
+    function setSelectMode(enabled) {
+      selectModeActive = enabled;
+      document.body.classList.toggle("select-mode", enabled);
+      document.getElementById("multiSelectBar").classList.toggle("show", enabled);
+      if (!enabled) selectedChatIds.clear();
+      updateMultiSelectBarLabel();
+      renderUsersList();
+    }
+
+    function updateMultiSelectBarLabel() {
+      document.getElementById("multiSelectCount").textContent = `${selectedChatIds.size} selected`;
+    }
+
+    window.toggleChatSelection = function(cid, ev) {
+      if (ev) ev.stopPropagation();
+      if (!selectModeActive) setSelectMode(true);
+      if (selectedChatIds.has(cid)) selectedChatIds.delete(cid);
+      else selectedChatIds.add(cid);
+      updateMultiSelectBarLabel();
+      renderUsersList();
+    };
+
+    document.getElementById("btnSelectMode").addEventListener("click", () => {
+      vibrateAction(15);
+      setSelectMode(!selectModeActive);
+    });
+    document.getElementById("msCancelBtn").addEventListener("click", () => setSelectMode(false));
+
+    document.getElementById("msMuteBtn").addEventListener("click", () => {
+      if (!selectedChatIds.size) return;
+      selectedChatIds.forEach(cid => { mutedChats[cid] = true; });
+      localStorage.setItem("na_muted_chats", JSON.stringify(mutedChats));
+      setSelectMode(false);
+    });
+
+    document.getElementById("msRemoveListBtn").addEventListener("click", async () => {
+      if (!selectedChatIds.size) return;
+      const ok = await proConfirm(`Remove ${selectedChatIds.size} selected chat(s) from your chat list?`, "Remove Chats");
+      if (!ok) return;
+      selectedChatIds.forEach(cid => { hiddenChats[cid] = true; });
+      localStorage.setItem("na_hidden_chats", JSON.stringify(hiddenChats));
+      setSelectMode(false);
+    });
+
+    /* DP Touch Handler */
     window.handleUserAvatarTap = function(targetUid, ev) {
       if (ev) ev.stopPropagation();
       if (!targetUid || !me) return;
-      const now = Date.now();
-      const userStatuses = Object.entries(statuses)
-        .filter(([, s]) => s.uid === targetUid && !blocks[targetUid] && (now - (s.time || 0)) < 86400000)
-        .map(([id, v]) => ({ id, ...v }))
-        .sort((a, b) => b.time - a.time);
-
       const u = targetUid === me.uid ? prefs : (users[targetUid] || {});
+      const canSeeStatus = canViewByPrivacy(u, targetUid, "privStatus");
+      const now = Date.now();
+      const userStatuses = canSeeStatus
+        ? Object.entries(statuses)
+            .filter(([, s]) => s.uid === targetUid && !blocks[targetUid] && (now - (s.time || 0)) < 86400000)
+            .map(([id, v]) => ({ id, ...v }))
+            .sort((a, b) => b.time - a.time)
+        : [];
+
       const displayName = targetUid === me.uid ? (prefs.name || "You") : getCleanUserName(targetUid, u);
 
       if (userStatuses.length > 0) {
@@ -1786,10 +2109,11 @@
       const u = isSelf ? prefs : (users[targetUid] || {});
       const displayName = isSelf ? (prefs.name || "You") : getCleanUserName(targetUid, u);
       const avWrap = document.getElementById("profModalAvWrap");
-      const hasPic = !u.hideProfilePic && !!u.avatarData;
+      const canSeePic = canViewByPrivacy(u, targetUid, "privPhoto");
+      const hasPic = canSeePic && !!u.avatarData;
 
       if (hasPic) {
-        avWrap.innerHTML = `<img src="${u.avatarData}" style="width:100%;height:100%;object-fit:cover;display:block;" />`;
+        avWrap.innerHTML = `<img src="${u.avatarData}" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;" />`;
         avWrap.onclick = () => showFull("img", encodeURIComponent(u.avatarData));
       } else {
         avWrap.innerHTML = esc(displayName.charAt(0).toUpperCase());
@@ -1797,12 +2121,14 @@
       }
 
       document.getElementById("profModalName").textContent = displayName + (isSelf ? " (You)" : "");
-      document.getElementById("profModalAbout").textContent = u.about || `Using ${APP_NAME}`;
+
+      const canSeeAbout = canViewByPrivacy(u, targetUid, "privAbout");
+      document.getElementById("profModalAbout").textContent = canSeeAbout ? (u.about || `Using ${APP_NAME}`) : "Hidden by privacy";
 
       let presTxt = isSelf ? "Your Profile" : "";
       if (!isSelf) {
         if (blocks[targetUid]) presTxt = "Blocked";
-        else if (!u.hideLastSeen) {
+        else if (canViewByPrivacy(u, targetUid, "privLastSeen")) {
           if (isUserOnlineNow(u)) presTxt = "Online";
           else if (u.lastSeen) presTxt = "Last seen " + new Date(u.lastSeen).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         }
@@ -1899,14 +2225,14 @@
       const payload = JSON.stringify({ app: APP_NAME, version: APP_VERSION, exportedAt: new Date().toISOString(), chats: allChatsMsgs, callLogs }, null, 2);
       const blob = new Blob([payload], { type: "application/json" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement("a"); a.href = url; a.download = "na-whatsapp-v2.0.3-backup.json"; a.click();
+      const a = document.createElement("a"); a.href = url; a.download = "na-whatsapp-v2.0.5-backup.json"; a.click();
       URL.revokeObjectURL(url);
     });
 
     document.getElementById("resetLocalDataBtn").addEventListener("click", async () => {
       const ok = await proConfirm("Reset local data?", "Reset");
       if (!ok) return;
-      ["na_seen_statuses", "na_muted_chats", "na_locked_chats", "na_disappear_chats", "na_drafts", "na_viewed_once", "na_pending_queue", "na_app_pin", "na_custom_tone", "na_wp_img", "na_live_wp_id", "na_wp_bright", "na_card_bg_hex", "na_selected_msg_font"].forEach(k => localStorage.removeItem(k));
+      ["na_seen_statuses", "na_muted_chats", "na_hidden_chats", "na_locked_chats", "na_disappear_chats", "na_drafts", "na_viewed_once", "na_pending_queue", "na_app_pin", "na_custom_tone", "na_wp_img", "na_live_wp_id", "na_wp_bright", "na_card_bg_hex", "na_selected_msg_font", "na_btn_icon_tint"].forEach(k => localStorage.removeItem(k));
       location.reload();
     });
 
@@ -1921,6 +2247,8 @@
     }
 
     async function sendChatPayload(chatId, payload) {
+      delete hiddenChats[chatId];
+      localStorage.setItem("na_hidden_chats", JSON.stringify(hiddenChats));
       const dispDays = disappearSettings[chatId] || 0;
       if (dispDays > 0 && !payload.expiresAt) {
         payload.expiresAt = Date.now() + dispDays * 86400000;
@@ -1955,7 +2283,31 @@
       savePendingQueue();
       setUploadStatus(pendingQueue.length ? `Queued (${pendingQueue.length})` : "");
     }
-    window.addEventListener("online", () => flushPendingQueue());
+
+    window.addEventListener("online", () => {
+      touchPresence(true);
+      flushPendingQueue();
+      renderUsersList();
+      if (activeChat && activeChat.type === "private") updateRoomHeaderMeta();
+    });
+
+    window.addEventListener("offline", () => {
+      markSelfOfflineImmediate();
+      renderUsersList();
+      if (activeChat && activeChat.type === "private") updateRoomHeaderMeta();
+    });
+
+    function cleanupExpiredMessagesInDb() {
+      if (!me || !navigator.onLine) return;
+      const now = Date.now();
+      Object.entries(allChatsMsgs || {}).forEach(([cid, mObj]) => {
+        Object.entries(mObj || {}).forEach(([mid, m]) => {
+          if (m && m.expiresAt && now > m.expiresAt && m.uid === me.uid) {
+            remove(ref(db, `chats/${cid}/${mid}`)).catch(() => {});
+          }
+        });
+      });
+    }
 
     document.getElementById("pickStPhotoBtn").addEventListener("click", () => document.getElementById("stPhotoInput").click());
     document.getElementById("pickStVideoBtn").addEventListener("click", () => document.getElementById("stVideoInput").click());
@@ -1993,16 +2345,16 @@
 
     function startIncomingRingLoop() {
       stopIncomingRingLoop(); playAlertTone(true);
-      if (navigator.vibrate) { try { navigator.vibrate([350, 250, 350]); } catch (_) {} }
+      vibrateAction([350, 250, 350]);
       ringLoopTimer = setInterval(() => {
         playAlertTone(true);
-        if (navigator.vibrate) { try { navigator.vibrate([350, 250, 350]); } catch (_) {} }
+        vibrateAction([350, 250, 350]);
       }, 2200);
     }
 
     function stopIncomingRingLoop() {
       if (ringLoopTimer) { clearInterval(ringLoopTimer); ringLoopTimer = null; }
-      if (navigator.vibrate) { try { navigator.vibrate(0); } catch (_) {} }
+      vibrateAction(0);
     }
 
     document.getElementById("testToneBtn").addEventListener("click", () => playAlertTone(true));
@@ -2091,6 +2443,7 @@
 
     document.querySelectorAll(".wa-tab").forEach(tab => {
       tab.addEventListener("click", () => {
+        if (selectModeActive) setSelectMode(false);
         document.querySelectorAll(".wa-tab").forEach(t => t.classList.remove("active"));
         document.querySelectorAll(".home-view").forEach(v => v.classList.remove("active"));
         tab.classList.add("active");
@@ -2112,7 +2465,7 @@
       try {
         const cred = await createUserWithEmailAndPassword(auth, email, pass);
         await updateProfile(cred.user, { displayName: name });
-        await update(ref(db, "users/" + cred.user.uid), { name, about: `Using ${APP_NAME}` });
+        await update(ref(db, "users/" + cred.user.uid), { name, about: `Using ${APP_NAME}`, privLastSeen: "everyone", privPhoto: "everyone", privAbout: "everyone", privStatus: "everyone" });
       } catch (e) { document.getElementById("authError").textContent = e.message; }
     });
 
@@ -2123,7 +2476,7 @@
     });
 
     document.getElementById("btnLogout").addEventListener("click", async () => {
-      if (me && !prefs.hideLastSeen) await update(ref(db, "users/" + me.uid), { online: false, lastSeen: Date.now() });
+      await markSelfOfflineImmediate();
       await signOut(auth);
       authScreen.style.display = "flex";
       appShell.style.display = "none";
@@ -2140,7 +2493,12 @@
         const cleanInitialName = getCleanUserName(user.uid, { name: user.displayName || (user.email ? user.email.split("@")[0] : "User") });
         await update(ref(db, "users/" + me.uid), { name: cleanInitialName });
         touchPresence(true); flushPendingQueue();
-        setInterval(() => { touchPresence(true); flushPendingQueue(); }, 25000);
+        setInterval(() => {
+          if (document.visibilityState === "visible" && navigator.onLine) touchPresence(true);
+          else markSelfOfflineImmediate();
+          flushPendingQueue();
+          cleanupExpiredMessagesInDb();
+        }, 20000);
         listenCore(); listenCalls();
       } else {
         me = null;
@@ -2149,10 +2507,30 @@
       }
     });
 
+    /* Immediate offline update on tab hide / page exit / back navigation */
+    function markSelfOfflineImmediate() {
+      if (!me) return;
+      if (navigator.onLine) {
+        update(ref(db, "users/" + me.uid), { online: false, lastSeen: Date.now() }).catch(() => {});
+        remove(ref(db, "typing/" + me.uid)).catch(() => {});
+      }
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") markSelfOfflineImmediate();
+      else if (me && navigator.onLine) touchPresence(true);
+    });
+    window.addEventListener("pagehide", () => markSelfOfflineImmediate());
+    window.addEventListener("beforeunload", () => markSelfOfflineImmediate());
+
     function touchPresence(online) {
       if (!me) return;
-      if (prefs.hideLastSeen) update(ref(db, "users/" + me.uid), { online: false, hideLastSeen: true });
-      else update(ref(db, "users/" + me.uid), { online, lastSeen: Date.now(), hideLastSeen: false });
+      const canShowOnline = online && navigator.onLine && document.visibilityState === "visible" && prefs.privLastSeen !== "nobody";
+      if (!canShowOnline) {
+        update(ref(db, "users/" + me.uid), { online: false, lastSeen: Date.now() }).catch(() => {});
+      } else {
+        update(ref(db, "users/" + me.uid), { online: true, lastSeen: Date.now() }).catch(() => {});
+      }
     }
 
     function getPrivateChatId(uidA, uidB) { return [uidA, uidB].sort().join("__"); }
@@ -2166,22 +2544,29 @@
       return Object.values(allChatsMsgs[chatId] || {}).filter(m => !isMessageExpired(m) && m.uid !== me.uid && !m.deletedForEveryone && !(m.deletedFor && m.deletedFor[me.uid]) && !(m.seenBy && m.seenBy[me.uid])).length;
     }
 
-    function getUserStatusRingClass(uid) {
+    function getUserStatusRingClass(uid, uObj) {
+      const u = uObj || users[uid] || {};
+      if (!canViewByPrivacy(u, uid, "privStatus")) return "";
       const now = Date.now();
       const userSt = Object.entries(statuses).filter(([, s]) => s.uid === uid && (now - (s.time || 0)) < 86400000).map(([id]) => id);
       if (!userSt.length) return "";
       return userSt.some(id => !seenStatusIds[id]) ? "status-unseen" : "status-seen";
     }
 
-    function isUserOnlineNow(u) { return !!(u && !u.hideLastSeen && u.online && (Date.now() - (u.lastSeen || 0) < 45000)); }
+    /* Strict online check: requires recent heartbeat within 38 seconds */
+    function isUserOnlineNow(u, uid) {
+      if (!u) return false;
+      if (uid && !canViewByPrivacy(u, uid, "privLastSeen")) return false;
+      return !!(u.online && (Date.now() - (u.lastSeen || 0) < 38000));
+    }
 
     function refreshTypingBadge() {
       const badge = document.getElementById("roomTyping"), actorEl = document.getElementById("typingActorName");
       if (!activeChat || !me) { badge.style.display = "none"; return; }
-      const activeTypers = Object.entries(typingMap).filter(([uid, info]) => uid !== me.uid && !blocks[uid] && info && (Date.now() - (info.t || 0)) <= 3000 && info.chatId === activeChat.id);
+      const activeTypers = Object.entries(typingMap).filter(([uid, info]) => uid !== me.uid && !blocks[uid] && info && (Date.now() - (info.t || 0)) <= 2800 && info.chatId === activeChat.id);
       if (!activeTypers.length) { badge.style.display = "none"; return; }
       actorEl.textContent = activeTypers.map(([uid]) => getCleanUserName(uid)).slice(0, 2).join(", ");
-      badge.style.display = "inline-block";
+      badge.style.display = "inline-flex";
     }
 
     function listenCore() {
@@ -2191,7 +2576,10 @@
           const u = users[me.uid];
           prefs.name = getCleanUserName(me.uid, u);
           prefs.about = u.about || `Using ${APP_NAME}`;
-          prefs.hideLastSeen = !!u.hideLastSeen; prefs.hideProfilePic = !!u.hideProfilePic;
+          prefs.privLastSeen = u.privLastSeen || (u.hideLastSeen ? "nobody" : "everyone");
+          prefs.privPhoto = u.privPhoto || (u.hideProfilePic ? "nobody" : "everyone");
+          prefs.privAbout = u.privAbout || "everyone";
+          prefs.privStatus = u.privStatus || "everyone";
           prefs.avatarData = u.avatarData || ""; prefs.privateHandle = u.privateHandle || "";
           prefs.allowedHandleUsers = u.allowedHandleUsers || {};
           if (u.cardBgHex) { cardBgHex = u.cardBgHex; localStorage.setItem("na_card_bg_hex", cardBgHex); }
@@ -2239,42 +2627,52 @@
 
     function renderHomeMyAvatar() {
       const el = document.getElementById("homeMyAv"), ring = document.getElementById("homeMyRing");
-      ring.className = "av-ring " + getUserStatusRingClass(me.uid);
-      if (prefs.hideProfilePic || !prefs.avatarData) el.innerHTML = esc((prefs.name || "U").charAt(0).toUpperCase());
+      ring.className = "av-ring " + getUserStatusRingClass(me.uid, prefs);
+      if (!prefs.avatarData) el.innerHTML = esc((prefs.name || "U").charAt(0).toUpperCase());
       else el.innerHTML = `<img src="${prefs.avatarData}" />`;
     }
 
     function renderUsersList() {
       const q = document.getElementById("searchBox").value.trim().toLowerCase();
       const box = document.getElementById("usersChatList");
-      const list = Object.entries(users).filter(([uid, u]) => {
-        if (uid === me.uid) return false;
-        const name = getCleanUserName(uid, u).toLowerCase();
-        const about = (u.about || "").toLowerCase();
-        const handleAllowed = u.privateHandle && u.allowedHandleUsers && u.allowedHandleUsers[me.uid];
-        const handleText = handleAllowed ? (u.privateHandle || "").toLowerCase() : "";
-        return !q || name.includes(q) || about.includes(q) || handleText.includes(q);
-      });
+      const list = Object.entries(users)
+        .filter(([uid, u]) => {
+          if (uid === me.uid) return false;
+          const cid = getPrivateChatId(me.uid, uid);
+          if (hiddenChats[cid] && !q) return false;
+          const name = getCleanUserName(uid, u).toLowerCase();
+          const about = canViewByPrivacy(u, uid, "privAbout") ? (u.about || "").toLowerCase() : "";
+          const handleAllowed = u.privateHandle && u.allowedHandleUsers && u.allowedHandleUsers[me.uid];
+          const handleText = handleAllowed ? (u.privateHandle || "").toLowerCase() : "";
+          return !q || name.includes(q) || about.includes(q) || handleText.includes(q);
+        })
+        .map(([uid, u]) => {
+          const cid = getPrivateChatId(me.uid, uid);
+          const msgs = Object.values(allChatsMsgs[cid] || {}).filter(m => !isMessageExpired(m) && !(m.deletedFor && m.deletedFor[me.uid]));
+          const last = msgs.sort((a, b) => (b.time || 0) - (a.time || 0))[0];
+          return { uid, u, cid, last, lastTime: last ? (last.time || 0) : 0 };
+        })
+        .sort((a, b) => b.lastTime - a.lastTime);
 
       if (!list.length) { box.innerHTML = `<p style="font-size:13px; color:#e1f5fe; padding:12px;">No users found.</p>`; return; }
 
-      box.innerHTML = list.map(([uid, u]) => {
+      box.innerHTML = list.map(({ uid, u, cid, last }) => {
         const isBlocked = !!blocks[uid];
-        const cid = getPrivateChatId(me.uid, uid);
         const isLocked = !!lockedChats[cid];
+        const isSelected = selectedChatIds.has(cid);
         const draft = draftTexts[cid] || "";
-        const msgs = Object.values(allChatsMsgs[cid] || {}).filter(m => !isMessageExpired(m) && !(m.deletedFor && m.deletedFor[me.uid]));
-        const last = msgs.sort((a, b) => (b.time || 0) - (a.time || 0))[0];
         const tStr = last ? new Date(last.time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
         const unread = isBlocked ? 0 : getUnreadCountForChat(cid);
         const displayName = getCleanUserName(uid, u);
-        const avHtml = (!u.hideProfilePic && u.avatarData) ? `<img src="${u.avatarData}" />` : esc(displayName.charAt(0).toUpperCase());
-        const ringCls = getUserStatusRingClass(uid);
-        const onlineShow = !isBlocked && isUserOnlineNow(u) ? "show" : "";
+        const canSeePic = canViewByPrivacy(u, uid, "privPhoto");
+        const avHtml = (canSeePic && u.avatarData) ? `<img src="${u.avatarData}" />` : esc(displayName.charAt(0).toUpperCase());
+        const ringCls = getUserStatusRingClass(uid, u);
+        const onlineShow = !isBlocked && isUserOnlineNow(u, uid) ? "show" : "";
         const showHandle = !isBlocked && u.privateHandle && u.allowedHandleUsers && u.allowedHandleUsers[me.uid] ? ` • ${u.privateHandle}` : "";
         const mutedTag = mutedChats[cid] ? " 🔕" : "";
         const lockBadge = isLocked ? `<span class="lock-tag">🔐</span>` : "";
-        const aboutLine = isBlocked ? "Blocked" : `${u.about || ""}${showHandle}`;
+        const aboutTxt = canViewByPrivacy(u, uid, "privAbout") ? (u.about || "") : "";
+        const aboutLine = isBlocked ? "Blocked" : `${aboutTxt}${showHandle}`;
 
         let lastLine = "";
         if (isBlocked) lastLine = `<span class="blocked-tag">Blocked</span>`;
@@ -2283,7 +2681,8 @@
         else lastLine = esc(last ? (last.deletedForEveryone ? "Deleted" : (last.viewOnce ? "👁 View Once" : (last.text || (last.audioData ? "🎤 Voice" : (last.photoData ? "📷 Photo" : "🎬 Video"))))) : "Tap to chat");
 
         return `
-          <div class="pro-card" onclick="openPrivateRoom('${uid}')">
+          <div class="pro-card ${isSelected ? "selected-chat" : ""}" onclick="${selectModeActive ? `toggleChatSelection('${cid}', event)` : `openPrivateRoom('${uid}')`}" oncontextmenu="event.preventDefault(); toggleChatSelection('${cid}', event);">
+            <span class="select-check-circle">${isSelected ? "✓" : ""}</span>
             <div class="av-container" onclick="handleUserAvatarTap('${uid}', event)" title="Touch DP for Status or Info">
               <div class="av-ring ${ringCls}"><div class="av">${avHtml}</div></div>
               <span class="online-dot ${onlineShow}"></span>
@@ -2308,14 +2707,20 @@
     function renderGroupsList() {
       const q = document.getElementById("searchBox").value.trim().toLowerCase();
       const box = document.getElementById("groupsList");
-      const myGroups = Object.entries(groups).filter(([, g]) => g.members && g.members[me.uid] && (!q || (g.name || "").toLowerCase().includes(q)));
+      const myGroups = Object.entries(groups)
+        .filter(([, g]) => g.members && g.members[me.uid] && (!q || (g.name || "").toLowerCase().includes(q)))
+        .map(([gid, g]) => {
+          const msgs = Object.values(allChatsMsgs[gid] || {}).filter(m => !isMessageExpired(m) && !(m.deletedFor && m.deletedFor[me.uid]));
+          const last = msgs.sort((a, b) => (b.time || 0) - (a.time || 0))[0];
+          return { gid, g, last, lastTime: last ? (last.time || 0) : (g.time || 0) };
+        })
+        .sort((a, b) => b.lastTime - a.lastTime);
+
       if (!myGroups.length) { box.innerHTML = `<p style="font-size:13px; color:#e1f5fe; padding:12px;">No groups yet.</p>`; return; }
 
-      box.innerHTML = myGroups.map(([gid, g]) => {
+      box.innerHTML = myGroups.map(({ gid, g, last }) => {
         const isLocked = !!lockedChats[gid];
         const draft = draftTexts[gid] || "";
-        const msgs = Object.values(allChatsMsgs[gid] || {}).filter(m => !isMessageExpired(m) && !(m.deletedFor && m.deletedFor[me.uid]));
-        const last = msgs.sort((a, b) => (b.time || 0) - (a.time || 0))[0];
         const senderLbl = last ? getCleanUserName(last.uid, { name: last.sender }) : "User";
         const sub = isLocked ? "Locked group" : (draft ? `Draft: ${draft}` : (last ? `${senderLbl}: ${last.deletedForEveryone ? "Deleted" : (last.text || "[Media]")}` : (g.description || "Group")));
         const unread = getUnreadCountForChat(gid);
@@ -2462,6 +2867,7 @@
     };
 
     function showRoom() {
+      if (selectModeActive) setSelectMode(false);
       replyObj = null; stagedChatMedia = null; onlyStarredInRoom = false; inChatQuery = ""; mediaFilterMode = "all";
       scrollNewCount.textContent = "";
       composerInput.value = draftTexts[activeChat.id] || "";
@@ -2478,11 +2884,14 @@
     }
 
     document.getElementById("backToHomeBtn").addEventListener("click", () => {
+      vibrateAction(14);
       saveCurrentDraft();
+      if (me && navigator.onLine) remove(ref(db, "typing/" + me.uid)).catch(() => {});
       activeChat = null;
       document.getElementById("roomDropdown").style.display = "none";
       document.getElementById("emojiPickerDrawer").style.display = "none";
       roomScreen.style.display = "none";
+      touchPresence(true);
       renderUsersList(); renderGroupsList();
     });
 
@@ -2506,17 +2915,19 @@
       grpManageBtn.style.display = "none";
       const otherUid = activeChat.otherUid, u = users[otherUid] || {}, isBlocked = !!blocks[otherUid], displayName = getCleanUserName(otherUid, u);
       document.getElementById("ddBlockLabel").textContent = isBlocked ? "✅ Unblock" : "🚫 Block";
-      ring.className = "av-ring " + getUserStatusRingClass(otherUid);
-      av.innerHTML = (!u.hideProfilePic && u.avatarData) ? `<img src="${u.avatarData}" />` : esc(displayName.charAt(0).toUpperCase());
+      ring.className = "av-ring " + getUserStatusRingClass(otherUid, u);
+      const canSeePic = canViewByPrivacy(u, otherUid, "privPhoto");
+      av.innerHTML = (canSeePic && u.avatarData) ? `<img src="${u.avatarData}" />` : esc(displayName.charAt(0).toUpperCase());
       titleEl.textContent = displayName;
       if (isBlocked) { sub.innerHTML = `<span style="color:#ff8a80; font-weight:700;">Blocked</span>`; return; }
 
       let pres = "";
-      if (!u.hideLastSeen) {
-        if (isUserOnlineNow(u)) pres = "online";
+      if (canViewByPrivacy(u, otherUid, "privLastSeen")) {
+        if (isUserOnlineNow(u, otherUid)) pres = "online";
         else if (u.lastSeen) pres = "last seen " + new Date(u.lastSeen).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
       }
-      sub.textContent = `${pres}${u.about ? ` • ${u.about}` : ""}${isCurrentChatMuted() ? " • Muted" : ""}`.trim();
+      const aboutTxt = canViewByPrivacy(u, otherUid, "privAbout") ? (u.about || "") : "";
+      sub.textContent = `${pres}${aboutTxt ? ` • ${aboutTxt}` : ""}${isCurrentChatMuted() ? " • Muted" : ""}`.trim();
     }
 
     const roomDropdown = document.getElementById("roomDropdown");
@@ -2664,7 +3075,8 @@
         } else {
           if (m.forwarded) {
             const srcUser = users[m.forwardFromUid] || {}, srcName = getCleanUserName(m.forwardFromUid, { name: srcUser.name || m.forwardFromName });
-            const srcAv = (!srcUser.hideProfilePic && srcUser.avatarData) ? `<img src="${srcUser.avatarData}" />` : esc(srcName.charAt(0).toUpperCase());
+            const canSeeSrcPic = canViewByPrivacy(srcUser, m.forwardFromUid, "privPhoto");
+            const srcAv = (canSeeSrcPic && srcUser.avatarData) ? `<img src="${srcUser.avatarData}" />` : esc(srcName.charAt(0).toUpperCase());
             body += `<div class="fwd-badge"><span>Forward</span><span class="fwd-dp">${srcAv}</span><span>${esc(srcName)}</span></div>`;
           }
           const tags = [];
@@ -2674,7 +3086,7 @@
           if (tags.length) body += `<div class="m-tags">${tags.join(" • ")}</div>`;
           if (m.replyTo) body += `<div class="m-quote" onclick="flashTarget('${m.replyTo.id}')"><strong>${esc(m.replyTo.sender)}</strong><span>${esc(m.replyTo.snippet)}</span></div>`;
           if (!isMe || activeChat.type === "group") body += `<div class="m-sender">${esc(senderName)}</div>`;
-          if (m.text) body += `<div>${formatRichWhatsAppText(m.text)}</div>`;
+          if (m.text) body += `<div class="allow-select">${formatRichWhatsAppText(m.text)}</div>`;
 
           if (m.viewOnce && (m.photoData || m.videoData)) {
             const kind = m.photoData ? "img" : "vid";
@@ -2730,7 +3142,7 @@
     const emojiRegex = /(\p{Extended_Pictographic}(?:\uFE0F|\u200D\p{Extended_Pictographic})*)/gu;
     function formatRichWhatsAppText(text) {
       let safe = esc(text);
-      safe = safe.replace(/`([^`\n]+?)`/g, "<code style='background:rgba(0,0,0,0.38);padding:1px 5px;border-radius:4px;'>$1</code>");
+      safe = safe.replace(/`([^`\n]+?)`/g, "<code style='background:rgba(0,0,0,0.42);padding:1px 5px;border-radius:4px;'>$1</code>");
       safe = safe.replace(/\*([^\*\n]+?)\*/g, "<strong>$1</strong>");
       safe = safe.replace(/_([^_\n]+?)_/g, "<em>$1</em>");
       safe = safe.replace(/~([^~\n]+?)~/g, "<del>$1</del>");
@@ -2921,6 +3333,7 @@
 
     document.getElementById("sendStagedMediaBtn").addEventListener("click", async () => {
       if (!(await canSendInCurrentChat()) || !stagedChatMedia) return;
+      vibrateAction(16);
       const isVO = document.getElementById("viewOnceChk").checked;
       const payload = { uid: me.uid, sender: prefs.name || "User", text: isVO ? "" : composerInput.value.trim(), msgFont: selectedMsgFont, viewOnce: isVO, time: Date.now() };
       if (stagedChatMedia.kind === "photo") payload.photoData = stagedChatMedia.dataUrl; else payload.videoData = stagedChatMedia.dataUrl;
@@ -2936,6 +3349,7 @@
 
     micOrSendBtn.addEventListener("click", async () => {
       if (!(await canSendInCurrentChat())) return;
+      vibrateAction(16);
       const txt = composerInput.value.trim();
       if (txt) {
         let finalTxt = txt;
@@ -2974,7 +3388,7 @@
 
     window.showFull = function(kind, encUrl) {
       const u = decodeURIComponent(encUrl); currentFullMediaUrl = u;
-      document.getElementById("fullViewerContent").innerHTML = kind === "img" ? `<img src="${u}" />` : `<video src="${u}" controls autoplay playsinline></video>`;
+      document.getElementById("fullViewerContent").innerHTML = kind === "img" ? `<img src="${u}" />` : `<video src="${u}" controls controlsList="nodownload noplaybackrate" autoplay playsinline></video>`;
       pushNavState(); document.getElementById("fullViewer").style.display = "flex";
     };
     document.getElementById("downloadFullMediaBtn").addEventListener("click", () => {
@@ -2995,6 +3409,7 @@
 
     document.getElementById("stPostTextBtn").addEventListener("click", async () => {
       const t = document.getElementById("stTextInput").value.trim(); if (!t || !me) return;
+      vibrateAction(15);
       await push(ref(db, "statuses"), { uid: me.uid, sender: prefs.name || "User", type: "text", text: t, time: Date.now(), totalViewCount: 0, views: {}, likes: {} });
       document.getElementById("stTextInput").value = ""; document.getElementById("stInfo").textContent = "Posted!";
     });
@@ -3002,6 +3417,7 @@
     let voiceStatusRec = null, voiceStatusChunks = [];
     document.getElementById("stVoiceRecBtn").addEventListener("click", async () => {
       if (!me) return;
+      vibrateAction(15);
       if (!voiceStatusRec) {
         try {
           const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -3020,10 +3436,10 @@
             };
             rd.readAsDataURL(blob);
             voiceStatusRec = null;
-            document.getElementById("stVoiceRecBtn").textContent = "🎤 Voice Status";
+            document.getElementById("stVoiceRecBtn").textContent = "🎤 Voice";
           };
           voiceStatusRec.start();
-          document.getElementById("stVoiceRecBtn").textContent = "⏹ Stop & Post Voice";
+          document.getElementById("stVoiceRecBtn").textContent = "⏹ Stop Voice";
           document.getElementById("stInfo").textContent = "Recording voice status...";
         } catch (_) { await proAlert("Microphone permission needed.", "Permission"); }
       } else if (voiceStatusRec.state !== "inactive") {
@@ -3047,446 +3463,403 @@
 
     document.getElementById("postStMediaBtn").addEventListener("click", async () => {
       if (!stagedStatusMedia || !me) return;
+      vibrateAction(16);
       const cap = document.getElementById("stTextInput").value.trim();
       if (stagedStatusMedia.kind === "photo") {
-        document.getElementById("stInfo").textContent = "Posting photo...";
-        const d = await compressImg(stagedStatusMedia.file, 850, 0.78);
+        document.getElementById("stInfo").textContent = "Posting photo status...";
+        const d = await compressImg(stagedStatusMedia.file, 1080, 0.84);
         await push(ref(db, "statuses"), { uid: me.uid, sender: prefs.name || "User", type: "photo", photoData: d, text: cap, time: Date.now(), totalViewCount: 0, views: {}, likes: {} });
-        document.getElementById("stInfo").textContent = "Photo posted!";
+        document.getElementById("stInfo").textContent = "Photo status shared!";
       } else {
-        document.getElementById("stInfo").textContent = "Preparing video (max 60s)...";
+        document.getElementById("stInfo").textContent = "Preparing video status (max 60s)...";
         const blob = await trim60s(stagedStatusMedia.file);
         const dataUrl = await new Promise((res) => { const rd = new FileReader(); rd.onload = () => res(rd.result); rd.readAsDataURL(blob); });
         await push(ref(db, "statuses"), { uid: me.uid, sender: prefs.name || "User", type: "video", videoData: dataUrl, text: cap, time: Date.now(), totalViewCount: 0, views: {}, likes: {} });
-        document.getElementById("stInfo").textContent = "Video posted!";
+        document.getElementById("stInfo").textContent = "Video status shared!";
       }
       document.getElementById("stTextInput").value = ""; document.getElementById("stPhotoInput").value = ""; document.getElementById("stVideoInput").value = "";
       document.getElementById("stPhotoName").textContent = "No photo selected"; document.getElementById("stVideoName").textContent = "No video selected";
       stagedStatusMedia = null; refreshStatusMediaUi();
     });
 
-    async function recordStatusView(sid) {
-      if (!me || !statuses[sid]) return;
-      const viewerName = prefs.name || getCleanUserName(me.uid);
-      const nowTs = Date.now();
-      await runTransaction(ref(db, `statuses/${sid}/views/${me.uid}`), (cur) => {
-        if (!cur) return { name: viewerName, count: 1, lastSeen: nowTs, firstSeen: nowTs };
-        return { ...cur, name: viewerName, count: (cur.count || 0) + 1, lastSeen: nowTs };
-      });
-      await runTransaction(ref(db, `statuses/${sid}/totalViewCount`), (c) => (c || 0) + 1);
-    }
-
-    function syncStorySocialCounts() {
-      const sid = orderedStoryIds[currentStoryIdx];
-      const s = statuses[sid];
-      if (!s || !me) return;
-
-      const likesObj = s.likes || {};
-      const likeCount = Object.keys(likesObj).length;
-      const iLiked = !!likesObj[me.uid];
-      document.getElementById("storyLikeHeart").textContent = iLiked ? "❤️" : "🤍";
-      document.getElementById("storyLikeCount").textContent = String(likeCount);
-
-      const viewsObj = s.views || {};
-      const uniqueViewers = Object.keys(viewsObj).length;
-      const totalViews = s.totalViewCount || Object.values(viewsObj).reduce((acc, v) => acc + (v.count || 1), 0);
-
-      const viewersBtn = document.getElementById("viewersStoryBtn");
-      document.getElementById("storyReplyBar").style.display = s.uid === me.uid ? "none" : "flex";
-      if (s.uid === me.uid) {
-        viewersBtn.style.display = "inline-flex";
-        document.getElementById("storyViewsBadge").textContent = `${uniqueViewers} (${totalViews}x)`;
-        document.getElementById("storyQuickStats").textContent = `👁 ${uniqueViewers} viewers • ${totalViews} views • ❤️ ${likeCount}`;
-      } else {
-        viewersBtn.style.display = "none";
-        document.getElementById("storyQuickStats").textContent = `❤️ ${likeCount} likes`;
-      }
-    }
-
-    document.getElementById("likeCurrentStoryBtn").addEventListener("click", async () => {
-      const sid = orderedStoryIds[currentStoryIdx];
-      if (!sid || !me || !statuses[sid]) return;
-      const cur = !!(statuses[sid].likes && statuses[sid].likes[me.uid]);
-      await set(ref(db, `statuses/${sid}/likes/${me.uid}`), cur ? null : { name: prefs.name || "User", time: Date.now() });
-      syncStorySocialCounts();
-    });
-
-    document.getElementById("sendStoryReplyBtn").addEventListener("click", async () => {
-      const sid = orderedStoryIds[currentStoryIdx];
-      const s = statuses[sid];
-      const replyTxt = document.getElementById("storyReplyInput").value.trim();
-      if (!s || !replyTxt || !me || s.uid === me.uid) return;
-      const cid = getPrivateChatId(me.uid, s.uid);
-      await sendChatPayload(cid, {
-        uid: me.uid,
-        sender: prefs.name || "User",
-        text: replyTxt,
-        replyTo: { id: sid, sender: `${getCleanUserName(s.uid, { name: s.sender })} (Status)`, snippet: s.text || "[Status Media]" },
-        time: Date.now()
-      });
-      document.getElementById("storyReplyInput").value = "";
-      await proAlert("Reply sent to chat!", "Status Reply");
-    });
-
-    document.getElementById("viewersStoryBtn").addEventListener("click", () => {
-      const sid = orderedStoryIds[currentStoryIdx];
-      const s = statuses[sid];
-      if (!s) return;
-      const viewsObj = s.views || {};
-      const entries = Object.entries(viewsObj).map(([uid, v]) => ({ uid, ...v })).sort((a, b) => (b.lastSeen || 0) - (a.lastSeen || 0));
-      const totalViews = s.totalViewCount || entries.reduce((acc, x) => acc + (x.count || 1), 0);
-
-      document.getElementById("statusViewersSummary").textContent = `Unique Viewers: ${entries.length} • Total Views: ${totalViews}`;
-      document.getElementById("statusViewersList").innerHTML = entries.length ? entries.map(v => {
-        const tm = v.lastSeen ? new Date(v.lastSeen).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
-        return `
-          <div class="item-card" style="display:flex; justify-content:space-between; align-items:center;">
-            <div>
-              <b>${esc(getCleanUserName(v.uid, { name: v.name }))}</b>
-              <div style="font-size:11px; color:#b3e5fc;">Viewed ${v.count || 1} time(s)</div>
-            </div>
-            <span style="font-size:11.5px; color:#81d4fa;">${tm}</span>
-          </div>
-        `;
-      }).join("") : `<p style="font-size:12px; color:#b3e5fc;">No viewers yet.</p>`;
-
-      pushNavState();
-      document.getElementById("statusViewersModal").style.display = "block";
-    });
-
-    document.getElementById("closeStatusViewersModal").addEventListener("click", () => {
-      document.getElementById("statusViewersModal").style.display = "none";
-    });
-
-    function clearStoryTimer() { if (storyTimer) { clearTimeout(storyTimer); storyTimer = null; } }
-    function scheduleStoryAdvance(ms) { clearStoryTimer(); storyTimer = setTimeout(() => showStoryAtIndex(currentStoryIdx + 1), ms); }
-
-    function showStoryAtIndex(idx) {
-      clearStoryTimer();
-      if (!orderedStoryIds.length) return;
-      if (idx < 0) idx = 0;
-      if (idx >= orderedStoryIds.length) { document.getElementById("closeStoryModalBtn").click(); return; }
-      currentStoryIdx = idx;
-      const sid = orderedStoryIds[currentStoryIdx], s = statuses[sid]; if (!s) return;
-
-      seenStatusIds[sid] = true; localStorage.setItem("na_seen_statuses", JSON.stringify(seenStatusIds));
-      recordStatusView(sid);
-      renderHomeMyAvatar(); renderUsersList(); renderStatusesList();
-
-      const delBtn = document.getElementById("deleteCurrentStoryBtn");
-      delBtn.style.display = (s.uid === me.uid) ? "inline-flex" : "none";
-      delBtn.onclick = async () => {
-        if (!(await proConfirm("Delete this status?", "Delete"))) return;
-        await remove(ref(db, "statuses/" + sid));
-        document.getElementById("closeStoryModalBtn").click();
-      };
-
-      const author = getCleanUserName(s.uid, { name: s.sender });
-      document.getElementById("storyAuthorName").textContent = `${author} (${currentStoryIdx + 1}/${orderedStoryIds.length})`;
-      document.getElementById("storyTimeLabel").textContent = new Date(s.time || Date.now()).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-
-      let contentHtml = "";
-      if (s.type === "text") {
-        contentHtml = `<h2 style="line-height:1.45;">${formatRichWhatsAppText(s.text || "")}</h2>`;
-      } else if (s.type === "photo") {
-        contentHtml = `<img src="${s.photoData}" />${s.text ? `<p style="margin-top:10px;">${formatRichWhatsAppText(s.text)}</p>` : ""}`;
-      } else if (s.type === "video") {
-        contentHtml = `<video id="storyVidPlayer" src="${s.videoData}" autoplay playsinline></video>${s.text ? `<p style="margin-top:10px;">${formatRichWhatsAppText(s.text)}</p>` : ""}`;
-      } else if (s.type === "audio") {
-        contentHtml = `<div style="font-size:44px; margin-bottom:10px;">🎤</div><audio src="${s.audioData}" controls autoplay></audio>${s.text ? `<p style="margin-top:10px;">${formatRichWhatsAppText(s.text)}</p>` : ""}`;
-      }
-      document.getElementById("storyMediaContent").innerHTML = contentHtml;
-      syncStorySocialCounts();
-
-      const bar = document.getElementById("storyBarFill");
-      function startBar(dur) {
-        bar.style.setProperty("--story-dur", dur + "ms");
-        bar.style.animation = "none"; void bar.offsetWidth;
-        bar.style.animation = `storyFillAnim ${dur}ms linear forwards`;
-        scheduleStoryAdvance(dur);
-      }
-
-      const vidEl = document.getElementById("storyVidPlayer");
-      if (vidEl) {
-        vidEl.muted = false;
-        vidEl.play().catch(() => { vidEl.muted = true; vidEl.play().catch(() => {}); });
-        vidEl.onloadedmetadata = () => {
-          const d = Math.max(3000, Math.min(60000, Math.round((vidEl.duration || 8) * 1000)));
-          startBar(d);
-        };
-        vidEl.onended = () => showStoryAtIndex(currentStoryIdx + 1);
-        setTimeout(() => { if (!storyTimer) startBar(10000); }, 400);
-      } else {
-        startBar(6000);
-      }
-
-      pushNavState(); document.getElementById("statusStoryModal").style.display = "flex";
-    }
-
-    window.openStatusStory = function(sid) {
-      renderStatusesList();
-      const idx = orderedStoryIds.indexOf(sid);
-      showStoryAtIndex(idx >= 0 ? idx : 0);
-    };
-    document.getElementById("prevStoryBtn").addEventListener("click", () => showStoryAtIndex(currentStoryIdx - 1));
-    document.getElementById("nextStoryBtn").addEventListener("click", () => showStoryAtIndex(currentStoryIdx + 1));
-    document.getElementById("closeStoryModalBtn").addEventListener("click", () => {
-      clearStoryTimer(); document.getElementById("statusStoryModal").style.display = "none"; document.getElementById("storyMediaContent").innerHTML = "";
-    });
-
     function renderStatusesList() {
-      const q = document.getElementById("searchBox").value.trim().toLowerCase();
-      const now = Date.now();
-      const arr = Object.entries(statuses).map(([id, v]) => ({ id, ...v }))
-        .filter(s => !blocks[s.uid] && (now - (s.time || 0)) < 86400000 && (!q || getCleanUserName(s.uid, { name: s.sender }).toLowerCase().includes(q) || (s.text || "").toLowerCase().includes(q)))
-        .sort((a, b) => b.time - a.time);
-      orderedStoryIds = arr.map(s => s.id);
+      const q = document.getElementById("searchBox").value.trim().toLowerCase(), box = document.getElementById("statusFeedList"), now = Date.now();
+      const active = Object.entries(statuses).filter(([, s]) => {
+        if (!s || blocks[s.uid] || (now - (s.time || 0)) >= 86400000) return false;
+        const ownerObj = s.uid === me.uid ? prefs : (users[s.uid] || {});
+        if (!canViewByPrivacy(ownerObj, s.uid, "privStatus")) return false;
+        const sName = getCleanUserName(s.uid, { name: s.sender }).toLowerCase();
+        return !q || sName.includes(q) || (s.text || "").toLowerCase().includes(q);
+      }).map(([id, v]) => ({ id, ...v })).sort((a, b) => b.time - a.time);
 
-      document.getElementById("statusFeedList").innerHTML = arr.length ? arr.map(s => {
-        const seenState = seenStatusIds[s.id] ? "Seen" : "New";
-        const stAuthor = getCleanUserName(s.uid, { name: s.sender });
-        const mineTag = s.uid === me.uid ? ` <span class="admin-chip">YOU</span>` : "";
-        const likeCnt = Object.keys(s.likes || {}).length;
-        const viewCnt = s.totalViewCount || Object.values(s.views || {}).reduce((acc, x) => acc + (x.count || 1), 0);
+      orderedStoryIds = active.map(x => x.id);
+      if (!active.length) { box.innerHTML = `<p style="font-size:13px; color:#e1f5fe; padding:12px;">No recent status updates.</p>`; return; }
 
-        let thumbHtml = `<div class="av">${s.type === "audio" ? "🎤" : esc(stAuthor.charAt(0).toUpperCase())}</div>`;
+      box.innerHTML = active.map(s => {
+        const isSeen = !!seenStatusIds[s.id], isMine = s.uid === me.uid, viewsCount = s.totalViewCount || Object.keys(s.views || {}).length, likesCount = Object.keys(s.likes || {}).length;
+        const sName = getCleanUserName(s.uid, { name: s.sender });
+        let thumbHtml = `<div class="av">${esc(sName.charAt(0).toUpperCase())}</div>`;
         if (s.type === "photo" && s.photoData) thumbHtml = `<div class="st-thumb-box"><img src="${s.photoData}" /></div>`;
-        else if (s.type === "video" && s.videoData) thumbHtml = `<div class="st-thumb-box"><video src="${s.videoData}#t=0.15" preload="metadata" muted playsinline></video></div>`;
-
-        const statsLine = s.uid === me.uid ? `👁 ${viewCnt} views • ❤️ ${likeCnt}` : `❤️ ${likeCnt}`;
+        else if (s.type === "video" && s.videoData) thumbHtml = `<div class="st-thumb-box"><video src="${s.videoData}" muted playsinline preload="metadata"></video></div>`;
+        else if (s.type === "audio") thumbHtml = `<div class="st-thumb-box" style="font-size:22px;">🎤</div>`;
 
         return `
           <div class="pro-card" onclick="openStatusStory('${s.id}')">
-            <div class="av-container"><div class="av-ring ${seenStatusIds[s.id] ? "status-seen" : "status-unseen"}">${thumbHtml}</div></div>
+            <div class="av-ring ${isSeen ? "status-seen" : "status-unseen"}" style="width:46px; height:46px; min-width:46px; min-height:46px;">${thumbHtml}</div>
             <div class="row-body">
-              <div class="row-head"><span class="row-title">${esc(stAuthor)}${mineTag}</span><span class="row-time" style="color:${seenStatusIds[s.id] ? "#b3e5fc" : "#81d4fa"}; font-weight:700;">${seenState}</span></div>
-              <div class="row-last">${esc(s.text || (s.type === "photo" ? "Photo" : s.type === "video" ? "Video" : (s.type === "audio" ? "Voice Status" : "")))}</div>
-              <div class="row-about">${statsLine}</div>
+              <div class="row-head">
+                <span class="row-title">${esc(sName)} ${isMine ? "(You)" : ""}</span>
+                <span class="row-time">${new Date(s.time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+              </div>
+              <div class="row-last">${esc(s.text || (s.type === "photo" ? "Photo status" : s.type === "video" ? "Video status" : s.type === "audio" ? "Voice status" : "Status"))}</div>
+              <div style="font-size:11px; color:#81d4fa; margin-top:3px;">👁 ${viewsCount} views • ❤️ ${likesCount} likes</div>
             </div>
           </div>
         `;
-      }).join("") : `<p style="font-size:12px; color:#e1f5fe;">No statuses.</p>`;
+      }).join("");
       applyCardTone();
     }
 
+    function syncStorySocialCounts() {
+      const s = statuses[orderedStoryIds[currentStoryIdx]]; if (!s) return;
+      const viewsCount = s.totalViewCount || Object.keys(s.views || {}).length, likesObj = s.likes || {}, likesCount = Object.keys(likesObj).length, iLiked = !!(me && likesObj[me.uid]);
+      document.getElementById("storyViewsBadge").textContent = String(viewsCount);
+      document.getElementById("storyLikeHeart").textContent = iLiked ? "❤️" : "🤍";
+      document.getElementById("storyLikeCount").textContent = String(likesCount);
+      document.getElementById("storyQuickStats").textContent = `👁 ${viewsCount} • ❤️ ${likesCount}`;
+    }
+
+    window.openStatusStory = function(sid) {
+      const idx = orderedStoryIds.indexOf(sid); if (idx < 0) return;
+      currentStoryIdx = idx; showStoryAtIndex(); pushNavState(); document.getElementById("statusStoryModal").style.display = "flex";
+    };
+
+    function showStoryAtIndex() {
+      if (storyTimer) clearTimeout(storyTimer);
+      const sid = orderedStoryIds[currentStoryIdx]; if (!sid) return;
+      const s = statuses[sid]; if (!s) return;
+
+      seenStatusIds[sid] = true; localStorage.setItem("na_seen_statuses", JSON.stringify(seenStatusIds));
+      renderStatusesList(); renderUsersList(); renderHomeMyAvatar();
+
+      if (me && s.uid !== me.uid) {
+        update(ref(db, `statuses/${sid}/views/${me.uid}`), { name: prefs.name || "User", time: Date.now() });
+        runTransaction(ref(db, `statuses/${sid}/totalViewCount`), (cur) => (cur || 0) + 1);
+      }
+
+      const isMine = me && s.uid === me.uid;
+      document.getElementById("viewersStoryBtn").style.display = isMine ? "inline-flex" : "none";
+      document.getElementById("deleteCurrentStoryBtn").style.display = isMine ? "inline-flex" : "none";
+      document.getElementById("storyReplyBar").style.display = isMine ? "none" : "flex";
+
+      document.getElementById("storyAuthorName").textContent = getCleanUserName(s.uid, { name: s.sender }) + (isMine ? " (You)" : "");
+      document.getElementById("storyTimeLabel").textContent = new Date(s.time || Date.now()).toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+
+      const box = document.getElementById("storyMediaContent");
+      let durMs = 6000;
+      if (s.type === "photo" && s.photoData) {
+        box.innerHTML = `<img src="${s.photoData}" class="wa-status-full-media" />${s.text ? `<div style="margin-top:10px; font-size:15px; font-weight:700; background:rgba(0,0,0,0.6); padding:6px 14px; border-radius:999px;">${formatRichWhatsAppText(s.text)}</div>` : ""}`;
+      } else if (s.type === "video" && s.videoData) {
+        durMs = 15000;
+        box.innerHTML = `<video src="${s.videoData}" class="wa-status-full-media" controls controlsList="nodownload noplaybackrate" autoplay playsinline></video>${s.text ? `<div style="margin-top:8px; font-size:14px; font-weight:700; background:rgba(0,0,0,0.6); padding:6px 14px; border-radius:999px;">${formatRichWhatsAppText(s.text)}</div>` : ""}`;
+      } else if (s.type === "audio" && s.audioData) {
+        durMs = 12000;
+        box.innerHTML = `<div style="font-size:48px; margin-bottom:12px;">🎤</div><div style="font-size:18px; font-weight:700; margin-bottom:14px;">${formatRichWhatsAppText(s.text || "Voice Status")}</div><audio src="${s.audioData}" controls autoplay style="max-width:90%;"></audio>`;
+      } else {
+        box.innerHTML = `<div style="font-size:24px; font-weight:800; max-width:92%; line-height:1.4; padding:18px; border-radius:20px; background:linear-gradient(145deg,#0d47a1,#0288d1);">${formatRichWhatsAppText(s.text || "")}</div>`;
+      }
+
+      const bar = document.getElementById("storyBarFill");
+      bar.style.animation = "none"; bar.offsetHeight;
+      bar.style.setProperty("--story-dur", `${durMs}ms`);
+      bar.style.animation = `storyFillAnim ${durMs}ms linear forwards`;
+      syncStorySocialCounts();
+      storyTimer = setTimeout(() => { if (currentStoryIdx < orderedStoryIds.length - 1) { currentStoryIdx++; showStoryAtIndex(); } else closeStoryModal(); }, durMs);
+    }
+
+    document.getElementById("likeCurrentStoryBtn").addEventListener("click", async () => {
+      const sid = orderedStoryIds[currentStoryIdx]; if (!sid || !me) return;
+      vibrateAction(14);
+      const cur = !!(statuses[sid]?.likes && statuses[sid].likes[me.uid]);
+      await set(ref(db, `statuses/${sid}/likes/${me.uid}`), cur ? null : true);
+    });
+
+    document.getElementById("viewersStoryBtn").addEventListener("click", () => {
+      const sid = orderedStoryIds[currentStoryIdx]; const s = statuses[sid]; if (!s) return;
+      const viewsObj = s.views || {}, keys = Object.keys(viewsObj), totalCount = s.totalViewCount || keys.length;
+      document.getElementById("statusViewersSummary").textContent = `Total Views: ${totalCount} • Unique Viewers: ${keys.length}`;
+      document.getElementById("statusViewersList").innerHTML = keys.length ? keys.map(uid => {
+        const v = viewsObj[uid], t = v?.time ? new Date(v.time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
+        return `<div class="item-card" style="display:flex; justify-content:space-between; align-items:center;"><span>👁 <b>${esc(getCleanUserName(uid, { name: v?.name }))}</b></span><span style="font-size:11px; color:#b3e5fc;">${t}</span></div>`;
+      }).join("") : `<p style="font-size:13px; color:#b3e5fc;">No viewers yet.</p>`;
+      pushNavState(); document.getElementById("statusViewersModal").style.display = "block";
+    });
+    document.getElementById("closeStatusViewersModal").addEventListener("click", () => { document.getElementById("statusViewersModal").style.display = "none"; });
+
+    document.getElementById("deleteCurrentStoryBtn").addEventListener("click", async () => {
+      const sid = orderedStoryIds[currentStoryIdx]; const s = statuses[sid]; if (!s || s.uid !== me.uid) return;
+      if (!(await proConfirm("Delete this status?", "Delete Status"))) return;
+      if (storyTimer) clearTimeout(storyTimer);
+      await remove(ref(db, "statuses/" + sid));
+      delete seenStatusIds[sid]; localStorage.setItem("na_seen_statuses", JSON.stringify(seenStatusIds));
+      closeStoryModal();
+    });
+
+    document.getElementById("sendStoryReplyBtn").addEventListener("click", async () => {
+      const sid = orderedStoryIds[currentStoryIdx]; const s = statuses[sid];
+      const txt = document.getElementById("storyReplyInput").value.trim();
+      if (!s || !txt || blocks[s.uid]) return;
+      await sendChatPayload(getPrivateChatId(me.uid, s.uid), { uid: me.uid, sender: prefs.name || "User", text: txt, replyTo: { id: sid, sender: getCleanUserName(s.uid, { name: s.sender }) + "'s Status", snippet: s.text || "[Status]" }, time: Date.now() });
+      document.getElementById("storyReplyInput").value = ""; await proAlert("Reply sent!", "Status");
+    });
+
+    document.getElementById("prevStoryBtn").addEventListener("click", () => { if (currentStoryIdx > 0) { currentStoryIdx--; showStoryAtIndex(); } });
+    document.getElementById("nextStoryBtn").addEventListener("click", () => { if (currentStoryIdx < orderedStoryIds.length - 1) { currentStoryIdx++; showStoryAtIndex(); } else closeStoryModal(); });
+    function closeStoryModal() { if (storyTimer) clearTimeout(storyTimer); document.getElementById("statusStoryModal").style.display = "none"; }
+    document.getElementById("closeStoryModalBtn").addEventListener("click", closeStoryModal);
+
     document.getElementById("btnStarred").addEventListener("click", () => {
-      const starredItems = [];
-      Object.values(allChatsMsgs).forEach(mObj => Object.values(mObj || {}).forEach(m => { if (!isMessageExpired(m) && m.starred && m.starred[me.uid] && !m.deletedForEveryone) starredItems.push(m); }));
-      document.getElementById("starredBody").innerHTML = starredItems.length ? starredItems.map(x => `<div class="item-card"><b>${esc(getCleanUserName(x.uid, { name: x.sender }))}</b>: ${esc(x.text || "[Media]")}</div>`).join("") : `<p style="font-size:12px; color:#b3e5fc;">No starred messages.</p>`;
+      const box = document.getElementById("starredBody"), items = [];
+      Object.entries(allChatsMsgs).forEach(([cid, mObj]) => {
+        Object.entries(mObj || {}).forEach(([mid, m]) => {
+          if (!isMessageExpired(m) && m.starred && m.starred[me.uid] && !m.deletedForEveryone && !(m.deletedFor && m.deletedFor[me.uid])) items.push({ cid, mid, ...m });
+        });
+      });
+      box.innerHTML = items.length ? items.sort((a, b) => (b.time || 0) - (a.time || 0)).map(m => `<div class="item-card"><b>${esc(getCleanUserName(m.uid, { name: m.sender }))}:</b> ${esc(m.text || "[Media]")}</div>`).join("") : `<p style="font-size:13px; color:#b3e5fc;">No starred messages.</p>`;
       pushNavState(); document.getElementById("starredModal").style.display = "block";
     });
-    document.getElementById("closeStarredModal").addEventListener("click", () => document.getElementById("starredModal").style.display = "none");
+    document.getElementById("closeStarredModal").addEventListener("click", () => { document.getElementById("starredModal").style.display = "none"; });
 
     document.getElementById("btnSettings").addEventListener("click", () => {
-      prefs.clearAvatarFlag = false;
-      applySnakeCustomizer();
+      tempAv = ""; prefs.clearAvatarFlag = false;
       document.getElementById("setDisplayNameInput").value = prefs.name || "";
       document.getElementById("setAboutInput").value = prefs.about || "";
       document.getElementById("setAppPinInput").value = appPin || "";
-      document.getElementById("setReadReceipts").checked = readReceiptsOn;
-      document.getElementById("setHideLastSeen").checked = !!prefs.hideLastSeen;
-      document.getElementById("setHidePic").checked = !!prefs.hideProfilePic;
-      document.getElementById("setPrivateHandle").value = prefs.privateHandle || "";
+      document.getElementById("privLastSeenSelect").value = prefs.privLastSeen || "everyone";
+      document.getElementById("privPhotoSelect").value = prefs.privPhoto || "everyone";
+      document.getElementById("privAboutSelect").value = prefs.privAbout || "everyone";
+      document.getElementById("privStatusSelect").value = prefs.privStatus || "everyone";
       document.getElementById("setNotifEnabled").checked = notifEnabled;
+      document.getElementById("setReadReceipts").checked = readReceiptsOn;
+      document.getElementById("setPrivateHandle").value = prefs.privateHandle || "";
+      document.getElementById("setAvatarName").textContent = prefs.avatarData ? "Current DP set" : "No DP";
+      document.getElementById("setToneName").textContent = customToneData ? "Custom tone set" : "Default";
       document.getElementById("setCardColorPicker").value = cardBgHex;
-      document.getElementById("setToneName").textContent = customToneData ? "Custom" : "Default";
-      renderTargetedHandleList(); renderBlockUsersBox(); pushNavState();
-      document.getElementById("settingsModal").style.display = "block";
+      applySnakeCustomizer();
+      renderBlockUsersBox(); renderTargetedHandleList(); pushNavState(); document.getElementById("settingsModal").style.display = "block";
     });
-    document.getElementById("closeSettingsModal").addEventListener("click", () => document.getElementById("settingsModal").style.display = "none");
-
-    document.getElementById("setCardColorPicker").addEventListener("input", (e) => { cardBgHex = e.target.value; localStorage.setItem("na_card_bg_hex", cardBgHex); applyCardTone(); });
-    document.getElementById("resetCardColorBtn").addEventListener("click", () => { cardBgHex = "#081c3c"; localStorage.setItem("na_card_bg_hex", cardBgHex); applyCardTone(); });
-
-    document.getElementById("setAvatarFile").addEventListener("change", async (e) => {
-      const f = e.target.files[0]; if (!f) return;
-      prefs.clearAvatarFlag = false; document.getElementById("setAvatarName").textContent = f.name;
-      tempAv = await compressImg(f, 240, 0.75);
-    });
+    document.getElementById("closeSettingsModal").addEventListener("click", () => { applyCardTone(); document.getElementById("settingsModal").style.display = "none"; });
+    document.getElementById("setAvatarFile").addEventListener("change", async (e) => { const f = e.target.files[0]; if (!f) return; tempAv = await compressImg(f, 360, 0.82); prefs.clearAvatarFlag = false; document.getElementById("setAvatarName").textContent = f.name; });
+    document.getElementById("setCardColorPicker").addEventListener("input", (e) => { cardBgHex = e.target.value; applyCardTone(); });
+    document.getElementById("resetCardColorBtn").addEventListener("click", () => { cardBgHex = "#081c3c"; applyCardTone(); });
 
     function renderTargetedHandleList() {
-      const box = document.getElementById("targetedHandleList"); if (!box || !me) return;
+      const box = document.getElementById("targetedHandleList"), allowed = prefs.allowedHandleUsers || {};
       const others = Object.entries(users).filter(([uid]) => uid !== me.uid);
-      box.innerHTML = others.length ? others.map(([uid, u]) => `<label style="display:flex; align-items:center; justify-content:space-between; font-size:13px; padding:5px 0;"><span>${esc(getCleanUserName(uid, u))}</span><input type="checkbox" class="tgt-handle-chk" value="${uid}" ${(prefs.allowedHandleUsers && prefs.allowedHandleUsers[uid]) ? "checked" : ""} style="width:auto; margin:0;" /></label>`).join("") : `<div style="font-size:12px; color:#b3e5fc;">No other users.</div>`;
+      box.innerHTML = others.length ? others.map(([uid, u]) => `<label style="display:flex; align-items:center; gap:8px; padding:4px 0; font-size:13px;"><input type="checkbox" class="handle-allow-chk" value="${uid}" ${allowed[uid] ? "checked" : ""} style="width:auto; margin:0;" />${esc(getCleanUserName(uid, u))}</label>`).join("") : `<p style="font-size:12px; color:#b3e5fc;">No other users.</p>`;
     }
 
     document.getElementById("savePrefsBtn").addEventListener("click", async () => {
       if (!me) return;
-      appPin = document.getElementById("setAppPinInput").value.trim(); localStorage.setItem("na_app_pin", appPin);
-      readReceiptsOn = document.getElementById("setReadReceipts").checked; localStorage.setItem("na_read_receipts", String(readReceiptsOn));
-      notifEnabled = document.getElementById("setNotifEnabled").checked; localStorage.setItem("na_notif_on", String(notifEnabled));
-      applySnakeCustomizer();
-      const allowedMap = {}; document.querySelectorAll(".tgt-handle-chk:checked").forEach(ch => { allowedMap[ch.value] = true; });
-      const newName = getCleanUserName(me.uid, { name: document.getElementById("setDisplayNameInput").value.trim() || prefs.name || "User" });
-      const up = {
-        name: newName, about: document.getElementById("setAboutInput").value.trim() || "Available",
-        hideLastSeen: document.getElementById("setHideLastSeen").checked, hideProfilePic: document.getElementById("setHidePic").checked,
-        privateHandle: document.getElementById("setPrivateHandle").value.trim(), allowedHandleUsers: allowedMap,
-        cardBgHex, selectedLiveWp
+      vibrateAction(16);
+      const nextName = getCleanUserName(me.uid, { name: document.getElementById("setDisplayNameInput").value.trim() || prefs.name || "User" });
+      const nextAbout = document.getElementById("setAboutInput").value.trim() || `Using ${APP_NAME}`;
+      const nextPin = document.getElementById("setAppPinInput").value.trim();
+      const privLastSeen = document.getElementById("privLastSeenSelect").value;
+      const privPhoto = document.getElementById("privPhotoSelect").value;
+      const privAbout = document.getElementById("privAboutSelect").value;
+      const privStatus = document.getElementById("privStatusSelect").value;
+
+      notifEnabled = document.getElementById("setNotifEnabled").checked;
+      readReceiptsOn = document.getElementById("setReadReceipts").checked;
+      localStorage.setItem("na_notif_on", String(notifEnabled));
+      localStorage.setItem("na_read_receipts", String(readReceiptsOn));
+
+      if (nextPin && (!/^\d{4,6}$/.test(nextPin))) return await proAlert("PIN must be 4–6 digits.", "PIN");
+      appPin = nextPin; localStorage.setItem("na_app_pin", appPin);
+      localStorage.setItem("na_card_bg_hex", cardBgHex); applyCardTone(); applySnakeCustomizer();
+
+      let finalAv = prefs.avatarData || "";
+      if (prefs.clearAvatarFlag) finalAv = "";
+      else if (tempAv) finalAv = tempAv;
+
+      const allowedMap = {};
+      document.querySelectorAll(".handle-allow-chk:checked").forEach(ch => { allowedMap[ch.value] = true; });
+      const handleVal = document.getElementById("setPrivateHandle").value.trim();
+      const patch = {
+        name: nextName,
+        about: nextAbout,
+        privLastSeen,
+        privPhoto,
+        privAbout,
+        privStatus,
+        hideLastSeen: privLastSeen === "nobody",
+        hideProfilePic: privPhoto === "nobody",
+        avatarData: finalAv,
+        privateHandle: handleVal,
+        allowedHandleUsers: allowedMap,
+        cardBgHex,
+        selectedLiveWp,
+        online: privLastSeen !== "nobody" && navigator.onLine && document.visibilityState === "visible",
+        lastSeen: Date.now()
       };
-      if (prefs.clearAvatarFlag) up.avatarData = ""; else if (tempAv) up.avatarData = tempAv;
-      try { await updateProfile(me, { displayName: newName }); } catch (_) {}
-      await update(ref(db, "users/" + me.uid), up);
-      prefs.clearAvatarFlag = false; tempAv = ""; touchPresence(!up.hideLastSeen);
+      await update(ref(db, "users/" + me.uid), patch);
+      prefs = { ...prefs, ...patch, clearAvatarFlag: false }; tempAv = "";
+      renderHomeMyAvatar(); renderUsersList();
+      if (activeChat && activeChat.type === "private") updateRoomHeaderMeta();
       document.getElementById("settingsModal").style.display = "none";
+      await proAlert("Settings & Privacy saved!", "Settings");
     });
 
     function renderBlockUsersBox() {
-      const box = document.getElementById("blockUsersBox"); if (!box || !me) return;
-      const others = Object.entries(users).filter(([uid]) => uid !== me.uid);
-      box.innerHTML = others.length ? others.map(([uid, u]) => `<div class="item-card" style="display:flex; justify-content:space-between; align-items:center;"><span>${esc(getCleanUserName(uid, u))} ${blocks[uid] ? `<b style="color:#ff8a80;">(Blocked)</b>` : ""}</span><button onclick="flipBlock('${uid}', ${!!blocks[uid]})" class="${blocks[uid] ? "wave-btn btn-sm" : "btn-danger btn-sm"}">${blocks[uid] ? "Unblock" : "Block"}</button></div>`).join("") : `<p style="font-size:12px; color:#b3e5fc;">No other users.</p>`;
+      const box = document.getElementById("blockUsersBox"), others = Object.entries(users).filter(([uid]) => uid !== me.uid);
+      box.innerHTML = others.length ? others.map(([uid, u]) => {
+        const isB = !!blocks[uid];
+        return `<div class="item-card" style="display:flex; justify-content:space-between; align-items:center;"><span>${esc(getCleanUserName(uid, u))}</span><button type="button" class="${isB ? "wave-btn" : "btn-danger"} btn-sm" onclick="toggleBlockUid('${uid}')">${isB ? "Unblock" : "Block"}</button></div>`;
+      }).join("") : `<p style="font-size:12px; color:#b3e5fc;">No other users.</p>`;
     }
-    window.flipBlock = async function(uid, currentlyBlocked) { await set(ref(db, `blocks/${me.uid}/${uid}`), currentlyBlocked ? null : true); };
+    window.toggleBlockUid = async function(uid) { if (!me) return; await set(ref(db, `blocks/${me.uid}/${uid}`), blocks[uid] ? null : true); };
 
-    /* Calls */
-    let pc = null, localStream = null, activeCallId = null, currentCallMeta = null, callTimeoutRef = null, facingMode = "user", isMuted = false, isSpeakerOn = true, isCamOff = false, callTimerInt = null, callSec = 0;
-    const rtcConfig = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] };
+    /* WebRTC Voice & Video Call */
+    let pc = null, localStream = null, currentCallId = null, callPeerUid = null, callMode = "audio", callTimerInt = null, callSec = 0, callConnected = false, speakerOn = true, camFacing = "user";
+    const rtcConfig = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }, { urls: "stun:stun1.l.google.com:19302" }] };
 
-    function getFormattedCallDuration() { if (!callSec) return ""; return `${String(Math.floor(callSec / 60)).padStart(2, "0")}:${String(callSec % 60).padStart(2, "0")}`; }
-    function startCallTimer() { stopCallTimer(); callSec = 0; document.getElementById("callTimerText").textContent = "00:00"; callTimerInt = setInterval(() => { callSec++; document.getElementById("callTimerText").textContent = getFormattedCallDuration(); }, 1000); }
-    function stopCallTimer() { if (callTimerInt) { clearInterval(callTimerInt); callTimerInt = null; } document.getElementById("callTimerText").textContent = ""; }
-    function clearCallTimeout() { if (callTimeoutRef) { clearTimeout(callTimeoutRef); callTimeoutRef = null; } }
+    document.getElementById("voiceCallBtn").addEventListener("click", () => startCall("audio"));
+    document.getElementById("videoCallBtn").addEventListener("click", () => startCall("video"));
 
-    async function recordCallLog(statusLabel) {
-      if (!me || !currentCallMeta) return;
-      await push(ref(db, `callLogs/${me.uid}`), { peerUid: currentCallMeta.peerUid || "", peerName: currentCallMeta.peerName || "User", mode: currentCallMeta.mode || "audio", direction: currentCallMeta.direction || "Outgoing", statusLabel, duration: getFormattedCallDuration(), time: Date.now() });
-    }
-
-    document.getElementById("voiceCallBtn").addEventListener("click", () => startOutgoingCall("audio"));
-    document.getElementById("videoCallBtn").addEventListener("click", () => startOutgoingCall("video"));
-
-    async function startOutgoingCall(mode) {
-      if (!activeChat || activeChat.type !== "private") return await proAlert("Select a private chat.", "Call");
-      if (blocks[activeChat.otherUid]) return await proAlert("User blocked.", "Blocked");
-      const targetUid = activeChat.otherUid, peerName = getCleanUserName(targetUid), callId = [me.uid, targetUid].sort().join("_") + "_" + Date.now();
-      activeCallId = callId; currentCallMeta = { peerUid: targetUid, peerName, mode, direction: "Outgoing" };
-      setupCallUi(peerName, "Calling...", mode, false);
-      localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: mode === "video" ? { facingMode } : false });
-      attachLocalMedia(mode); createPeerConnection(callId);
-      localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
-      const offer = await pc.createOffer(); await pc.setLocalDescription(offer);
-      await set(ref(db, `calls/${callId}`), { callerUid: me.uid, callerName: prefs.name || "User", calleeUid: targetUid, calleeName: peerName, mode, status: "ringing", offer: { type: offer.type, sdp: offer.sdp }, time: Date.now() });
-      clearCallTimeout();
-      callTimeoutRef = setTimeout(async () => {
-        if (activeCallId === callId && !callTimerInt) { await update(ref(db, `calls/${callId}`), { status: "missed" }); await recordCallLog("No Answer"); cleanupCall(); }
-      }, 30000);
-      listenSingleCall(callId);
+    async function startCall(mode) {
+      if (!activeChat || activeChat.type !== "private") return await proAlert("Direct chat only.", "Call");
+      const peerUid = activeChat.otherUid;
+      if (blocks[peerUid]) return await proAlert("User blocked.", "Blocked");
+      callMode = mode; callPeerUid = peerUid; callConnected = false; camFacing = "user";
+      const cRef = push(ref(db, "calls")); currentCallId = cRef.key;
+      await set(cRef, { callerUid: me.uid, callerName: prefs.name || "User", calleeUid: peerUid, mode, status: "ringing", time: Date.now() });
+      await push(ref(db, `callLogs/${me.uid}`), { peerUid, peerName: getCleanUserName(peerUid), mode, direction: "Outgoing", statusLabel: "Calling", time: Date.now() });
+      showCallOverlay(getCleanUserName(peerUid), "Calling...", false);
+      try {
+        localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: mode === "video" ? { facingMode: camFacing } : false });
+        setupLocalMediaPreview(); setupPeerConnection();
+        localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
+        const offer = await pc.createOffer(); await pc.setLocalDescription(offer);
+        await update(ref(db, `calls/${currentCallId}`), { offer: { type: offer.type, sdp: offer.sdp } });
+        listenCallSignaling();
+      } catch (_) { await proAlert("Microphone/Camera permission denied.", "Permission"); hangupCall("Failed"); }
     }
 
     function listenCalls() {
+      if (callsListenerAttached) return; callsListenerAttached = true;
       onValue(ref(db, "calls"), (snap) => {
         const all = snap.val() || {};
         Object.entries(all).forEach(([cid, c]) => {
-          if (c.calleeUid === me.uid && c.status === "ringing" && !activeCallId && !blocks[c.callerUid]) {
-            activeCallId = cid;
-            const callerCleanName = getCleanUserName(c.callerUid, { name: c.callerName });
-            currentCallMeta = { peerUid: c.callerUid, peerName: callerCleanName, mode: c.mode || "audio", direction: "Incoming" };
-            setupCallUi(callerCleanName, `Incoming ${c.mode === "video" ? "Video" : "Voice"} Call`, c.mode, true);
-            startIncomingRingLoop(); listenSingleCall(cid);
+          if (!c || watchedCallIds.has(cid)) return;
+          if (c.calleeUid === me.uid && c.status === "ringing" && !blocks[c.callerUid]) {
+            watchedCallIds.add(cid); currentCallId = cid; callPeerUid = c.callerUid; callMode = c.mode || "audio"; callConnected = false;
+            showCallOverlay(getCleanUserName(c.callerUid, { name: c.callerName }), `Incoming ${callMode === "video" ? "Video" : "Voice"} Call...`, true);
+            startIncomingRingLoop(); listenCallSignaling();
           }
         });
       });
     }
 
-    function listenSingleCall(cid) {
-      onValue(ref(db, `calls/${cid}`), async (snap) => {
-        const c = snap.val(); if (!c || activeCallId !== cid) return;
-        if (c.status === "accepted") {
-          clearCallTimeout(); stopIncomingRingLoop();
-          if (c.answer && pc && !pc.currentRemoteDescription) {
-            await pc.setRemoteDescription(new RTCSessionDescription(c.answer));
-            document.getElementById("callStateText").textContent = "Connected";
-            if (!callTimerInt) startCallTimer();
+    function listenCallSignaling() {
+      if (!currentCallId) return;
+      onValue(ref(db, `calls/${currentCallId}`), async (snap) => {
+        const c = snap.val(); if (!c) return;
+        if (c.status === "rejected" || c.status === "ended") { cleanupCallUi(c.status === "rejected" ? "Declined" : "Ended"); return; }
+        if (c.answer && pc && !pc.currentRemoteDescription) { await pc.setRemoteDescription(new RTCSessionDescription(c.answer)); callConnected = true; document.getElementById("callStateText").textContent = "Connected"; startCallTimer(); }
+        if (c.candidates) {
+          for (const [k, cand] of Object.entries(c.candidates)) {
+            if (cand.from !== me.uid && pc && !cand.applied) { try { await pc.addIceCandidate(new RTCIceCandidate(cand.candidate)); await set(ref(db, `calls/${currentCallId}/candidates/${k}/applied`), true); } catch (_) {} }
           }
-        }
-        if (c.candidates) { Object.values(c.candidates).forEach(async (item) => { if (item.from !== me.uid && pc && pc.remoteDescription) { try { await pc.addIceCandidate(new RTCIceCandidate(item.cand)); } catch (_) {} } }); }
-        if (c.status === "ended" || c.status === "rejected" || c.status === "missed") {
-          clearCallTimeout(); stopIncomingRingLoop();
-          if (c.status === "missed" && c.calleeUid === me.uid) await recordCallLog("Missed Call");
-          else if (c.status === "rejected") await recordCallLog("Declined");
-          else if (c.status === "ended") await recordCallLog(callSec > 0 ? "Completed" : "Ended");
-          cleanupCall();
         }
       });
     }
 
     document.getElementById("acceptCallBtn").addEventListener("click", async () => {
-      if (!activeCallId) return;
       stopIncomingRingLoop(); document.getElementById("incomingCallBar").style.display = "none";
-      const snap = await new Promise(r => onValue(ref(db, `calls/${activeCallId}`), s => r(s.val()), { onlyOnce: true }));
-      if (!snap) return;
-      localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: snap.mode === "video" ? { facingMode } : false });
-      attachLocalMedia(snap.mode); createPeerConnection(activeCallId);
-      localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
-      await pc.setRemoteDescription(new RTCSessionDescription(snap.offer));
-      const ans = await pc.createAnswer(); await pc.setLocalDescription(ans);
-      await update(ref(db, `calls/${activeCallId}`), { status: "accepted", answer: { type: ans.type, sdp: ans.sdp } });
-      document.getElementById("callStateText").textContent = "Connected"; startCallTimer();
+      try {
+        localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: callMode === "video" ? { facingMode: camFacing } : false });
+        setupLocalMediaPreview(); setupPeerConnection();
+        localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
+        const snap = await new Promise(res => onValue(ref(db, `calls/${currentCallId}`), s => res(s.val()), { onlyOnce: true }));
+        if (snap && snap.offer) {
+          await pc.setRemoteDescription(new RTCSessionDescription(snap.offer));
+          const ans = await pc.createAnswer(); await pc.setLocalDescription(ans);
+          await update(ref(db, `calls/${currentCallId}`), { answer: { type: ans.type, sdp: ans.sdp }, status: "accepted" });
+          callConnected = true; document.getElementById("callStateText").textContent = "Connected"; startCallTimer();
+        }
+      } catch (_) { await proAlert("Microphone/Camera permission denied.", "Permission"); hangupCall("Failed"); }
     });
 
     document.getElementById("rejectCallBtn").addEventListener("click", async () => {
       stopIncomingRingLoop();
-      if (activeCallId) { await update(ref(db, `calls/${activeCallId}`), { status: "rejected" }); await recordCallLog("Declined"); }
-      cleanupCall();
+      if (currentCallId) await update(ref(db, `calls/${currentCallId}`), { status: "rejected" });
+      if (callPeerUid) await push(ref(db, `callLogs/${me.uid}`), { peerUid: callPeerUid, peerName: getCleanUserName(callPeerUid), mode: callMode, direction: "Incoming", statusLabel: "Declined", time: Date.now() });
+      cleanupCallUi("Declined");
     });
 
-    document.getElementById("hangupBtn").addEventListener("click", async () => {
-      stopIncomingRingLoop();
-      if (activeCallId) { await update(ref(db, `calls/${activeCallId}`), { status: callSec > 0 ? "ended" : "missed" }); await recordCallLog(callSec > 0 ? "Completed" : "Cancelled"); }
-      cleanupCall();
-    });
-
-    function createPeerConnection(cid) {
+    function setupPeerConnection() {
       pc = new RTCPeerConnection(rtcConfig);
-      pc.onicecandidate = (e) => { if (e.candidate) push(ref(db, `calls/${cid}/candidates`), { from: me.uid, cand: e.candidate.toJSON() }); };
-      pc.ontrack = (e) => { const stream = e.streams[0]; document.getElementById("remoteAudio").srcObject = stream; const rv = document.getElementById("remoteVideo"); rv.srcObject = stream; rv.style.display = "block"; document.getElementById("audioCallAvatar").style.display = "none"; };
+      pc.onicecandidate = (ev) => { if (ev.candidate && currentCallId) push(ref(db, `calls/${currentCallId}/candidates`), { from: me.uid, candidate: ev.candidate.toJSON(), applied: false }); };
+      pc.ontrack = (ev) => {
+        const stream = ev.streams[0] || new MediaStream([ev.track]);
+        if (callMode === "video") { const rv = document.getElementById("remoteVideo"); rv.srcObject = stream; rv.style.display = "block"; document.getElementById("audioCallAvatar").style.display = "none"; }
+        else { const ra = document.getElementById("remoteAudio"); ra.srcObject = stream; ra.play().catch(() => {}); }
+      };
     }
 
-    function setupCallUi(name, state, mode, incoming) {
-      document.getElementById("callPeerName").textContent = name; document.getElementById("callStateText").textContent = state;
-      document.getElementById("incomingCallBar").style.display = incoming ? "flex" : "none";
-      document.getElementById("localVideo").style.display = mode === "video" ? "block" : "none";
-      document.getElementById("remoteVideo").style.display = "none"; document.getElementById("audioCallAvatar").style.display = "flex";
-      document.getElementById("callOverlay").style.display = "flex";
+    function setupLocalMediaPreview() {
+      const lv = document.getElementById("localVideo"), av = document.getElementById("audioCallAvatar");
+      if (callMode === "video" && localStream) { lv.srcObject = localStream; lv.style.display = "block"; av.style.display = "none"; }
+      else { lv.style.display = "none"; av.style.display = "flex"; }
     }
-    function attachLocalMedia(mode) { if (mode === "video") document.getElementById("localVideo").srcObject = localStream; }
 
-    document.getElementById("toggleSpeakerBtn").addEventListener("click", () => {
-      isSpeakerOn = !isSpeakerOn;
-      document.getElementById("remoteAudio").volume = isSpeakerOn ? 1.0 : 0.28;
-      document.getElementById("remoteVideo").volume = isSpeakerOn ? 1.0 : 0.28;
-      const btn = document.getElementById("toggleSpeakerBtn"); btn.classList.toggle("speaker-on", isSpeakerOn); btn.textContent = isSpeakerOn ? "🔊" : "🔈";
-    });
-    document.getElementById("toggleMuteBtn").addEventListener("click", () => { if (!localStream) return; isMuted = !isMuted; localStream.getAudioTracks().forEach(t => t.enabled = !isMuted); document.getElementById("toggleMuteBtn").classList.toggle("active-off", isMuted); });
-    document.getElementById("toggleCamBtn").addEventListener("click", () => { if (!localStream) return; isCamOff = !isCamOff; localStream.getVideoTracks().forEach(t => t.enabled = !isCamOff); document.getElementById("toggleCamBtn").classList.toggle("active-off", isCamOff); });
+    document.getElementById("toggleSpeakerBtn").addEventListener("click", () => { speakerOn = !speakerOn; const b = document.getElementById("toggleSpeakerBtn"), ra = document.getElementById("remoteAudio"); if (ra) ra.volume = speakerOn ? 1.0 : 0.25; b.classList.toggle("speaker-on", speakerOn); });
+    document.getElementById("toggleMuteBtn").addEventListener("click", () => { if (!localStream) return; const at = localStream.getAudioTracks()[0]; if (!at) return; at.enabled = !at.enabled; document.getElementById("toggleMuteBtn").classList.toggle("active-off", !at.enabled); });
+    document.getElementById("toggleCamBtn").addEventListener("click", () => { if (!localStream) return; const vt = localStream.getVideoTracks()[0]; if (!vt) return; vt.enabled = !vt.enabled; document.getElementById("toggleCamBtn").classList.toggle("active-off", !vt.enabled); });
     document.getElementById("flipCamBtn").addEventListener("click", async () => {
-      if (!localStream || !pc) return;
-      facingMode = facingMode === "user" ? "environment" : "user";
-      const ns = await navigator.mediaDevices.getUserMedia({ video: { facingMode } }), nt = ns.getVideoTracks()[0];
-      const sender = pc.getSenders().find(s => s.track && s.track.kind === "video");
-      if (sender) await sender.replaceTrack(nt);
-      localStream.getVideoTracks().forEach(t => t.stop());
-      localStream = new MediaStream([...localStream.getAudioTracks(), nt]);
-      document.getElementById("localVideo").srcObject = localStream;
+      if (callMode !== "video" || !localStream || !pc) return;
+      camFacing = camFacing === "user" ? "environment" : "user";
+      try {
+        const ns = await navigator.mediaDevices.getUserMedia({ video: { facingMode: camFacing }, audio: false });
+        const nv = ns.getVideoTracks()[0], sender = pc.getSenders().find(s => s.track && s.track.kind === "video");
+        if (sender && nv) await sender.replaceTrack(nv);
+        const ov = localStream.getVideoTracks()[0]; if (ov) { localStream.removeTrack(ov); ov.stop(); }
+        localStream.addTrack(nv); setupLocalMediaPreview();
+      } catch (_) {}
     });
 
-    function cleanupCall() {
-      clearCallTimeout(); stopIncomingRingLoop(); stopCallTimer();
-      if (pc) { pc.close(); pc = null; }
-      if (localStream) { localStream.getTracks().forEach(t => t.stop()); localStream = null; }
-      activeCallId = null; currentCallMeta = null; isMuted = false; isCamOff = false;
-      document.getElementById("callOverlay").style.display = "none";
+    document.getElementById("hangupBtn").addEventListener("click", () => hangupCall("Ended"));
+    async function hangupCall(reason) {
+      stopIncomingRingLoop();
+      if (currentCallId) await update(ref(db, `calls/${currentCallId}`), { status: "ended" }).catch(() => {});
+      if (callPeerUid) await push(ref(db, `callLogs/${me.uid}`), { peerUid: callPeerUid, peerName: getCleanUserName(callPeerUid), mode: callMode, direction: callConnected ? "Connected" : "Outgoing", statusLabel: callConnected ? "Completed" : (reason || "No Answer"), duration: callConnected ? formatCallDur(callSec) : "", time: Date.now() });
+      cleanupCallUi(reason || "Ended");
     }
 
-    function compressImg(file, maxW, q) {
+    function showCallOverlay(name, stateTxt, isIncoming) { document.getElementById("callPeerName").textContent = name; document.getElementById("callStateText").textContent = stateTxt; document.getElementById("callTimerText").textContent = ""; document.getElementById("incomingCallBar").style.display = isIncoming ? "flex" : "none"; document.getElementById("callOverlay").style.display = "flex"; }
+    function startCallTimer() { if (callTimerInt) clearInterval(callTimerInt); callSec = 0; callTimerInt = setInterval(() => { callSec++; document.getElementById("callTimerText").textContent = formatCallDur(callSec); }, 1000); }
+    function formatCallDur(s) { return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; }
+    function cleanupCallUi() {
+      stopIncomingRingLoop();
+      if (callTimerInt) { clearInterval(callTimerInt); callTimerInt = null; }
+      if (localStream) { localStream.getTracks().forEach(t => t.stop()); localStream = null; }
+      if (pc) { pc.close(); pc = null; }
+      document.getElementById("remoteVideo").style.display = "none"; document.getElementById("localVideo").style.display = "none";
+      document.getElementById("audioCallAvatar").style.display = "flex"; document.getElementById("incomingCallBar").style.display = "none";
+      document.getElementById("callOverlay").style.display = "none"; currentCallId = null; callPeerUid = null; callConnected = false;
+    }
+
+    function compressImg(file, maxW = 900, q = 0.78) {
       return new Promise((res) => {
         const rd = new FileReader();
         rd.onload = () => {
           const img = new Image();
           img.onload = () => {
-            const scale = Math.min(1, maxW / img.width);
-            const c = document.createElement("canvas"); c.width = img.width * scale; c.height = img.height * scale;
-            c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); res(c.toDataURL("image/jpeg", q));
+            let w = img.width, h = img.height;
+            if (w > maxW) { h = Math.round(h * (maxW / w)); w = maxW; }
+            const c = document.createElement("canvas"); c.width = w; c.height = h;
+            c.getContext("2d").drawImage(img, 0, 0, w, h); res(c.toDataURL("image/jpeg", q));
           };
           img.src = rd.result;
         };
@@ -3495,15 +3868,18 @@
     }
 
     function trim60s(file) {
-      return new Promise((resolve) => {
-        const v = document.createElement("video"); v.src = URL.createObjectURL(file); v.muted = true; v.playsInline = true;
+      return new Promise((res) => {
+        const v = document.createElement("video"); v.preload = "metadata"; v.muted = true; v.src = URL.createObjectURL(file);
         v.onloadedmetadata = () => {
-          if (!isFinite(v.duration) || v.duration <= 60) { resolve(file); return; }
-          const stream = v.captureStream ? v.captureStream() : v.mozCaptureStream();
-          const rec = new MediaRecorder(stream), chunks = [];
-          rec.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
-          rec.onstop = () => resolve(new Blob(chunks, { type: "video/webm" }));
-          rec.start(); v.play(); setTimeout(() => { v.pause(); rec.stop(); }, 60000);
+          const dur = v.duration || 0; URL.revokeObjectURL(v.src);
+          if (dur <= 60 || !v.captureStream) return res(file);
+          v.src = URL.createObjectURL(file); v.currentTime = 0;
+          v.oncanplay = () => {
+            const st = v.captureStream(), rec = new MediaRecorder(st), ch = [];
+            rec.ondataavailable = (e) => { if (e.data.size > 0) ch.push(e.data); };
+            rec.onstop = () => { URL.revokeObjectURL(v.src); res(new Blob(ch, { type: "video/webm" })); };
+            rec.start(); v.play(); setTimeout(() => { v.pause(); if (rec.state !== "inactive") rec.stop(); }, 60000);
+          };
         };
       });
     }
