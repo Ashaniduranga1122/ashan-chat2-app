@@ -39,6 +39,38 @@ jobs:
           mkdir -p android-app/app/src/main/java/com/ashan/chatapp
           mkdir -p android-app/app/src/main/res/layout
           mkdir -p android-app/app/src/main/res/values
+          mkdir -p android-app/app/src/main/res/mipmap-mdpi
+          mkdir -p android-app/app/src/main/res/mipmap-hdpi
+          mkdir -p android-app/app/src/main/res/mipmap-xhdpi
+          mkdir -p android-app/app/src/main/res/mipmap-xxhdpi
+          mkdir -p android-app/app/src/main/res/mipmap-xxxhdpi
+
+          if [ -f "1000394929.jpg" ]; then
+            python3 - << 'PYEOF'
+          from PIL import Image
+
+          img = Image.open("1000394929.jpg").convert("RGBA")
+          w, h = img.size
+
+          # Center square crop around the middle icon
+          side = int(min(w, h) * 0.24)
+          left = (w - side) // 2
+          top = (h - side) // 2
+          icon_img = img.crop((left, top, left + side, top + side))
+
+          sizes = {
+              "mipmap-mdpi": 48,
+              "mipmap-hdpi": 72,
+              "mipmap-xhdpi": 96,
+              "mipmap-xxhdpi": 144,
+              "mipmap-xxxhdpi": 192,
+          }
+          for folder, size in sizes.items():
+              resized = icon_img.resize((size, size), Image.Resampling.LANCZOS)
+              resized.save(f"android-app/app/src/main/res/{folder}/ic_launcher.png")
+              resized.save(f"android-app/app/src/main/res/{folder}/ic_launcher_round.png")
+          PYEOF
+          fi
 
           cat << 'EOF' > android-app/settings.gradle.kts
           pluginManagement {
@@ -55,7 +87,7 @@ jobs:
                   mavenCentral()
               }
           }
-          rootProject.name = "AshanChat"
+          rootProject.name = "NA Whatsapp"
           include(":app")
           EOF
 
@@ -125,7 +157,9 @@ jobs:
 
               <application
                   android:allowBackup="true"
-                  android:label="AshanChat"
+                  android:icon="@mipmap/ic_launcher"
+                  android:roundIcon="@mipmap/ic_launcher_round"
+                  android:label="NA Whatsapp"
                   android:supportsRtl="true"
                   android:theme="@style/Theme.AppCompat.NoActionBar"
                   android:usesCleartextTraffic="true">
@@ -340,5 +374,5 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AshanChat-APK
+          name: NA-Whatsapp-APK
           path: android-app/app/build/outputs/apk/debug/app-debug.apk
